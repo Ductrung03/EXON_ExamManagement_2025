@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="17.7" version="17.7" Modules="professional" RootPath="." Language="en" Id="{0F460387-1DD3-4AD7-960F-52F132D2CD4E}">
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:"/>
+    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="ARPNOMODIFY" MultiBuildValue="DefaultBuild:1"/>
+    <ROW Property="LIMITUI" MultiBuildValue="DefaultBuild:1"/>
+    <ROW Property="Manufacturer" Value="GIAM SAT THI"/>
+    <ROW Property="ProductCode" Value="1033:{C85DE0AC-7A42-4FC2-94A8-DD661BEC11BA} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="MTA"/>
+    <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
+    <ROW Property="REBOOTPROMPT" MultiBuildValue="DefaultBuild:Suppress"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="UpgradeCode" Value="{DAE455C0-AB7B-4CFE-BB54-11ACF851A6DB}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="Debug_Dir" Directory_Parent="APPDIR" DefaultDir="Debug"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="HaKTNLK57_Dir" Directory_Parent="ThongKeDapAn_Dir" DefaultDir="HÓA(KT~1|Hóa (KTNLK57)"/>
+    <ROW Directory="Report_Dir" Directory_Parent="Debug_Dir" DefaultDir="Report"/>
+    <ROW Directory="SqlServerTypes_Dir" Directory_Parent="Debug_Dir" DefaultDir="SQLSER~1|SqlServerTypes"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="Temp_Dir" Directory_Parent="Debug_Dir" DefaultDir="Temp"/>
+    <ROW Directory="Template_Dir" Directory_Parent="Debug_Dir" DefaultDir="Template"/>
+    <ROW Directory="ThongKeDapAn_Dir" Directory_Parent="Temp_Dir" DefaultDir="THONGK~1|ThongKeDapAn"/>
+    <ROW Directory="TingAnhKTNLK57_Dir" Directory_Parent="ThongKeDapAn_Dir" DefaultDir="TIẾNGA~1|Tiếng Anh (KTNLK57)"/>
+    <ROW Directory="TingAnhNL4_Dir" Directory_Parent="ThongKeDapAn_Dir" DefaultDir="TIẾNGA~2|Tiếng Anh (NL 4"/>
+    <ROW Directory="TonKTNLK57_Dir" Directory_Parent="ThongKeDapAn_Dir" DefaultDir="TOÁN(K~1|Toán (KTNLK57)"/>
+    <ROW Directory="VtlKTNLK57_Dir" Directory_Parent="ThongKeDapAn_Dir" DefaultDir="VẬTLÝ(~1|Vật lý (KTNLK57)"/>
+    <ROW Directory="__100_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2528"/>
+    <ROW Directory="__10_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2570"/>
+    <ROW Directory="__11_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2571"/>
+    <ROW Directory="__12_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2572"/>
+    <ROW Directory="__13_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2573"/>
+    <ROW Directory="__14_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2574"/>
+    <ROW Directory="__15_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2575"/>
+    <ROW Directory="__16_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2576"/>
+    <ROW Directory="__17_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2577"/>
+    <ROW Directory="__18_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2578"/>
+    <ROW Directory="__19_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2579"/>
+    <ROW Directory="__1_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2561"/>
+    <ROW Directory="__20_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2580"/>
+    <ROW Directory="__21_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2581"/>
+    <ROW Directory="__22_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2582"/>
+    <ROW Directory="__23_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2583"/>
+    <ROW Directory="__24_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2584"/>
+    <ROW Directory="__25_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2585"/>
+    <ROW Directory="__26_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2586"/>
+    <ROW Directory="__27_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2587"/>
+    <ROW Directory="__28_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2588"/>
+    <ROW Directory="__29_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2589"/>
+    <ROW Directory="__2_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2562"/>
+    <ROW Directory="__30_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2590"/>
+    <ROW Directory="__31_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2591"/>
+    <ROW Directory="__32_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2592"/>
+    <ROW Directory="__33_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2593"/>
+    <ROW Directory="__34_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2594"/>
+    <ROW Directory="__35_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2595"/>
+    <ROW Directory="__36_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2596"/>
+    <ROW Directory="__37_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2597"/>
+    <ROW Directory="__38_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2598"/>
+    <ROW Directory="__39_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2599"/>
+    <ROW Directory="__3_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2563"/>
+    <ROW Directory="__40_Dir" Directory_Parent="TingAnhKTNLK57_Dir" DefaultDir="2651"/>
+    <ROW Directory="__41_Dir" Directory_Parent="TingAnhNL4_Dir" DefaultDir="7)"/>
+    <ROW Directory="__42_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2600"/>
+    <ROW Directory="__43_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2602"/>
+    <ROW Directory="__44_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2604"/>
+    <ROW Directory="__45_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2605"/>
+    <ROW Directory="__46_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2606"/>
+    <ROW Directory="__47_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2607"/>
+    <ROW Directory="__48_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2608"/>
+    <ROW Directory="__49_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2609"/>
+    <ROW Directory="__4_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2564"/>
+    <ROW Directory="__50_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2610"/>
+    <ROW Directory="__51_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2611"/>
+    <ROW Directory="__52_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2612"/>
+    <ROW Directory="__53_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2613"/>
+    <ROW Directory="__54_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2614"/>
+    <ROW Directory="__55_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2615"/>
+    <ROW Directory="__56_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2616"/>
+    <ROW Directory="__57_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2617"/>
+    <ROW Directory="__58_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2618"/>
+    <ROW Directory="__59_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2619"/>
+    <ROW Directory="__5_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2565"/>
+    <ROW Directory="__60_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2621"/>
+    <ROW Directory="__61_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2622"/>
+    <ROW Directory="__62_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2623"/>
+    <ROW Directory="__63_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2624"/>
+    <ROW Directory="__64_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2625"/>
+    <ROW Directory="__65_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2627"/>
+    <ROW Directory="__66_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2629"/>
+    <ROW Directory="__67_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2631"/>
+    <ROW Directory="__68_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2633"/>
+    <ROW Directory="__69_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2634"/>
+    <ROW Directory="__6_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2566"/>
+    <ROW Directory="__70_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2635"/>
+    <ROW Directory="__71_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2637"/>
+    <ROW Directory="__72_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2638"/>
+    <ROW Directory="__73_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2639"/>
+    <ROW Directory="__74_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2640"/>
+    <ROW Directory="__75_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2641"/>
+    <ROW Directory="__76_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2642"/>
+    <ROW Directory="__77_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2643"/>
+    <ROW Directory="__78_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2644"/>
+    <ROW Directory="__79_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2645"/>
+    <ROW Directory="__7_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2567"/>
+    <ROW Directory="__80_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2646"/>
+    <ROW Directory="__81_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2648"/>
+    <ROW Directory="__82_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2649"/>
+    <ROW Directory="__83_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2650"/>
+    <ROW Directory="__84_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2719"/>
+    <ROW Directory="__85_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2720"/>
+    <ROW Directory="__86_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2721"/>
+    <ROW Directory="__87_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2722"/>
+    <ROW Directory="__88_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2723"/>
+    <ROW Directory="__89_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2724"/>
+    <ROW Directory="__8_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2568"/>
+    <ROW Directory="__90_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2725"/>
+    <ROW Directory="__91_Dir" Directory_Parent="TonKTNLK57_Dir" DefaultDir="2726"/>
+    <ROW Directory="__92_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2520"/>
+    <ROW Directory="__93_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2521"/>
+    <ROW Directory="__94_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2522"/>
+    <ROW Directory="__95_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2523"/>
+    <ROW Directory="__96_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2524"/>
+    <ROW Directory="__97_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2525"/>
+    <ROW Directory="__98_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2526"/>
+    <ROW Directory="__99_Dir" Directory_Parent="VtlKTNLK57_Dir" DefaultDir="2527"/>
+    <ROW Directory="__9_Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2569"/>
+    <ROW Directory="__Dir" Directory_Parent="HaKTNLK57_Dir" DefaultDir="2560"/>
+    <ROW Directory="de_Dir" Directory_Parent="Debug_Dir" DefaultDir="de"/>
+    <ROW Directory="x64_Dir" Directory_Parent="SqlServerTypes_Dir" DefaultDir="x64"/>
+    <ROW Directory="x86_Dir" Directory_Parent="SqlServerTypes_Dir" DefaultDir="x86"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="APPDIR" ComponentId="{DA92A6BA-57F0-48A1-BAD6-4611FAB19095}" Directory_="APPDIR" Attributes="0"/>
+    <ROW Component="Bunifu_UI_v1.5.3.dll" ComponentId="{DEB9C286-5304-4836-8FD8-6AF3971CE24D}" Directory_="Debug_Dir" Attributes="0" KeyPath="Bunifu_UI_v1.5.3.dll"/>
+    <ROW Component="CircularProgressBar.dll" ComponentId="{EB1F8C10-0192-4F2A-BD19-32C2379C1932}" Directory_="Debug_Dir" Attributes="0" KeyPath="CircularProgressBar.dll"/>
+    <ROW Component="CircularProgressBar.xml" ComponentId="{D49FAF43-3B71-4EED-8D94-40A50CF3DC57}" Directory_="Debug_Dir" Attributes="0" KeyPath="CircularProgressBar.xml" Type="0"/>
+    <ROW Component="ClosedXML.dll" ComponentId="{89F7022C-FBA9-4B68-86D8-586EC27B6686}" Directory_="Debug_Dir" Attributes="0" KeyPath="ClosedXML.dll"/>
+    <ROW Component="DevelopmentTool.dll" ComponentId="{78AF2558-D7A5-45FA-B5CD-850538BA0792}" Directory_="Debug_Dir" Attributes="0" KeyPath="DevelopmentTool.dll"/>
+    <ROW Component="DocumentFormat.OpenXml.dll" ComponentId="{CEBD68BD-FB30-4F96-AD24-56C956E52633}" Directory_="Debug_Dir" Attributes="0" KeyPath="DocumentFormat.OpenXml.dll"/>
+    <ROW Component="EXON.Common.dll" ComponentId="{CEEDF5AA-39E9-41DB-BF13-90FDED7C830C}" Directory_="Debug_Dir" Attributes="0" KeyPath="EXON.Common.dll"/>
+    <ROW Component="EXON.GradedEssay.exe" ComponentId="{ED3BCC03-B00C-4B5E-BEC9-2B6FB453C940}" Directory_="Debug_Dir" Attributes="0" KeyPath="EXON.GradedEssay.exe"/>
+    <ROW Component="EXON.MONITOR.exe" ComponentId="{91676552-1BE9-4148-9998-4407ABA93950}" Directory_="Debug_Dir" Attributes="0" KeyPath="EXON.MONITOR.exe"/>
+    <ROW Component="EXON.SubData.dll" ComponentId="{3DBEAF54-B5F6-46BA-8F18-BCC2ED642425}" Directory_="Debug_Dir" Attributes="0" KeyPath="EXON.SubData.dll"/>
+    <ROW Component="EXON.SubModel.dll" ComponentId="{8DDEFD9B-1B91-45BD-A3E6-277BDDF2BF74}" Directory_="Debug_Dir" Attributes="0" KeyPath="EXON.SubModel.dll"/>
+    <ROW Component="EXON_EM.Data.dll" ComponentId="{67E74660-048B-4F33-B454-E11D862D303B}" Directory_="Debug_Dir" Attributes="0" KeyPath="EXON_EM.Data.dll"/>
+    <ROW Component="EntityFramework.SqlServer.dll" ComponentId="{2FC0A852-4B7E-4F23-8223-95A364D05DB1}" Directory_="Debug_Dir" Attributes="0" KeyPath="EntityFramework.SqlServer.dll"/>
+    <ROW Component="EntityFramework.dll" ComponentId="{B7E52E8A-9DB6-40A0-A333-7594D045329B}" Directory_="Debug_Dir" Attributes="0" KeyPath="EntityFramework.dll"/>
+    <ROW Component="EnvDTE.dll" ComponentId="{D1EFF98E-8C52-415A-ADA7-75C1EA896937}" Directory_="Debug_Dir" Attributes="0" KeyPath="EnvDTE.dll"/>
+    <ROW Component="EnvDTE80.dll" ComponentId="{C49F49C4-E73B-49E7-9082-36B3028A7C22}" Directory_="Debug_Dir" Attributes="0" KeyPath="EnvDTE80.dll"/>
+    <ROW Component="ExcelDataReader.DataSet.dll" ComponentId="{D273102D-AC06-4DD3-9B68-AB4771E8A5E4}" Directory_="Debug_Dir" Attributes="0" KeyPath="ExcelDataReader.DataSet.dll"/>
+    <ROW Component="ExcelDataReader.dll" ComponentId="{23C0693B-9E2E-476D-9BC9-DD075B132771}" Directory_="Debug_Dir" Attributes="0" KeyPath="ExcelDataReader.dll"/>
+    <ROW Component="ExcelNumberFormat.dll" ComponentId="{C54D0594-5DDB-4116-974B-BB0599E0DAD5}" Directory_="Debug_Dir" Attributes="0" KeyPath="ExcelNumberFormat.dll"/>
+    <ROW Component="HaKTNLK57.docx" ComponentId="{06584BF1-0B16-4884-A341-214E8445CED2}" Directory_="ThongKeDapAn_Dir" Attributes="0" KeyPath="HaKTNLK57.docx" Type="0"/>
+    <ROW Component="MetroFramework.Design.dll" ComponentId="{19154E8B-0906-403A-8F54-636D2CDCF8E7}" Directory_="Debug_Dir" Attributes="0" KeyPath="MetroFramework.Design.dll"/>
+    <ROW Component="MetroFramework.Fonts.dll" ComponentId="{44EB8D31-2197-45D5-AC0D-3FBACE223A3B}" Directory_="Debug_Dir" Attributes="0" KeyPath="MetroFramework.Fonts.dll"/>
+    <ROW Component="MetroFramework.dll" ComponentId="{F1D84C8E-818C-4C99-8EE7-69F721B4AE69}" Directory_="Debug_Dir" Attributes="0" KeyPath="MetroFramework.dll"/>
+    <ROW Component="Microsoft.MSXML.dll" ComponentId="{F2A3444A-16B9-4037-9E21-0AB23CE2C039}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.MSXML.dll"/>
+    <ROW Component="Microsoft.ReportViewer.Common.dll" ComponentId="{2CD28A3F-00D1-4586-8BCC-D552C6DF5A76}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.ReportViewer.Common.dll"/>
+    <ROW Component="Microsoft.ReportViewer.DataVisualization.DLL" ComponentId="{4C79EDCB-2B9D-4061-A10E-86394EB6222B}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.ReportViewer.DataVisualization.DLL"/>
+    <ROW Component="Microsoft.ReportViewer.Design.DLL" ComponentId="{1B93B2F4-1E53-4B3D-A9BB-1D48B8D64B0A}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.ReportViewer.Design.DLL"/>
+    <ROW Component="Microsoft.ReportViewer.ProcessingObjectModel.DLL" ComponentId="{1436AE2E-08C7-405B-9696-723F5376C85B}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.ReportViewer.ProcessingObjectModel.DLL"/>
+    <ROW Component="Microsoft.ReportViewer.WebDesign.DLL" ComponentId="{EEDB5652-35C3-41BB-A604-D4204B939B00}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.ReportViewer.WebDesign.DLL"/>
+    <ROW Component="Microsoft.ReportViewer.WebForms.DLL" ComponentId="{4F446CFC-D162-473D-A3D5-604318B1BE9B}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.ReportViewer.WebForms.DLL"/>
+    <ROW Component="Microsoft.ReportViewer.WinForms.DLL" ComponentId="{44267115-2163-4618-A687-DEC8A2165615}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.ReportViewer.WinForms.DLL"/>
+    <ROW Component="Microsoft.SqlServer.Types.dll" ComponentId="{B8667A4A-E3E9-4E50-88F7-BE77D72AF288}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.SqlServer.Types.dll"/>
+    <ROW Component="Microsoft.VisualStudio.OLE.Interop.dll" ComponentId="{4E7117FC-93DA-4898-93DC-8BB2FEAC470E}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.OLE.Interop.dll"/>
+    <ROW Component="Microsoft.VisualStudio.Shell.Interop.8.0.dll" ComponentId="{5F4D4206-882A-42A8-AA97-C5AC83BCFE8E}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Shell.Interop.8.0.dll"/>
+    <ROW Component="Microsoft.VisualStudio.Shell.Interop.dll" ComponentId="{D4E8379D-9A3E-4274-938E-CB1385598E85}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.Shell.Interop.dll"/>
+    <ROW Component="Microsoft.VisualStudio.TextManager.Interop.8.0.dll" ComponentId="{CCEFE737-8189-4EA1-AD11-3418E24BB14B}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.TextManager.Interop.8.0.dll"/>
+    <ROW Component="Microsoft.VisualStudio.TextManager.Interop.dll" ComponentId="{49880DB5-891E-4389-B084-7B7D03D8848E}" Directory_="Debug_Dir" Attributes="0" KeyPath="Microsoft.VisualStudio.TextManager.Interop.dll"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{5655ED0F-BF42-47FD-AA4F-AF8DD667D0B5}" Directory_="Debug_Dir" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
+    <ROW Component="PrintResultCopy.doc" ComponentId="{D71296F4-6AC3-44E1-889F-3B4C1AB1A437}" Directory_="Template_Dir" Attributes="0" KeyPath="PrintResultCopy.doc" Type="0"/>
+    <ROW Component="ProductInformation" ComponentId="{2475C8CF-D391-4727-8E43-608B5F5A5B33}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="QuanLyHoiDongThiVer2.exe" ComponentId="{EF043F4A-0B76-41A2-AEB7-CBF432B7E65B}" Directory_="Debug_Dir" Attributes="0" KeyPath="QuanLyHoiDongThiVer2.exe"/>
+    <ROW Component="SqlServerSpatial140.dll" ComponentId="{44DA2790-38C7-45E6-A268-73040C242CAC}" Directory_="x64_Dir" Attributes="256" KeyPath="SqlServerSpatial140.dll"/>
+    <ROW Component="SqlServerSpatial140.dll_1" ComponentId="{659747B6-BFA0-459D-A241-5AD646657FCA}" Directory_="x86_Dir" Attributes="0" KeyPath="SqlServerSpatial140.dll_1"/>
+    <ROW Component="System.Windows.Forms.Ribbon.dll" ComponentId="{51998BA7-7766-4148-B986-8F2B2E41CCD8}" Directory_="Debug_Dir" Attributes="0" KeyPath="System.Windows.Forms.Ribbon.dll"/>
+    <ROW Component="TXDrawing.Windows.Forms.dll" ComponentId="{3329B998-ECAB-4998-B857-4C8B500F1B45}" Directory_="Debug_Dir" Attributes="0" KeyPath="TXDrawing.Windows.Forms.dll"/>
+    <ROW Component="TXDrawing.dll" ComponentId="{B17C4433-1DEA-4FAE-B751-8E9D4FAE84C9}" Directory_="Debug_Dir" Attributes="0" KeyPath="TXDrawing.dll"/>
+    <ROW Component="TXDrawing.resources.dll" ComponentId="{3FD09F9F-CF8A-4EF0-A530-B12E47503426}" Directory_="de_Dir" Attributes="0" KeyPath="TXDrawing.resources.dll"/>
+    <ROW Component="TXImageProvider.dll" ComponentId="{AD8EBA4F-A225-4BE6-9DA8-690447DE8FF4}" Directory_="Debug_Dir" Attributes="0" KeyPath="TXImageProvider.dll"/>
+    <ROW Component="TXTextControl.Windows.Forms.dll" ComponentId="{ED99E0C9-EC86-40CA-B35D-CA46F87DD68F}" Directory_="Debug_Dir" Attributes="0" KeyPath="TXTextControl.Windows.Forms.dll"/>
+    <ROW Component="TXTextControl.dll" ComponentId="{CBEDF14B-3513-47F8-90C2-D191E0C39F23}" Directory_="Debug_Dir" Attributes="0" KeyPath="TXTextControl.dll"/>
+    <ROW Component="TXTextControl.resources.dll" ComponentId="{0A657CEB-65CB-472C-8128-4A221BD285FA}" Directory_="de_Dir" Attributes="0" KeyPath="TXTextControl.resources.dll"/>
+    <ROW Component="WinFormAnimation.dll" ComponentId="{0F726337-577D-461B-A081-6C74328C5421}" Directory_="Debug_Dir" Attributes="0" KeyPath="WinFormAnimation.dll"/>
+    <ROW Component="docx" ComponentId="{3DFFB0C0-BE2A-4258-83D2-367FC6D0D450}" Directory_="__Dir" Attributes="0" KeyPath="docx" Type="0"/>
+    <ROW Component="docx_1" ComponentId="{0E6259B9-8860-4959-85E8-7DE406DBC4AD}" Directory_="HaKTNLK57_Dir" Attributes="0" KeyPath="docx_1" Type="0"/>
+    <ROW Component="docx_10" ComponentId="{4400C03E-F0E3-4117-83F8-293176F68DAA}" Directory_="__9_Dir" Attributes="0" KeyPath="docx_18" Type="0"/>
+    <ROW Component="docx_100" ComponentId="{EC13891F-50F4-4D8D-8A93-87E09197880D}" Directory_="__98_Dir" Attributes="0" KeyPath="docx_193" Type="0"/>
+    <ROW Component="docx_101" ComponentId="{74CF40F9-3A09-4A37-9370-2E4EE97E9440}" Directory_="__99_Dir" Attributes="0" KeyPath="docx_195" Type="0"/>
+    <ROW Component="docx_11" ComponentId="{2F7FD28A-F4B9-480F-ADC6-6F37BE0DD611}" Directory_="__10_Dir" Attributes="0" KeyPath="docx_20" Type="0"/>
+    <ROW Component="docx_12" ComponentId="{C5E22471-CC32-4EE1-83D1-0DF1FB6EF84B}" Directory_="__11_Dir" Attributes="0" KeyPath="docx_22" Type="0"/>
+    <ROW Component="docx_13" ComponentId="{3A9E8562-341B-4AB2-9647-2A5630078C2A}" Directory_="__12_Dir" Attributes="0" KeyPath="docx_24" Type="0"/>
+    <ROW Component="docx_14" ComponentId="{993B9AF3-FC9E-4486-9A48-82B7F93D5F4D}" Directory_="__13_Dir" Attributes="0" KeyPath="docx_26" Type="0"/>
+    <ROW Component="docx_15" ComponentId="{D161741A-3783-4F70-9DED-4158F4BC7EE8}" Directory_="__14_Dir" Attributes="0" KeyPath="docx_28" Type="0"/>
+    <ROW Component="docx_16" ComponentId="{E91434C3-C142-496A-9E58-C57AAFC794D0}" Directory_="__15_Dir" Attributes="0" KeyPath="docx_30" Type="0"/>
+    <ROW Component="docx_17" ComponentId="{FFD72FF3-9E69-4AE3-AAC0-1300B65EFC92}" Directory_="__16_Dir" Attributes="0" KeyPath="docx_32" Type="0"/>
+    <ROW Component="docx_18" ComponentId="{0B12385D-6B29-4420-8126-18D0C5FADE58}" Directory_="__17_Dir" Attributes="0" KeyPath="docx_34" Type="0"/>
+    <ROW Component="docx_19" ComponentId="{FECCC05A-A680-43F9-BE09-0CC8475155E1}" Directory_="__18_Dir" Attributes="0" KeyPath="docx_36" Type="0"/>
+    <ROW Component="docx_2" ComponentId="{70F0544C-9A81-4721-99B0-B7DFC4D41F4C}" Directory_="__1_Dir" Attributes="0" KeyPath="docx_2" Type="0"/>
+    <ROW Component="docx_20" ComponentId="{107FB63C-E1CA-44E5-84A8-DE457306D265}" Directory_="__19_Dir" Attributes="0" KeyPath="docx_38" Type="0"/>
+    <ROW Component="docx_21" ComponentId="{FD6B91E6-0040-4B90-9B45-BB0953FFD96A}" Directory_="__20_Dir" Attributes="0" KeyPath="docx_40" Type="0"/>
+    <ROW Component="docx_22" ComponentId="{BCD26BB2-7D05-433F-A900-9119B6AFD62F}" Directory_="__21_Dir" Attributes="0" KeyPath="docx_42" Type="0"/>
+    <ROW Component="docx_23" ComponentId="{FEFF052B-05B3-491C-BA78-7FEC79112297}" Directory_="__22_Dir" Attributes="0" KeyPath="docx_44" Type="0"/>
+    <ROW Component="docx_24" ComponentId="{BE432A11-60B5-4B1F-AAB1-B9E956F47674}" Directory_="__23_Dir" Attributes="0" KeyPath="docx_46" Type="0"/>
+    <ROW Component="docx_25" ComponentId="{5BA1DF53-1544-4DD2-B582-01D81B3976BD}" Directory_="__24_Dir" Attributes="0" KeyPath="docx_48" Type="0"/>
+    <ROW Component="docx_26" ComponentId="{44CDAD6B-7414-48D3-BF61-AC45A4C1A151}" Directory_="__25_Dir" Attributes="0" KeyPath="docx_50" Type="0"/>
+    <ROW Component="docx_27" ComponentId="{79650068-B130-4EB5-9E1B-35D1C620EAF3}" Directory_="__26_Dir" Attributes="0" KeyPath="docx_52" Type="0"/>
+    <ROW Component="docx_28" ComponentId="{931AA03B-036A-4C06-A353-DE7A5C09F342}" Directory_="__27_Dir" Attributes="0" KeyPath="docx_54" Type="0"/>
+    <ROW Component="docx_29" ComponentId="{748F82ED-46E3-4616-8E8A-9C49E1951276}" Directory_="__28_Dir" Attributes="0" KeyPath="docx_56" Type="0"/>
+    <ROW Component="docx_3" ComponentId="{C471AAE0-1000-4C4D-807A-AB3D8E7E867F}" Directory_="__2_Dir" Attributes="0" KeyPath="docx_4" Type="0"/>
+    <ROW Component="docx_30" ComponentId="{99F5A1EC-3327-4C09-840E-F1279F8E97B9}" Directory_="__29_Dir" Attributes="0" KeyPath="docx_58" Type="0"/>
+    <ROW Component="docx_31" ComponentId="{54437BE7-34DD-4061-A1A6-27F9A93CD84D}" Directory_="__30_Dir" Attributes="0" KeyPath="docx_60" Type="0"/>
+    <ROW Component="docx_32" ComponentId="{8F11AD73-2364-4B90-9FA5-7DA131FAD301}" Directory_="__31_Dir" Attributes="0" KeyPath="docx_62" Type="0"/>
+    <ROW Component="docx_33" ComponentId="{2F1A2E4A-8E7E-4678-9DFC-2A5C682F369E}" Directory_="__32_Dir" Attributes="0" KeyPath="docx_64" Type="0"/>
+    <ROW Component="docx_34" ComponentId="{24C43944-D9CC-45E2-B5FC-EB944F61DF74}" Directory_="__33_Dir" Attributes="0" KeyPath="docx_66" Type="0"/>
+    <ROW Component="docx_35" ComponentId="{392586EA-CDAA-4544-AB91-62DF374A8176}" Directory_="__34_Dir" Attributes="0" KeyPath="docx_68" Type="0"/>
+    <ROW Component="docx_36" ComponentId="{0D77FDF5-01E3-43D7-957A-C0738EB3810D}" Directory_="__35_Dir" Attributes="0" KeyPath="docx_70" Type="0"/>
+    <ROW Component="docx_37" ComponentId="{1D12D6F5-13EA-4482-98C6-A20191841107}" Directory_="__36_Dir" Attributes="0" KeyPath="docx_72" Type="0"/>
+    <ROW Component="docx_38" ComponentId="{8C5370B9-8AE3-4F9A-B881-30D88B706B6D}" Directory_="__37_Dir" Attributes="0" KeyPath="docx_74" Type="0"/>
+    <ROW Component="docx_39" ComponentId="{772E5DE7-7EF2-482A-BC55-FEA71482DA6D}" Directory_="__38_Dir" Attributes="0" KeyPath="docx_76" Type="0"/>
+    <ROW Component="docx_4" ComponentId="{9433131F-44BD-4087-B574-A8D067EB07EC}" Directory_="__3_Dir" Attributes="0" KeyPath="docx_6" Type="0"/>
+    <ROW Component="docx_40" ComponentId="{2A837292-DCA8-490E-9AC9-0E4B2CA27EE5}" Directory_="__39_Dir" Attributes="0" KeyPath="docx_78" Type="0"/>
+    <ROW Component="docx_41" ComponentId="{5A547116-CC8E-48B3-AFEC-6AFBDF51A0CE}" Directory_="__41_Dir" Attributes="0" KeyPath="docx_80" Type="0"/>
+    <ROW Component="docx_42" ComponentId="{F26D4519-6FA8-44F1-A6C1-8ECFB522410B}" Directory_="__42_Dir" Attributes="0" KeyPath="docx_81" Type="0"/>
+    <ROW Component="docx_43" ComponentId="{648C28A3-431A-4918-A45C-2BF6644D8067}" Directory_="TonKTNLK57_Dir" Attributes="0" KeyPath="docx_82" Type="0"/>
+    <ROW Component="docx_44" ComponentId="{369BA445-1B50-44FB-BB7D-EC8EEE6A68B0}" Directory_="__43_Dir" Attributes="0" KeyPath="docx_83" Type="0"/>
+    <ROW Component="docx_45" ComponentId="{F8964914-EA5F-4757-9452-EF0FEE20A959}" Directory_="__44_Dir" Attributes="0" KeyPath="docx_85" Type="0"/>
+    <ROW Component="docx_46" ComponentId="{90F06390-3EA4-4C98-AAAB-3551FE43C349}" Directory_="__45_Dir" Attributes="0" KeyPath="docx_87" Type="0"/>
+    <ROW Component="docx_47" ComponentId="{C2FCC360-242D-4E92-89F7-DF0E7671820A}" Directory_="__46_Dir" Attributes="0" KeyPath="docx_89" Type="0"/>
+    <ROW Component="docx_48" ComponentId="{D35274CE-8A66-42F5-8CCC-D6D55A2F6C04}" Directory_="__47_Dir" Attributes="0" KeyPath="docx_91" Type="0"/>
+    <ROW Component="docx_49" ComponentId="{BF79457D-E440-4632-A1A9-C915BE7F03D7}" Directory_="__48_Dir" Attributes="0" KeyPath="docx_93" Type="0"/>
+    <ROW Component="docx_5" ComponentId="{AE2CA9FE-D488-4AC4-9560-72CF14153E5A}" Directory_="__4_Dir" Attributes="0" KeyPath="docx_8" Type="0"/>
+    <ROW Component="docx_50" ComponentId="{AF4C42FA-E61E-49A0-B15C-B88E055FB74A}" Directory_="__49_Dir" Attributes="0" KeyPath="docx_95" Type="0"/>
+    <ROW Component="docx_51" ComponentId="{5F752F60-9F20-4018-B64E-073741B52F1C}" Directory_="__50_Dir" Attributes="0" KeyPath="docx_97" Type="0"/>
+    <ROW Component="docx_52" ComponentId="{90514537-B9F1-4BB5-8987-1E9F812C7F88}" Directory_="__51_Dir" Attributes="0" KeyPath="docx_99" Type="0"/>
+    <ROW Component="docx_53" ComponentId="{B035CF36-98B0-4EFD-965D-3E576DB7980C}" Directory_="__52_Dir" Attributes="0" KeyPath="docx_101" Type="0"/>
+    <ROW Component="docx_54" ComponentId="{2344D62E-4613-4387-9BA1-ADA5099F06FE}" Directory_="__53_Dir" Attributes="0" KeyPath="docx_103" Type="0"/>
+    <ROW Component="docx_55" ComponentId="{CCDEAF28-6EBF-48E3-9CCF-13C284E7F1D5}" Directory_="__54_Dir" Attributes="0" KeyPath="docx_105" Type="0"/>
+    <ROW Component="docx_56" ComponentId="{30CBFDD3-ECAA-40E3-B6BD-E1CAAE5425E4}" Directory_="__55_Dir" Attributes="0" KeyPath="docx_107" Type="0"/>
+    <ROW Component="docx_57" ComponentId="{41502604-2648-4F0B-95CD-FBEE69313F2B}" Directory_="__56_Dir" Attributes="0" KeyPath="docx_109" Type="0"/>
+    <ROW Component="docx_58" ComponentId="{D752DB10-C760-4051-A81C-AD5C57B38DB7}" Directory_="__57_Dir" Attributes="0" KeyPath="docx_111" Type="0"/>
+    <ROW Component="docx_59" ComponentId="{DB1948CD-48FA-48BF-84AF-648EF3C146D5}" Directory_="__58_Dir" Attributes="0" KeyPath="docx_113" Type="0"/>
+    <ROW Component="docx_6" ComponentId="{7E495A77-7839-4FD9-8F7E-931F49E84C88}" Directory_="__5_Dir" Attributes="0" KeyPath="docx_10" Type="0"/>
+    <ROW Component="docx_60" ComponentId="{45064A43-A593-4349-87C0-BB3880E73A14}" Directory_="__59_Dir" Attributes="0" KeyPath="docx_115" Type="0"/>
+    <ROW Component="docx_61" ComponentId="{2922588D-CDDC-4F04-9E91-0D00C7818C5B}" Directory_="__60_Dir" Attributes="0" KeyPath="docx_117" Type="0"/>
+    <ROW Component="docx_62" ComponentId="{C6370D7F-25A3-44BE-8D20-4822259D4351}" Directory_="__61_Dir" Attributes="0" KeyPath="docx_119" Type="0"/>
+    <ROW Component="docx_63" ComponentId="{6F25C5B9-5BD9-4D3D-A698-7A7FA5D01A7F}" Directory_="__62_Dir" Attributes="0" KeyPath="docx_121" Type="0"/>
+    <ROW Component="docx_64" ComponentId="{4B37D3B5-7890-4D02-B0C2-4785A5FA1151}" Directory_="__63_Dir" Attributes="0" KeyPath="docx_123" Type="0"/>
+    <ROW Component="docx_65" ComponentId="{F1594045-FB14-4CF0-83E0-3A6548E6A640}" Directory_="__64_Dir" Attributes="0" KeyPath="docx_125" Type="0"/>
+    <ROW Component="docx_66" ComponentId="{DC0A4353-8BE3-4374-B5C9-5F50FC2514EA}" Directory_="__65_Dir" Attributes="0" KeyPath="docx_127" Type="0"/>
+    <ROW Component="docx_67" ComponentId="{C6D9A4D4-1605-48C3-9E22-7D6A6732200E}" Directory_="__66_Dir" Attributes="0" KeyPath="docx_129" Type="0"/>
+    <ROW Component="docx_68" ComponentId="{6D3141B0-BDBA-417E-9D57-D0C93F16E477}" Directory_="__67_Dir" Attributes="0" KeyPath="docx_131" Type="0"/>
+    <ROW Component="docx_69" ComponentId="{BB970457-D000-438F-875C-57AE996C6521}" Directory_="__68_Dir" Attributes="0" KeyPath="docx_133" Type="0"/>
+    <ROW Component="docx_7" ComponentId="{904228AE-1CEC-4F10-8590-C9D4764DC8D4}" Directory_="__6_Dir" Attributes="0" KeyPath="docx_12" Type="0"/>
+    <ROW Component="docx_70" ComponentId="{E76AC117-F178-4ACA-AB25-E7160BE9DFBA}" Directory_="__69_Dir" Attributes="0" KeyPath="docx_135" Type="0"/>
+    <ROW Component="docx_71" ComponentId="{0AE1CEDF-AC75-499B-A465-ECA03AB15BC8}" Directory_="__70_Dir" Attributes="0" KeyPath="docx_137" Type="0"/>
+    <ROW Component="docx_72" ComponentId="{FA11803C-D93F-4130-82AB-DC70C2DD4728}" Directory_="__71_Dir" Attributes="0" KeyPath="docx_139" Type="0"/>
+    <ROW Component="docx_73" ComponentId="{4D8A2B19-5F33-4FDE-955A-93CCFEE7CE91}" Directory_="__72_Dir" Attributes="0" KeyPath="docx_141" Type="0"/>
+    <ROW Component="docx_74" ComponentId="{C7C480B8-AB0A-45F8-9444-7EE3027EE717}" Directory_="__73_Dir" Attributes="0" KeyPath="docx_143" Type="0"/>
+    <ROW Component="docx_75" ComponentId="{7D4AD79F-98D5-4A89-AE4E-B0ED077513C5}" Directory_="__74_Dir" Attributes="0" KeyPath="docx_145" Type="0"/>
+    <ROW Component="docx_76" ComponentId="{F8D5D653-1710-4791-9EA4-6A8E2E01EB4B}" Directory_="__75_Dir" Attributes="0" KeyPath="docx_147" Type="0"/>
+    <ROW Component="docx_77" ComponentId="{FB5CDDB6-E64E-4326-86A4-095DE30A3490}" Directory_="__76_Dir" Attributes="0" KeyPath="docx_149" Type="0"/>
+    <ROW Component="docx_78" ComponentId="{637CE94D-2596-436C-8E8A-39CC970B9E1F}" Directory_="__77_Dir" Attributes="0" KeyPath="docx_151" Type="0"/>
+    <ROW Component="docx_79" ComponentId="{890E1FAE-750D-4D60-ABC2-6976575D4EDF}" Directory_="__78_Dir" Attributes="0" KeyPath="docx_153" Type="0"/>
+    <ROW Component="docx_8" ComponentId="{659604CA-FB89-408D-B45B-3DC776230BA9}" Directory_="__7_Dir" Attributes="0" KeyPath="docx_14" Type="0"/>
+    <ROW Component="docx_80" ComponentId="{AF4EC445-69B8-4E44-B44C-2709451F6E62}" Directory_="__79_Dir" Attributes="0" KeyPath="docx_155" Type="0"/>
+    <ROW Component="docx_81" ComponentId="{DFA45389-CD35-4D7B-897F-FE5DD3A1DAE2}" Directory_="__80_Dir" Attributes="0" KeyPath="docx_157" Type="0"/>
+    <ROW Component="docx_82" ComponentId="{266A0DD8-C82A-423C-8E14-3D1860A4CC07}" Directory_="__81_Dir" Attributes="0" KeyPath="docx_159" Type="0"/>
+    <ROW Component="docx_83" ComponentId="{5513919E-C534-4170-9FC0-4EB67A7793DD}" Directory_="__82_Dir" Attributes="0" KeyPath="docx_161" Type="0"/>
+    <ROW Component="docx_84" ComponentId="{783AA316-3ACA-4431-AF4B-BABFF2909E83}" Directory_="__83_Dir" Attributes="0" KeyPath="docx_163" Type="0"/>
+    <ROW Component="docx_85" ComponentId="{91CDAE1C-E002-49CB-BE22-FABEB054AAEC}" Directory_="__84_Dir" Attributes="0" KeyPath="docx_165" Type="0"/>
+    <ROW Component="docx_86" ComponentId="{CC142694-9720-43EC-97F1-6260CE15320E}" Directory_="__85_Dir" Attributes="0" KeyPath="docx_167" Type="0"/>
+    <ROW Component="docx_87" ComponentId="{CB20EA39-358C-4043-AF86-6BE951E866C1}" Directory_="__86_Dir" Attributes="0" KeyPath="docx_169" Type="0"/>
+    <ROW Component="docx_88" ComponentId="{7D36771F-D1EF-4221-9A65-60FE00839E40}" Directory_="__87_Dir" Attributes="0" KeyPath="docx_171" Type="0"/>
+    <ROW Component="docx_89" ComponentId="{DE08FCB2-55A7-45D2-A52E-9419302EACCC}" Directory_="__88_Dir" Attributes="0" KeyPath="docx_173" Type="0"/>
+    <ROW Component="docx_9" ComponentId="{5D49DD9B-522E-49B8-BEDE-733364604AAE}" Directory_="__8_Dir" Attributes="0" KeyPath="docx_16" Type="0"/>
+    <ROW Component="docx_90" ComponentId="{A72A7E1F-B202-469E-A571-A7EC61119E4E}" Directory_="__89_Dir" Attributes="0" KeyPath="docx_175" Type="0"/>
+    <ROW Component="docx_91" ComponentId="{FC0B6A21-E144-4701-882D-CAFA7EF79A38}" Directory_="__90_Dir" Attributes="0" KeyPath="docx_177" Type="0"/>
+    <ROW Component="docx_92" ComponentId="{1B71DC12-C5C1-469D-8766-7F9E8BDF5256}" Directory_="__91_Dir" Attributes="0" KeyPath="docx_179" Type="0"/>
+    <ROW Component="docx_93" ComponentId="{B025C274-5C6A-4D97-ACBF-8F36C38FD25B}" Directory_="__92_Dir" Attributes="0" KeyPath="docx_181" Type="0"/>
+    <ROW Component="docx_94" ComponentId="{A88C6D74-8826-4702-9CAF-16AFA1B3E4D3}" Directory_="VtlKTNLK57_Dir" Attributes="0" KeyPath="docx_182" Type="0"/>
+    <ROW Component="docx_95" ComponentId="{0C8B3196-A00F-470E-A643-45D0857DD79D}" Directory_="__93_Dir" Attributes="0" KeyPath="docx_183" Type="0"/>
+    <ROW Component="docx_96" ComponentId="{9D010EBE-F5F8-4C00-8DF2-B5F232AD5E24}" Directory_="__94_Dir" Attributes="0" KeyPath="docx_185" Type="0"/>
+    <ROW Component="docx_97" ComponentId="{CBC112FD-7171-42C8-909C-C7F2EBA43538}" Directory_="__95_Dir" Attributes="0" KeyPath="docx_187" Type="0"/>
+    <ROW Component="docx_98" ComponentId="{B50D5F2F-4EBC-4E2E-B516-80C07753B2A5}" Directory_="__96_Dir" Attributes="0" KeyPath="docx_189" Type="0"/>
+    <ROW Component="docx_99" ComponentId="{7E0DC490-268F-4D5D-B736-353DB6E799C1}" Directory_="__97_Dir" Attributes="0" KeyPath="docx_191" Type="0"/>
+    <ROW Component="log4net.dll" ComponentId="{08FCE5DF-DECD-4CD0-A723-109BE30BBB3D}" Directory_="Debug_Dir" Attributes="0" KeyPath="log4net.dll"/>
+    <ROW Component="msvcr120.dll" ComponentId="{E49F304B-9C44-49B5-8505-ED27C9770CF6}" Directory_="x64_Dir" Attributes="256" KeyPath="msvcr120.dll"/>
+    <ROW Component="msvcr120.dll_1" ComponentId="{FB92630C-51FB-40DE-8202-430F1BD5BC7C}" Directory_="x86_Dir" Attributes="0" KeyPath="msvcr120.dll_1"/>
+    <ROW Component="rpKetQuaTheoCaThi.rdlc" ComponentId="{EFBA986D-4FA0-4A9E-A9D0-CF40CBD12BB9}" Directory_="Report_Dir" Attributes="0" KeyPath="rpKetQuaTheoCaThi.rdlc" Type="0"/>
+    <ROW Component="rtf" ComponentId="{C61F4F6A-B3BC-4C69-9D22-F18DF33D86CA}" Directory_="__40_Dir" Attributes="0" KeyPath="rtf_40" Type="0"/>
+    <ROW Component="rtf_1" ComponentId="{F8EC10A7-0D12-4A97-8940-861C9FA4B46F}" Directory_="__100_Dir" Attributes="0" KeyPath="rtf_99" Type="0"/>
+    <ROW Component="stdole.dll" ComponentId="{AC58E490-715C-4DE3-8C22-A9CB329BAF64}" Directory_="Debug_Dir" Attributes="0" KeyPath="stdole.dll"/>
+    <ROW Component="tx28_css.dll" ComponentId="{31E6AA17-0BA6-4F75-9E29-549096E2CA9D}" Directory_="Debug_Dir" Attributes="0" KeyPath="tx28_css.dll"/>
+    <ROW Component="tx28_htm.dll" ComponentId="{EF63D637-C7AE-4DFE-ACBC-0EBF2EA95DDE}" Directory_="Debug_Dir" Attributes="0" KeyPath="tx28_htm.dll"/>
+    <ROW Component="tx28_rtf.dll" ComponentId="{02139643-9F88-4686-BBFD-0B24CAB380DD}" Directory_="Debug_Dir" Attributes="0" KeyPath="tx28_rtf.dll"/>
+    <ROW Component="txic.dll" ComponentId="{02A7A35C-96C2-4499-A644-8711B1500670}" Directory_="Debug_Dir" Attributes="0" KeyPath="txic.dll"/>
+    <ROW Component="txkernel.dll" ComponentId="{395C8798-E039-43CD-A445-B07CC069E8FC}" Directory_="Debug_Dir" Attributes="0" KeyPath="txkernel.dll"/>
+    <ROW Component="txtools.dll" ComponentId="{9B69941E-C178-43A2-BD2D-07E4434ECAB8}" Directory_="Debug_Dir" Attributes="0" KeyPath="txtools.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="Bunifu_UI_v1.5.3.dll" Component_="Bunifu_UI_v1.5.3.dll" FileName="BUNIFU~1.DLL|Bunifu_UI_v1.5.3.dll" Attributes="0" SourcePath="bin\Debug\Bunifu_UI_v1.5.3.dll" SelfReg="false"/>
+    <ROW File="CircularProgressBar.dll" Component_="CircularProgressBar.dll" FileName="CIRCUL~1.DLL|CircularProgressBar.dll" Attributes="0" SourcePath="bin\Debug\CircularProgressBar.dll" SelfReg="false"/>
+    <ROW File="CircularProgressBar.xml" Component_="CircularProgressBar.xml" FileName="CIRCUL~1.XML|CircularProgressBar.xml" Attributes="0" SourcePath="bin\Debug\CircularProgressBar.xml" SelfReg="false"/>
+    <ROW File="ClosedXML.dll" Component_="ClosedXML.dll" FileName="CLOSED~1.DLL|ClosedXML.dll" Attributes="0" SourcePath="bin\Debug\ClosedXML.dll" SelfReg="false"/>
+    <ROW File="ClosedXML.pdb" Component_="ClosedXML.dll" FileName="CLOSED~1.PDB|ClosedXML.pdb" Attributes="0" SourcePath="bin\Debug\ClosedXML.pdb" SelfReg="false"/>
+    <ROW File="ClosedXML.xml" Component_="CircularProgressBar.xml" FileName="CLOSED~1.XML|ClosedXML.xml" Attributes="0" SourcePath="bin\Debug\ClosedXML.xml" SelfReg="false"/>
+    <ROW File="TXDrawing.resources.dll" Component_="TXDrawing.resources.dll" FileName="TXDRAW~1.DLL|TXDrawing.resources.dll" Attributes="0" SourcePath="bin\Debug\de\TXDrawing.resources.dll" SelfReg="false"/>
+    <ROW File="TXTextControl.resources.dll" Component_="TXTextControl.resources.dll" FileName="TXTEXT~1.DLL|TXTextControl.resources.dll" Attributes="0" SourcePath="bin\Debug\de\TXTextControl.resources.dll" SelfReg="false"/>
+    <ROW File="DevelopmentTool.dll" Component_="DevelopmentTool.dll" FileName="DEVELO~1.DLL|DevelopmentTool.dll" Attributes="0" SourcePath="bin\Debug\DevelopmentTool.dll" SelfReg="false"/>
+    <ROW File="DocumentFormat.OpenXml.dll" Component_="DocumentFormat.OpenXml.dll" FileName="DOCUME~1.DLL|DocumentFormat.OpenXml.dll" Attributes="0" SourcePath="bin\Debug\DocumentFormat.OpenXml.dll" SelfReg="false"/>
+    <ROW File="DocumentFormat.OpenXml.xml" Component_="CircularProgressBar.xml" FileName="DOCUME~1.XML|DocumentFormat.OpenXml.xml" Attributes="0" SourcePath="bin\Debug\DocumentFormat.OpenXml.xml" SelfReg="false"/>
+    <ROW File="EntityFramework.dll" Component_="EntityFramework.dll" FileName="ENTITY~1.DLL|EntityFramework.dll" Attributes="0" SourcePath="bin\Debug\EntityFramework.dll" SelfReg="false"/>
+    <ROW File="EntityFramework.SqlServer.dll" Component_="EntityFramework.SqlServer.dll" FileName="ENTITY~2.DLL|EntityFramework.SqlServer.dll" Attributes="0" SourcePath="bin\Debug\EntityFramework.SqlServer.dll" SelfReg="false"/>
+    <ROW File="EntityFramework.SqlServer.xml" Component_="CircularProgressBar.xml" FileName="ENTITY~1.XML|EntityFramework.SqlServer.xml" Attributes="0" SourcePath="bin\Debug\EntityFramework.SqlServer.xml" SelfReg="false"/>
+    <ROW File="EntityFramework.xml" Component_="CircularProgressBar.xml" FileName="ENTITY~2.XML|EntityFramework.xml" Attributes="0" SourcePath="bin\Debug\EntityFramework.xml" SelfReg="false"/>
+    <ROW File="EnvDTE.dll" Component_="EnvDTE.dll" FileName="EnvDTE.dll" Attributes="0" SourcePath="bin\Debug\EnvDTE.dll" SelfReg="false"/>
+    <ROW File="EnvDTE80.dll" Component_="EnvDTE80.dll" FileName="EnvDTE80.dll" Attributes="0" SourcePath="bin\Debug\EnvDTE80.dll" SelfReg="false"/>
+    <ROW File="ExcelDataReader.DataSet.dll" Component_="ExcelDataReader.DataSet.dll" FileName="EXCELD~1.DLL|ExcelDataReader.DataSet.dll" Attributes="0" SourcePath="bin\Debug\ExcelDataReader.DataSet.dll" SelfReg="false"/>
+    <ROW File="ExcelDataReader.DataSet.pdb" Component_="ExcelDataReader.DataSet.dll" FileName="EXCELD~1.PDB|ExcelDataReader.DataSet.pdb" Attributes="0" SourcePath="bin\Debug\ExcelDataReader.DataSet.pdb" SelfReg="false"/>
+    <ROW File="ExcelDataReader.DataSet.xml" Component_="CircularProgressBar.xml" FileName="EXCELD~1.XML|ExcelDataReader.DataSet.xml" Attributes="0" SourcePath="bin\Debug\ExcelDataReader.DataSet.xml" SelfReg="false"/>
+    <ROW File="ExcelDataReader.dll" Component_="ExcelDataReader.dll" FileName="EXCELD~2.DLL|ExcelDataReader.dll" Attributes="0" SourcePath="bin\Debug\ExcelDataReader.dll" SelfReg="false"/>
+    <ROW File="ExcelDataReader.pdb" Component_="ExcelDataReader.dll" FileName="EXCELD~2.PDB|ExcelDataReader.pdb" Attributes="0" SourcePath="bin\Debug\ExcelDataReader.pdb" SelfReg="false"/>
+    <ROW File="ExcelDataReader.xml" Component_="CircularProgressBar.xml" FileName="EXCELD~2.XML|ExcelDataReader.xml" Attributes="0" SourcePath="bin\Debug\ExcelDataReader.xml" SelfReg="false"/>
+    <ROW File="ExcelNumberFormat.dll" Component_="ExcelNumberFormat.dll" FileName="EXCELN~1.DLL|ExcelNumberFormat.dll" Attributes="0" SourcePath="bin\Debug\ExcelNumberFormat.dll" SelfReg="false"/>
+    <ROW File="ExcelNumberFormat.xml" Component_="CircularProgressBar.xml" FileName="EXCELN~1.XML|ExcelNumberFormat.xml" Attributes="0" SourcePath="bin\Debug\ExcelNumberFormat.xml" SelfReg="false"/>
+    <ROW File="EXON.Common.dll" Component_="EXON.Common.dll" FileName="EXONCO~1.DLL|EXON.Common.dll" Attributes="0" SourcePath="bin\Debug\EXON.Common.dll" SelfReg="false"/>
+    <ROW File="EXON.Common.dll.config" Component_="CircularProgressBar.xml" FileName="EXONCO~1.CON|EXON.Common.dll.config" Attributes="0" SourcePath="bin\Debug\EXON.Common.dll.config" SelfReg="false"/>
+    <ROW File="EXON.Common.pdb" Component_="EXON.Common.dll" FileName="EXONCO~1.PDB|EXON.Common.pdb" Attributes="0" SourcePath="bin\Debug\EXON.Common.pdb" SelfReg="false"/>
+    <ROW File="EXON.GradedEssay.exe" Component_="EXON.GradedEssay.exe" FileName="EXONGR~1.EXE|EXON.GradedEssay.exe" Attributes="0" SourcePath="bin\Debug\EXON.GradedEssay.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="EXON.GradedEssay.exe.config" Component_="CircularProgressBar.xml" FileName="EXONGR~1.CON|EXON.GradedEssay.exe.config" Attributes="0" SourcePath="bin\Debug\EXON.GradedEssay.exe.config" SelfReg="false"/>
+    <ROW File="EXON.GradedEssay.pdb" Component_="EXON.GradedEssay.exe" FileName="EXONGR~1.PDB|EXON.GradedEssay.pdb" Attributes="0" SourcePath="bin\Debug\EXON.GradedEssay.pdb" SelfReg="false"/>
+    <ROW File="EXON.MONITOR.exe" Component_="EXON.MONITOR.exe" FileName="EXONMO~1.EXE|EXON.MONITOR.exe" Attributes="0" SourcePath="bin\Debug\EXON.MONITOR.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="EXON.MONITOR.exe.config" Component_="CircularProgressBar.xml" FileName="EXONMO~1.CON|EXON.MONITOR.exe.config" Attributes="0" SourcePath="bin\Debug\EXON.MONITOR.exe.config" SelfReg="false"/>
+    <ROW File="EXON.MONITOR.pdb" Component_="EXON.MONITOR.exe" FileName="EXONMO~1.PDB|EXON.MONITOR.pdb" Attributes="0" SourcePath="bin\Debug\EXON.MONITOR.pdb" SelfReg="false"/>
+    <ROW File="EXON.SubData.dll" Component_="EXON.SubData.dll" FileName="EXONSU~1.DLL|EXON.SubData.dll" Attributes="0" SourcePath="bin\Debug\EXON.SubData.dll" SelfReg="false"/>
+    <ROW File="EXON.SubData.dll.config" Component_="CircularProgressBar.xml" FileName="EXONSU~1.CON|EXON.SubData.dll.config" Attributes="0" SourcePath="bin\Debug\EXON.SubData.dll.config" SelfReg="false"/>
+    <ROW File="EXON.SubData.pdb" Component_="EXON.SubData.dll" FileName="EXONSU~1.PDB|EXON.SubData.pdb" Attributes="0" SourcePath="bin\Debug\EXON.SubData.pdb" SelfReg="false"/>
+    <ROW File="EXON.SubModel.dll" Component_="EXON.SubModel.dll" FileName="EXONSU~2.DLL|EXON.SubModel.dll" Attributes="0" SourcePath="bin\Debug\EXON.SubModel.dll" SelfReg="false"/>
+    <ROW File="EXON.SubModel.dll.config" Component_="CircularProgressBar.xml" FileName="EXONSU~2.CON|EXON.SubModel.dll.config" Attributes="0" SourcePath="bin\Debug\EXON.SubModel.dll.config" SelfReg="false"/>
+    <ROW File="EXON.SubModel.pdb" Component_="EXON.SubModel.dll" FileName="EXONSU~2.PDB|EXON.SubModel.pdb" Attributes="0" SourcePath="bin\Debug\EXON.SubModel.pdb" SelfReg="false"/>
+    <ROW File="EXON_EM.Data.dll" Component_="EXON_EM.Data.dll" FileName="EXON_E~1.DLL|EXON_EM.Data.dll" Attributes="0" SourcePath="bin\Debug\EXON_EM.Data.dll" SelfReg="false"/>
+    <ROW File="EXON_EM.Data.dll.config" Component_="CircularProgressBar.xml" FileName="EXON_E~1.CON|EXON_EM.Data.dll.config" Attributes="0" SourcePath="bin\Debug\EXON_EM.Data.dll.config" SelfReg="false"/>
+    <ROW File="EXON_EM.Data.pdb" Component_="EXON_EM.Data.dll" FileName="EXON_E~1.PDB|EXON_EM.Data.pdb" Attributes="0" SourcePath="bin\Debug\EXON_EM.Data.pdb" SelfReg="false"/>
+    <ROW File="log4net.dll" Component_="log4net.dll" FileName="log4net.dll" Attributes="0" SourcePath="bin\Debug\log4net.dll" SelfReg="false"/>
+    <ROW File="log4net.xml" Component_="CircularProgressBar.xml" FileName="log4net.xml" Attributes="0" SourcePath="bin\Debug\log4net.xml" SelfReg="false"/>
+    <ROW File="MetroFramework.Design.dll" Component_="MetroFramework.Design.dll" FileName="METROF~1.DLL|MetroFramework.Design.dll" Attributes="0" SourcePath="bin\Debug\MetroFramework.Design.dll" SelfReg="false"/>
+    <ROW File="MetroFramework.dll" Component_="MetroFramework.dll" FileName="METROF~2.DLL|MetroFramework.dll" Attributes="0" SourcePath="bin\Debug\MetroFramework.dll" SelfReg="false"/>
+    <ROW File="MetroFramework.Fonts.dll" Component_="MetroFramework.Fonts.dll" FileName="METROF~3.DLL|MetroFramework.Fonts.dll" Attributes="0" SourcePath="bin\Debug\MetroFramework.Fonts.dll" SelfReg="false"/>
+    <ROW File="Microsoft.MSXML.dll" Component_="Microsoft.MSXML.dll" FileName="MICROS~1.DLL|Microsoft.MSXML.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.MSXML.dll" SelfReg="false"/>
+    <ROW File="Microsoft.ReportViewer.Common.dll" Component_="Microsoft.ReportViewer.Common.dll" FileName="MICROS~2.DLL|Microsoft.ReportViewer.Common.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.ReportViewer.Common.dll" SelfReg="false"/>
+    <ROW File="Microsoft.ReportViewer.DataVisualization.DLL" Component_="Microsoft.ReportViewer.DataVisualization.DLL" FileName="MICROS~3.DLL|Microsoft.ReportViewer.DataVisualization.DLL" Attributes="0" SourcePath="bin\Debug\Microsoft.ReportViewer.DataVisualization.DLL" SelfReg="false"/>
+    <ROW File="Microsoft.ReportViewer.Design.DLL" Component_="Microsoft.ReportViewer.Design.DLL" FileName="MICROS~4.DLL|Microsoft.ReportViewer.Design.DLL" Attributes="0" SourcePath="bin\Debug\Microsoft.ReportViewer.Design.DLL" SelfReg="false"/>
+    <ROW File="Microsoft.ReportViewer.ProcessingObjectModel.DLL" Component_="Microsoft.ReportViewer.ProcessingObjectModel.DLL" FileName="MICROS~5.DLL|Microsoft.ReportViewer.ProcessingObjectModel.DLL" Attributes="0" SourcePath="bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.DLL" SelfReg="false"/>
+    <ROW File="Microsoft.ReportViewer.WebDesign.DLL" Component_="Microsoft.ReportViewer.WebDesign.DLL" FileName="MICROS~6.DLL|Microsoft.ReportViewer.WebDesign.DLL" Attributes="0" SourcePath="bin\Debug\Microsoft.ReportViewer.WebDesign.DLL" SelfReg="false"/>
+    <ROW File="Microsoft.ReportViewer.WebForms.DLL" Component_="Microsoft.ReportViewer.WebForms.DLL" FileName="MICROS~7.DLL|Microsoft.ReportViewer.WebForms.DLL" Attributes="0" SourcePath="bin\Debug\Microsoft.ReportViewer.WebForms.DLL" SelfReg="false"/>
+    <ROW File="Microsoft.ReportViewer.WinForms.DLL" Component_="Microsoft.ReportViewer.WinForms.DLL" FileName="MICROS~8.DLL|Microsoft.ReportViewer.WinForms.DLL" Attributes="0" SourcePath="bin\Debug\Microsoft.ReportViewer.WinForms.DLL" SelfReg="false"/>
+    <ROW File="Microsoft.SqlServer.Types.dll" Component_="Microsoft.SqlServer.Types.dll" FileName="MICROS~9.DLL|Microsoft.SqlServer.Types.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.SqlServer.Types.dll" SelfReg="false"/>
+    <ROW File="Microsoft.VisualStudio.OLE.Interop.dll" Component_="Microsoft.VisualStudio.OLE.Interop.dll" FileName="MICRO~10.DLL|Microsoft.VisualStudio.OLE.Interop.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.VisualStudio.OLE.Interop.dll" SelfReg="false"/>
+    <ROW File="Microsoft.VisualStudio.Shell.Interop.8.0.dll" Component_="Microsoft.VisualStudio.Shell.Interop.8.0.dll" FileName="MICRO~11.DLL|Microsoft.VisualStudio.Shell.Interop.8.0.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.VisualStudio.Shell.Interop.8.0.dll" SelfReg="false"/>
+    <ROW File="Microsoft.VisualStudio.Shell.Interop.dll" Component_="Microsoft.VisualStudio.Shell.Interop.dll" FileName="MICRO~12.DLL|Microsoft.VisualStudio.Shell.Interop.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.VisualStudio.Shell.Interop.dll" SelfReg="false"/>
+    <ROW File="Microsoft.VisualStudio.TextManager.Interop.8.0.dll" Component_="Microsoft.VisualStudio.TextManager.Interop.8.0.dll" FileName="MICRO~13.DLL|Microsoft.VisualStudio.TextManager.Interop.8.0.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.VisualStudio.TextManager.Interop.8.0.dll" SelfReg="false"/>
+    <ROW File="Microsoft.VisualStudio.TextManager.Interop.dll" Component_="Microsoft.VisualStudio.TextManager.Interop.dll" FileName="MICRO~14.DLL|Microsoft.VisualStudio.TextManager.Interop.dll" Attributes="0" SourcePath="bin\Debug\Microsoft.VisualStudio.TextManager.Interop.dll" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="bin\Debug\Newtonsoft.Json.dll" SelfReg="false"/>
+    <ROW File="Newtonsoft.Json.xml" Component_="CircularProgressBar.xml" FileName="NEWTON~1.XML|Newtonsoft.Json.xml" Attributes="0" SourcePath="bin\Debug\Newtonsoft.Json.xml" SelfReg="false"/>
+    <ROW File="QuanLyHoiDongThiVer2.exe" Component_="QuanLyHoiDongThiVer2.exe" FileName="QUANLY~1.EXE|QuanLyHoiDongThiVer2.exe" Attributes="0" SourcePath="bin\Debug\QuanLyHoiDongThiVer2.exe" SelfReg="false" DigSign="true"/>
+    <ROW File="QuanLyHoiDongThiVer2.exe.config" Component_="CircularProgressBar.xml" FileName="QUANLY~1.CON|QuanLyHoiDongThiVer2.exe.config" Attributes="0" SourcePath="bin\Debug\QuanLyHoiDongThiVer2.exe.config" SelfReg="false"/>
+    <ROW File="QuanLyHoiDongThiVer2.pdb" Component_="QuanLyHoiDongThiVer2.exe" FileName="QUANLY~1.PDB|QuanLyHoiDongThiVer2.pdb" Attributes="0" SourcePath="bin\Debug\QuanLyHoiDongThiVer2.pdb" SelfReg="false"/>
+    <ROW File="rpKetQuaTheoCaThi.rdlc" Component_="rpKetQuaTheoCaThi.rdlc" FileName="RPKETQ~1.RDL|rpKetQuaTheoCaThi.rdlc" Attributes="0" SourcePath="bin\Debug\Report\rpKetQuaTheoCaThi.rdlc" SelfReg="false"/>
+    <ROW File="msvcr120.dll" Component_="msvcr120.dll" FileName="msvcr120.dll" Attributes="0" SourcePath="bin\Debug\SqlServerTypes\x64\msvcr120.dll" SelfReg="false"/>
+    <ROW File="SqlServerSpatial140.dll" Component_="SqlServerSpatial140.dll" FileName="SQLSER~1.DLL|SqlServerSpatial140.dll" Attributes="0" SourcePath="bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll" SelfReg="false"/>
+    <ROW File="msvcr120.dll_1" Component_="msvcr120.dll_1" FileName="msvcr120.dll" Attributes="0" SourcePath="bin\Debug\SqlServerTypes\x86\msvcr120.dll" SelfReg="false"/>
+    <ROW File="SqlServerSpatial140.dll_1" Component_="SqlServerSpatial140.dll_1" FileName="SQLSER~1.DLL|SqlServerSpatial140.dll" Attributes="0" SourcePath="bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll" SelfReg="false"/>
+    <ROW File="stdole.dll" Component_="stdole.dll" FileName="stdole.dll" Attributes="0" SourcePath="bin\Debug\stdole.dll" SelfReg="false"/>
+    <ROW File="System.Windows.Forms.Ribbon.dll" Component_="System.Windows.Forms.Ribbon.dll" FileName="SYSTEM~1.DLL|System.Windows.Forms.Ribbon.dll" Attributes="0" SourcePath="bin\Debug\System.Windows.Forms.Ribbon.dll" SelfReg="false"/>
+    <ROW File="docx" Component_="docx" FileName="2560~1.DOC|2560.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2560\2560.docx" SelfReg="false"/>
+    <ROW File="rtf" Component_="docx" FileName="2560.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2560\2560.rtf" SelfReg="false"/>
+    <ROW File="docx_1" Component_="docx_1" FileName="2560~1.DOC|2560.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2560.docx" SelfReg="false"/>
+    <ROW File="docx_2" Component_="docx_2" FileName="2561~1.DOC|2561.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2561\2561.docx" SelfReg="false"/>
+    <ROW File="rtf_1" Component_="docx_2" FileName="2561.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2561\2561.rtf" SelfReg="false"/>
+    <ROW File="docx_3" Component_="docx_1" FileName="2561~1.DOC|2561.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2561.docx" SelfReg="false"/>
+    <ROW File="docx_4" Component_="docx_3" FileName="2562~1.DOC|2562.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2562\2562.docx" SelfReg="false"/>
+    <ROW File="rtf_2" Component_="docx_3" FileName="2562.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2562\2562.rtf" SelfReg="false"/>
+    <ROW File="docx_5" Component_="docx_1" FileName="2562~1.DOC|2562.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2562.docx" SelfReg="false"/>
+    <ROW File="docx_6" Component_="docx_4" FileName="2563~1.DOC|2563.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2563\2563.docx" SelfReg="false"/>
+    <ROW File="rtf_3" Component_="docx_4" FileName="2563.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2563\2563.rtf" SelfReg="false"/>
+    <ROW File="docx_7" Component_="docx_1" FileName="2563~1.DOC|2563.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2563.docx" SelfReg="false"/>
+    <ROW File="docx_8" Component_="docx_5" FileName="2564~1.DOC|2564.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2564\2564.docx" SelfReg="false"/>
+    <ROW File="rtf_4" Component_="docx_5" FileName="2564.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2564\2564.rtf" SelfReg="false"/>
+    <ROW File="docx_9" Component_="docx_1" FileName="2564~1.DOC|2564.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2564.docx" SelfReg="false"/>
+    <ROW File="docx_10" Component_="docx_6" FileName="2565~1.DOC|2565.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2565\2565.docx" SelfReg="false"/>
+    <ROW File="rtf_5" Component_="docx_6" FileName="2565.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2565\2565.rtf" SelfReg="false"/>
+    <ROW File="docx_11" Component_="docx_1" FileName="2565~1.DOC|2565.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2565.docx" SelfReg="false"/>
+    <ROW File="docx_12" Component_="docx_7" FileName="2566~1.DOC|2566.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2566\2566.docx" SelfReg="false"/>
+    <ROW File="rtf_6" Component_="docx_7" FileName="2566.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2566\2566.rtf" SelfReg="false"/>
+    <ROW File="docx_13" Component_="docx_1" FileName="2566~1.DOC|2566.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2566.docx" SelfReg="false"/>
+    <ROW File="docx_14" Component_="docx_8" FileName="2567~1.DOC|2567.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2567\2567.docx" SelfReg="false"/>
+    <ROW File="rtf_7" Component_="docx_8" FileName="2567.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2567\2567.rtf" SelfReg="false"/>
+    <ROW File="docx_15" Component_="docx_1" FileName="2567~1.DOC|2567.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2567.docx" SelfReg="false"/>
+    <ROW File="docx_16" Component_="docx_9" FileName="2568~1.DOC|2568.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2568\2568.docx" SelfReg="false"/>
+    <ROW File="rtf_8" Component_="docx_9" FileName="2568.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2568\2568.rtf" SelfReg="false"/>
+    <ROW File="docx_17" Component_="docx_1" FileName="2568~1.DOC|2568.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2568.docx" SelfReg="false"/>
+    <ROW File="docx_18" Component_="docx_10" FileName="2569~1.DOC|2569.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2569\2569.docx" SelfReg="false"/>
+    <ROW File="rtf_9" Component_="docx_10" FileName="2569.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2569\2569.rtf" SelfReg="false"/>
+    <ROW File="docx_19" Component_="docx_1" FileName="2569~1.DOC|2569.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2569.docx" SelfReg="false"/>
+    <ROW File="docx_20" Component_="docx_11" FileName="2570~1.DOC|2570.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2570\2570.docx" SelfReg="false"/>
+    <ROW File="rtf_10" Component_="docx_11" FileName="2570.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2570\2570.rtf" SelfReg="false"/>
+    <ROW File="docx_21" Component_="docx_1" FileName="2570~1.DOC|2570.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2570.docx" SelfReg="false"/>
+    <ROW File="docx_22" Component_="docx_12" FileName="2571~1.DOC|2571.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2571\2571.docx" SelfReg="false"/>
+    <ROW File="rtf_11" Component_="docx_12" FileName="2571.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2571\2571.rtf" SelfReg="false"/>
+    <ROW File="docx_23" Component_="docx_1" FileName="2571~1.DOC|2571.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2571.docx" SelfReg="false"/>
+    <ROW File="docx_24" Component_="docx_13" FileName="2572~1.DOC|2572.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2572\2572.docx" SelfReg="false"/>
+    <ROW File="rtf_12" Component_="docx_13" FileName="2572.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2572\2572.rtf" SelfReg="false"/>
+    <ROW File="docx_25" Component_="docx_1" FileName="2572~1.DOC|2572.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2572.docx" SelfReg="false"/>
+    <ROW File="docx_26" Component_="docx_14" FileName="2573~1.DOC|2573.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2573\2573.docx" SelfReg="false"/>
+    <ROW File="rtf_13" Component_="docx_14" FileName="2573.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2573\2573.rtf" SelfReg="false"/>
+    <ROW File="docx_27" Component_="docx_1" FileName="2573~1.DOC|2573.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2573.docx" SelfReg="false"/>
+    <ROW File="docx_28" Component_="docx_15" FileName="2574~1.DOC|2574.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2574\2574.docx" SelfReg="false"/>
+    <ROW File="rtf_14" Component_="docx_15" FileName="2574.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2574\2574.rtf" SelfReg="false"/>
+    <ROW File="docx_29" Component_="docx_1" FileName="2574~1.DOC|2574.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2574.docx" SelfReg="false"/>
+    <ROW File="docx_30" Component_="docx_16" FileName="2575~1.DOC|2575.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2575\2575.docx" SelfReg="false"/>
+    <ROW File="rtf_15" Component_="docx_16" FileName="2575.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2575\2575.rtf" SelfReg="false"/>
+    <ROW File="docx_31" Component_="docx_1" FileName="2575~1.DOC|2575.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2575.docx" SelfReg="false"/>
+    <ROW File="docx_32" Component_="docx_17" FileName="2576~1.DOC|2576.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2576\2576.docx" SelfReg="false"/>
+    <ROW File="rtf_16" Component_="docx_17" FileName="2576.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2576\2576.rtf" SelfReg="false"/>
+    <ROW File="docx_33" Component_="docx_1" FileName="2576~1.DOC|2576.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2576.docx" SelfReg="false"/>
+    <ROW File="docx_34" Component_="docx_18" FileName="2577~1.DOC|2577.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2577\2577.docx" SelfReg="false"/>
+    <ROW File="rtf_17" Component_="docx_18" FileName="2577.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2577\2577.rtf" SelfReg="false"/>
+    <ROW File="docx_35" Component_="docx_1" FileName="2577~1.DOC|2577.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2577.docx" SelfReg="false"/>
+    <ROW File="docx_36" Component_="docx_19" FileName="2578~1.DOC|2578.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2578\2578.docx" SelfReg="false"/>
+    <ROW File="rtf_18" Component_="docx_19" FileName="2578.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2578\2578.rtf" SelfReg="false"/>
+    <ROW File="docx_37" Component_="docx_1" FileName="2578~1.DOC|2578.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2578.docx" SelfReg="false"/>
+    <ROW File="docx_38" Component_="docx_20" FileName="2579~1.DOC|2579.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2579\2579.docx" SelfReg="false"/>
+    <ROW File="rtf_19" Component_="docx_20" FileName="2579.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2579\2579.rtf" SelfReg="false"/>
+    <ROW File="docx_39" Component_="docx_1" FileName="2579~1.DOC|2579.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2579.docx" SelfReg="false"/>
+    <ROW File="docx_40" Component_="docx_21" FileName="2580~1.DOC|2580.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2580\2580.docx" SelfReg="false"/>
+    <ROW File="rtf_20" Component_="docx_21" FileName="2580.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2580\2580.rtf" SelfReg="false"/>
+    <ROW File="docx_41" Component_="docx_1" FileName="2580~1.DOC|2580.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2580.docx" SelfReg="false"/>
+    <ROW File="docx_42" Component_="docx_22" FileName="2581~1.DOC|2581.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2581\2581.docx" SelfReg="false"/>
+    <ROW File="rtf_21" Component_="docx_22" FileName="2581.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2581\2581.rtf" SelfReg="false"/>
+    <ROW File="docx_43" Component_="docx_1" FileName="2581~1.DOC|2581.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2581.docx" SelfReg="false"/>
+    <ROW File="docx_44" Component_="docx_23" FileName="2582~1.DOC|2582.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2582\2582.docx" SelfReg="false"/>
+    <ROW File="rtf_22" Component_="docx_23" FileName="2582.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2582\2582.rtf" SelfReg="false"/>
+    <ROW File="docx_45" Component_="docx_1" FileName="2582~1.DOC|2582.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2582.docx" SelfReg="false"/>
+    <ROW File="docx_46" Component_="docx_24" FileName="2583~1.DOC|2583.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2583\2583.docx" SelfReg="false"/>
+    <ROW File="rtf_23" Component_="docx_24" FileName="2583.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2583\2583.rtf" SelfReg="false"/>
+    <ROW File="docx_47" Component_="docx_1" FileName="2583~1.DOC|2583.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2583.docx" SelfReg="false"/>
+    <ROW File="docx_48" Component_="docx_25" FileName="2584~1.DOC|2584.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2584\2584.docx" SelfReg="false"/>
+    <ROW File="rtf_24" Component_="docx_25" FileName="2584.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2584\2584.rtf" SelfReg="false"/>
+    <ROW File="docx_49" Component_="docx_1" FileName="2584~1.DOC|2584.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2584.docx" SelfReg="false"/>
+    <ROW File="docx_50" Component_="docx_26" FileName="2585~1.DOC|2585.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2585\2585.docx" SelfReg="false"/>
+    <ROW File="rtf_25" Component_="docx_26" FileName="2585.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2585\2585.rtf" SelfReg="false"/>
+    <ROW File="docx_51" Component_="docx_1" FileName="2585~1.DOC|2585.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2585.docx" SelfReg="false"/>
+    <ROW File="docx_52" Component_="docx_27" FileName="2586~1.DOC|2586.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2586\2586.docx" SelfReg="false"/>
+    <ROW File="rtf_26" Component_="docx_27" FileName="2586.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2586\2586.rtf" SelfReg="false"/>
+    <ROW File="docx_53" Component_="docx_1" FileName="2586~1.DOC|2586.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2586.docx" SelfReg="false"/>
+    <ROW File="docx_54" Component_="docx_28" FileName="2587~1.DOC|2587.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2587\2587.docx" SelfReg="false"/>
+    <ROW File="rtf_27" Component_="docx_28" FileName="2587.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2587\2587.rtf" SelfReg="false"/>
+    <ROW File="docx_55" Component_="docx_1" FileName="2587~1.DOC|2587.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2587.docx" SelfReg="false"/>
+    <ROW File="docx_56" Component_="docx_29" FileName="2588~1.DOC|2588.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2588\2588.docx" SelfReg="false"/>
+    <ROW File="rtf_28" Component_="docx_29" FileName="2588.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2588\2588.rtf" SelfReg="false"/>
+    <ROW File="docx_57" Component_="docx_1" FileName="2588~1.DOC|2588.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2588.docx" SelfReg="false"/>
+    <ROW File="docx_58" Component_="docx_30" FileName="2589~1.DOC|2589.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2589\2589.docx" SelfReg="false"/>
+    <ROW File="rtf_29" Component_="docx_30" FileName="2589.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2589\2589.rtf" SelfReg="false"/>
+    <ROW File="docx_59" Component_="docx_1" FileName="2589~1.DOC|2589.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2589.docx" SelfReg="false"/>
+    <ROW File="docx_60" Component_="docx_31" FileName="2590~1.DOC|2590.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2590\2590.docx" SelfReg="false"/>
+    <ROW File="rtf_30" Component_="docx_31" FileName="2590.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2590\2590.rtf" SelfReg="false"/>
+    <ROW File="docx_61" Component_="docx_1" FileName="2590~1.DOC|2590.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2590.docx" SelfReg="false"/>
+    <ROW File="docx_62" Component_="docx_32" FileName="2591~1.DOC|2591.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2591\2591.docx" SelfReg="false"/>
+    <ROW File="rtf_31" Component_="docx_32" FileName="2591.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2591\2591.rtf" SelfReg="false"/>
+    <ROW File="docx_63" Component_="docx_1" FileName="2591~1.DOC|2591.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2591.docx" SelfReg="false"/>
+    <ROW File="docx_64" Component_="docx_33" FileName="2592~1.DOC|2592.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2592\2592.docx" SelfReg="false"/>
+    <ROW File="rtf_32" Component_="docx_33" FileName="2592.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2592\2592.rtf" SelfReg="false"/>
+    <ROW File="docx_65" Component_="docx_1" FileName="2592~1.DOC|2592.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2592.docx" SelfReg="false"/>
+    <ROW File="docx_66" Component_="docx_34" FileName="2593~1.DOC|2593.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2593\2593.docx" SelfReg="false"/>
+    <ROW File="rtf_33" Component_="docx_34" FileName="2593.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2593\2593.rtf" SelfReg="false"/>
+    <ROW File="docx_67" Component_="docx_1" FileName="2593~1.DOC|2593.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2593.docx" SelfReg="false"/>
+    <ROW File="docx_68" Component_="docx_35" FileName="2594~1.DOC|2594.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2594\2594.docx" SelfReg="false"/>
+    <ROW File="rtf_34" Component_="docx_35" FileName="2594.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2594\2594.rtf" SelfReg="false"/>
+    <ROW File="docx_69" Component_="docx_1" FileName="2594~1.DOC|2594.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2594.docx" SelfReg="false"/>
+    <ROW File="docx_70" Component_="docx_36" FileName="2595~1.DOC|2595.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2595\2595.docx" SelfReg="false"/>
+    <ROW File="rtf_35" Component_="docx_36" FileName="2595.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2595\2595.rtf" SelfReg="false"/>
+    <ROW File="docx_71" Component_="docx_1" FileName="2595~1.DOC|2595.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2595.docx" SelfReg="false"/>
+    <ROW File="docx_72" Component_="docx_37" FileName="2596~1.DOC|2596.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2596\2596.docx" SelfReg="false"/>
+    <ROW File="rtf_36" Component_="docx_37" FileName="2596.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2596\2596.rtf" SelfReg="false"/>
+    <ROW File="docx_73" Component_="docx_1" FileName="2596~1.DOC|2596.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2596.docx" SelfReg="false"/>
+    <ROW File="docx_74" Component_="docx_38" FileName="2597~1.DOC|2597.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2597\2597.docx" SelfReg="false"/>
+    <ROW File="rtf_37" Component_="docx_38" FileName="2597.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2597\2597.rtf" SelfReg="false"/>
+    <ROW File="docx_75" Component_="docx_1" FileName="2597~1.DOC|2597.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2597.docx" SelfReg="false"/>
+    <ROW File="docx_76" Component_="docx_39" FileName="2598~1.DOC|2598.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2598\2598.docx" SelfReg="false"/>
+    <ROW File="rtf_38" Component_="docx_39" FileName="2598.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2598\2598.rtf" SelfReg="false"/>
+    <ROW File="docx_77" Component_="docx_1" FileName="2598~1.DOC|2598.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2598.docx" SelfReg="false"/>
+    <ROW File="docx_78" Component_="docx_40" FileName="2599~1.DOC|2599.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2599\2599.docx" SelfReg="false"/>
+    <ROW File="rtf_39" Component_="docx_40" FileName="2599.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2599\2599.rtf" SelfReg="false"/>
+    <ROW File="docx_79" Component_="docx_1" FileName="2599~1.DOC|2599.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57)\2599.docx" SelfReg="false"/>
+    <ROW File="HaKTNLK57.docx" Component_="HaKTNLK57.docx" FileName="HÓA(KT~1.DOC|Hóa (KTNLK57).docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Hóa (KTNLK57).docx" SelfReg="false"/>
+    <ROW File="rtf_40" Component_="rtf" FileName="2651.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Tiếng Anh (KTNLK57)\2651\2651.rtf" SelfReg="false"/>
+    <ROW File="docx_80" Component_="docx_41" FileName="0000~1.DOC|0000.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Tiếng Anh (NL 4\7)\0000.docx" SelfReg="false"/>
+    <ROW File="docx_81" Component_="docx_42" FileName="2600~1.DOC|2600.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2600\2600.docx" SelfReg="false"/>
+    <ROW File="rtf_41" Component_="docx_42" FileName="2600.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2600\2600.rtf" SelfReg="false"/>
+    <ROW File="docx_82" Component_="docx_43" FileName="2600~1.DOC|2600.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2600.docx" SelfReg="false"/>
+    <ROW File="docx_83" Component_="docx_44" FileName="2602~1.DOC|2602.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2602\2602.docx" SelfReg="false"/>
+    <ROW File="rtf_42" Component_="docx_44" FileName="2602.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2602\2602.rtf" SelfReg="false"/>
+    <ROW File="docx_84" Component_="docx_43" FileName="2602~1.DOC|2602.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2602.docx" SelfReg="false"/>
+    <ROW File="docx_85" Component_="docx_45" FileName="2604~1.DOC|2604.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2604\2604.docx" SelfReg="false"/>
+    <ROW File="rtf_43" Component_="docx_45" FileName="2604.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2604\2604.rtf" SelfReg="false"/>
+    <ROW File="docx_86" Component_="docx_43" FileName="2604~1.DOC|2604.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2604.docx" SelfReg="false"/>
+    <ROW File="docx_87" Component_="docx_46" FileName="2605~1.DOC|2605.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2605\2605.docx" SelfReg="false"/>
+    <ROW File="rtf_44" Component_="docx_46" FileName="2605.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2605\2605.rtf" SelfReg="false"/>
+    <ROW File="docx_88" Component_="docx_43" FileName="2605~1.DOC|2605.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2605.docx" SelfReg="false"/>
+    <ROW File="docx_89" Component_="docx_47" FileName="2606~1.DOC|2606.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2606\2606.docx" SelfReg="false"/>
+    <ROW File="rtf_45" Component_="docx_47" FileName="2606.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2606\2606.rtf" SelfReg="false"/>
+    <ROW File="docx_90" Component_="docx_43" FileName="2606~1.DOC|2606.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2606.docx" SelfReg="false"/>
+    <ROW File="docx_91" Component_="docx_48" FileName="2607~1.DOC|2607.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2607\2607.docx" SelfReg="false"/>
+    <ROW File="rtf_46" Component_="docx_48" FileName="2607.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2607\2607.rtf" SelfReg="false"/>
+    <ROW File="docx_92" Component_="docx_43" FileName="2607~1.DOC|2607.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2607.docx" SelfReg="false"/>
+    <ROW File="docx_93" Component_="docx_49" FileName="2608~1.DOC|2608.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2608\2608.docx" SelfReg="false"/>
+    <ROW File="rtf_47" Component_="docx_49" FileName="2608.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2608\2608.rtf" SelfReg="false"/>
+    <ROW File="docx_94" Component_="docx_43" FileName="2608~1.DOC|2608.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2608.docx" SelfReg="false"/>
+    <ROW File="docx_95" Component_="docx_50" FileName="2609~1.DOC|2609.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2609\2609.docx" SelfReg="false"/>
+    <ROW File="rtf_48" Component_="docx_50" FileName="2609.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2609\2609.rtf" SelfReg="false"/>
+    <ROW File="docx_96" Component_="docx_43" FileName="2609~1.DOC|2609.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2609.docx" SelfReg="false"/>
+    <ROW File="docx_97" Component_="docx_51" FileName="2610~1.DOC|2610.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2610\2610.docx" SelfReg="false"/>
+    <ROW File="rtf_49" Component_="docx_51" FileName="2610.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2610\2610.rtf" SelfReg="false"/>
+    <ROW File="docx_98" Component_="docx_43" FileName="2610~1.DOC|2610.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2610.docx" SelfReg="false"/>
+    <ROW File="docx_99" Component_="docx_52" FileName="2611~1.DOC|2611.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2611\2611.docx" SelfReg="false"/>
+    <ROW File="rtf_50" Component_="docx_52" FileName="2611.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2611\2611.rtf" SelfReg="false"/>
+    <ROW File="docx_100" Component_="docx_43" FileName="2611~1.DOC|2611.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2611.docx" SelfReg="false"/>
+    <ROW File="docx_101" Component_="docx_53" FileName="2612~1.DOC|2612.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2612\2612.docx" SelfReg="false"/>
+    <ROW File="rtf_51" Component_="docx_53" FileName="2612.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2612\2612.rtf" SelfReg="false"/>
+    <ROW File="docx_102" Component_="docx_43" FileName="2612~1.DOC|2612.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2612.docx" SelfReg="false"/>
+    <ROW File="docx_103" Component_="docx_54" FileName="2613~1.DOC|2613.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2613\2613.docx" SelfReg="false"/>
+    <ROW File="rtf_52" Component_="docx_54" FileName="2613.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2613\2613.rtf" SelfReg="false"/>
+    <ROW File="docx_104" Component_="docx_43" FileName="2613~1.DOC|2613.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2613.docx" SelfReg="false"/>
+    <ROW File="docx_105" Component_="docx_55" FileName="2614~1.DOC|2614.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2614\2614.docx" SelfReg="false"/>
+    <ROW File="rtf_53" Component_="docx_55" FileName="2614.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2614\2614.rtf" SelfReg="false"/>
+    <ROW File="docx_106" Component_="docx_43" FileName="2614~1.DOC|2614.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2614.docx" SelfReg="false"/>
+    <ROW File="docx_107" Component_="docx_56" FileName="2615~1.DOC|2615.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2615\2615.docx" SelfReg="false"/>
+    <ROW File="rtf_54" Component_="docx_56" FileName="2615.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2615\2615.rtf" SelfReg="false"/>
+    <ROW File="docx_108" Component_="docx_43" FileName="2615~1.DOC|2615.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2615.docx" SelfReg="false"/>
+    <ROW File="docx_109" Component_="docx_57" FileName="2616~1.DOC|2616.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2616\2616.docx" SelfReg="false"/>
+    <ROW File="rtf_55" Component_="docx_57" FileName="2616.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2616\2616.rtf" SelfReg="false"/>
+    <ROW File="docx_110" Component_="docx_43" FileName="2616~1.DOC|2616.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2616.docx" SelfReg="false"/>
+    <ROW File="docx_111" Component_="docx_58" FileName="2617~1.DOC|2617.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2617\2617.docx" SelfReg="false"/>
+    <ROW File="rtf_56" Component_="docx_58" FileName="2617.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2617\2617.rtf" SelfReg="false"/>
+    <ROW File="docx_112" Component_="docx_43" FileName="2617~1.DOC|2617.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2617.docx" SelfReg="false"/>
+    <ROW File="docx_113" Component_="docx_59" FileName="2618~1.DOC|2618.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2618\2618.docx" SelfReg="false"/>
+    <ROW File="rtf_57" Component_="docx_59" FileName="2618.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2618\2618.rtf" SelfReg="false"/>
+    <ROW File="docx_114" Component_="docx_43" FileName="2618~1.DOC|2618.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2618.docx" SelfReg="false"/>
+    <ROW File="docx_115" Component_="docx_60" FileName="2619~1.DOC|2619.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2619\2619.docx" SelfReg="false"/>
+    <ROW File="rtf_58" Component_="docx_60" FileName="2619.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2619\2619.rtf" SelfReg="false"/>
+    <ROW File="docx_116" Component_="docx_43" FileName="2619~1.DOC|2619.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2619.docx" SelfReg="false"/>
+    <ROW File="docx_117" Component_="docx_61" FileName="2621~1.DOC|2621.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2621\2621.docx" SelfReg="false"/>
+    <ROW File="rtf_59" Component_="docx_61" FileName="2621.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2621\2621.rtf" SelfReg="false"/>
+    <ROW File="docx_118" Component_="docx_43" FileName="2621~1.DOC|2621.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2621.docx" SelfReg="false"/>
+    <ROW File="docx_119" Component_="docx_62" FileName="2622~1.DOC|2622.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2622\2622.docx" SelfReg="false"/>
+    <ROW File="rtf_60" Component_="docx_62" FileName="2622.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2622\2622.rtf" SelfReg="false"/>
+    <ROW File="docx_120" Component_="docx_43" FileName="2622~1.DOC|2622.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2622.docx" SelfReg="false"/>
+    <ROW File="docx_121" Component_="docx_63" FileName="2623~1.DOC|2623.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2623\2623.docx" SelfReg="false"/>
+    <ROW File="rtf_61" Component_="docx_63" FileName="2623.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2623\2623.rtf" SelfReg="false"/>
+    <ROW File="docx_122" Component_="docx_43" FileName="2623~1.DOC|2623.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2623.docx" SelfReg="false"/>
+    <ROW File="docx_123" Component_="docx_64" FileName="2624~1.DOC|2624.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2624\2624.docx" SelfReg="false"/>
+    <ROW File="rtf_62" Component_="docx_64" FileName="2624.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2624\2624.rtf" SelfReg="false"/>
+    <ROW File="docx_124" Component_="docx_43" FileName="2624~1.DOC|2624.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2624.docx" SelfReg="false"/>
+    <ROW File="docx_125" Component_="docx_65" FileName="2625~1.DOC|2625.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2625\2625.docx" SelfReg="false"/>
+    <ROW File="rtf_63" Component_="docx_65" FileName="2625.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2625\2625.rtf" SelfReg="false"/>
+    <ROW File="docx_126" Component_="docx_43" FileName="2625~1.DOC|2625.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2625.docx" SelfReg="false"/>
+    <ROW File="docx_127" Component_="docx_66" FileName="2627~1.DOC|2627.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2627\2627.docx" SelfReg="false"/>
+    <ROW File="rtf_64" Component_="docx_66" FileName="2627.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2627\2627.rtf" SelfReg="false"/>
+    <ROW File="docx_128" Component_="docx_43" FileName="2627~1.DOC|2627.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2627.docx" SelfReg="false"/>
+    <ROW File="docx_129" Component_="docx_67" FileName="2629~1.DOC|2629.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2629\2629.docx" SelfReg="false"/>
+    <ROW File="rtf_65" Component_="docx_67" FileName="2629.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2629\2629.rtf" SelfReg="false"/>
+    <ROW File="docx_130" Component_="docx_43" FileName="2629~1.DOC|2629.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2629.docx" SelfReg="false"/>
+    <ROW File="docx_131" Component_="docx_68" FileName="2631~1.DOC|2631.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2631\2631.docx" SelfReg="false"/>
+    <ROW File="rtf_66" Component_="docx_68" FileName="2631.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2631\2631.rtf" SelfReg="false"/>
+    <ROW File="docx_132" Component_="docx_43" FileName="2631~1.DOC|2631.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2631.docx" SelfReg="false"/>
+    <ROW File="docx_133" Component_="docx_69" FileName="2633~1.DOC|2633.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2633\2633.docx" SelfReg="false"/>
+    <ROW File="rtf_67" Component_="docx_69" FileName="2633.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2633\2633.rtf" SelfReg="false"/>
+    <ROW File="docx_134" Component_="docx_43" FileName="2633~1.DOC|2633.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2633.docx" SelfReg="false"/>
+    <ROW File="docx_135" Component_="docx_70" FileName="2634~1.DOC|2634.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2634\2634.docx" SelfReg="false"/>
+    <ROW File="rtf_68" Component_="docx_70" FileName="2634.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2634\2634.rtf" SelfReg="false"/>
+    <ROW File="docx_136" Component_="docx_43" FileName="2634~1.DOC|2634.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2634.docx" SelfReg="false"/>
+    <ROW File="docx_137" Component_="docx_71" FileName="2635~1.DOC|2635.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2635\2635.docx" SelfReg="false"/>
+    <ROW File="rtf_69" Component_="docx_71" FileName="2635.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2635\2635.rtf" SelfReg="false"/>
+    <ROW File="docx_138" Component_="docx_43" FileName="2635~1.DOC|2635.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2635.docx" SelfReg="false"/>
+    <ROW File="docx_139" Component_="docx_72" FileName="2637~1.DOC|2637.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2637\2637.docx" SelfReg="false"/>
+    <ROW File="rtf_70" Component_="docx_72" FileName="2637.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2637\2637.rtf" SelfReg="false"/>
+    <ROW File="docx_140" Component_="docx_43" FileName="2637~1.DOC|2637.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2637.docx" SelfReg="false"/>
+    <ROW File="docx_141" Component_="docx_73" FileName="2638~1.DOC|2638.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2638\2638.docx" SelfReg="false"/>
+    <ROW File="rtf_71" Component_="docx_73" FileName="2638.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2638\2638.rtf" SelfReg="false"/>
+    <ROW File="docx_142" Component_="docx_43" FileName="2638~1.DOC|2638.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2638.docx" SelfReg="false"/>
+    <ROW File="docx_143" Component_="docx_74" FileName="2639~1.DOC|2639.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2639\2639.docx" SelfReg="false"/>
+    <ROW File="rtf_72" Component_="docx_74" FileName="2639.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2639\2639.rtf" SelfReg="false"/>
+    <ROW File="docx_144" Component_="docx_43" FileName="2639~1.DOC|2639.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2639.docx" SelfReg="false"/>
+    <ROW File="docx_145" Component_="docx_75" FileName="2640~1.DOC|2640.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2640\2640.docx" SelfReg="false"/>
+    <ROW File="rtf_73" Component_="docx_75" FileName="2640.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2640\2640.rtf" SelfReg="false"/>
+    <ROW File="docx_146" Component_="docx_43" FileName="2640~1.DOC|2640.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2640.docx" SelfReg="false"/>
+    <ROW File="docx_147" Component_="docx_76" FileName="2641~1.DOC|2641.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2641\2641.docx" SelfReg="false"/>
+    <ROW File="rtf_74" Component_="docx_76" FileName="2641.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2641\2641.rtf" SelfReg="false"/>
+    <ROW File="docx_148" Component_="docx_43" FileName="2641~1.DOC|2641.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2641.docx" SelfReg="false"/>
+    <ROW File="docx_149" Component_="docx_77" FileName="2642~1.DOC|2642.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2642\2642.docx" SelfReg="false"/>
+    <ROW File="rtf_75" Component_="docx_77" FileName="2642.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2642\2642.rtf" SelfReg="false"/>
+    <ROW File="docx_150" Component_="docx_43" FileName="2642~1.DOC|2642.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2642.docx" SelfReg="false"/>
+    <ROW File="docx_151" Component_="docx_78" FileName="2643~1.DOC|2643.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2643\2643.docx" SelfReg="false"/>
+    <ROW File="rtf_76" Component_="docx_78" FileName="2643.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2643\2643.rtf" SelfReg="false"/>
+    <ROW File="docx_152" Component_="docx_43" FileName="2643~1.DOC|2643.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2643.docx" SelfReg="false"/>
+    <ROW File="docx_153" Component_="docx_79" FileName="2644~1.DOC|2644.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2644\2644.docx" SelfReg="false"/>
+    <ROW File="rtf_77" Component_="docx_79" FileName="2644.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2644\2644.rtf" SelfReg="false"/>
+    <ROW File="docx_154" Component_="docx_43" FileName="2644~1.DOC|2644.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2644.docx" SelfReg="false"/>
+    <ROW File="docx_155" Component_="docx_80" FileName="2645~1.DOC|2645.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2645\2645.docx" SelfReg="false"/>
+    <ROW File="rtf_78" Component_="docx_80" FileName="2645.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2645\2645.rtf" SelfReg="false"/>
+    <ROW File="docx_156" Component_="docx_43" FileName="2645~1.DOC|2645.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2645.docx" SelfReg="false"/>
+    <ROW File="docx_157" Component_="docx_81" FileName="2646~1.DOC|2646.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2646\2646.docx" SelfReg="false"/>
+    <ROW File="rtf_79" Component_="docx_81" FileName="2646.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2646\2646.rtf" SelfReg="false"/>
+    <ROW File="docx_158" Component_="docx_43" FileName="2646~1.DOC|2646.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2646.docx" SelfReg="false"/>
+    <ROW File="docx_159" Component_="docx_82" FileName="2648~1.DOC|2648.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2648\2648.docx" SelfReg="false"/>
+    <ROW File="rtf_80" Component_="docx_82" FileName="2648.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2648\2648.rtf" SelfReg="false"/>
+    <ROW File="docx_160" Component_="docx_43" FileName="2648~1.DOC|2648.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2648.docx" SelfReg="false"/>
+    <ROW File="docx_161" Component_="docx_83" FileName="2649~1.DOC|2649.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2649\2649.docx" SelfReg="false"/>
+    <ROW File="rtf_81" Component_="docx_83" FileName="2649.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2649\2649.rtf" SelfReg="false"/>
+    <ROW File="docx_162" Component_="docx_43" FileName="2649~1.DOC|2649.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2649.docx" SelfReg="false"/>
+    <ROW File="docx_163" Component_="docx_84" FileName="2650~1.DOC|2650.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2650\2650.docx" SelfReg="false"/>
+    <ROW File="rtf_82" Component_="docx_84" FileName="2650.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2650\2650.rtf" SelfReg="false"/>
+    <ROW File="docx_164" Component_="docx_43" FileName="2650~1.DOC|2650.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2650.docx" SelfReg="false"/>
+    <ROW File="docx_165" Component_="docx_85" FileName="2719~1.DOC|2719.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2719\2719.docx" SelfReg="false"/>
+    <ROW File="rtf_83" Component_="docx_85" FileName="2719.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2719\2719.rtf" SelfReg="false"/>
+    <ROW File="docx_166" Component_="docx_43" FileName="2719~1.DOC|2719.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2719.docx" SelfReg="false"/>
+    <ROW File="docx_167" Component_="docx_86" FileName="2720~1.DOC|2720.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2720\2720.docx" SelfReg="false"/>
+    <ROW File="rtf_84" Component_="docx_86" FileName="2720.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2720\2720.rtf" SelfReg="false"/>
+    <ROW File="docx_168" Component_="docx_43" FileName="2720~1.DOC|2720.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2720.docx" SelfReg="false"/>
+    <ROW File="docx_169" Component_="docx_87" FileName="2721~1.DOC|2721.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2721\2721.docx" SelfReg="false"/>
+    <ROW File="rtf_85" Component_="docx_87" FileName="2721.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2721\2721.rtf" SelfReg="false"/>
+    <ROW File="docx_170" Component_="docx_43" FileName="2721~1.DOC|2721.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2721.docx" SelfReg="false"/>
+    <ROW File="docx_171" Component_="docx_88" FileName="2722~1.DOC|2722.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2722\2722.docx" SelfReg="false"/>
+    <ROW File="rtf_86" Component_="docx_88" FileName="2722.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2722\2722.rtf" SelfReg="false"/>
+    <ROW File="docx_172" Component_="docx_43" FileName="2722~1.DOC|2722.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2722.docx" SelfReg="false"/>
+    <ROW File="docx_173" Component_="docx_89" FileName="2723~1.DOC|2723.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2723\2723.docx" SelfReg="false"/>
+    <ROW File="rtf_87" Component_="docx_89" FileName="2723.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2723\2723.rtf" SelfReg="false"/>
+    <ROW File="docx_174" Component_="docx_43" FileName="2723~1.DOC|2723.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2723.docx" SelfReg="false"/>
+    <ROW File="docx_175" Component_="docx_90" FileName="2724~1.DOC|2724.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2724\2724.docx" SelfReg="false"/>
+    <ROW File="rtf_88" Component_="docx_90" FileName="2724.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2724\2724.rtf" SelfReg="false"/>
+    <ROW File="docx_176" Component_="docx_43" FileName="2724~1.DOC|2724.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2724.docx" SelfReg="false"/>
+    <ROW File="docx_177" Component_="docx_91" FileName="2725~1.DOC|2725.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2725\2725.docx" SelfReg="false"/>
+    <ROW File="rtf_89" Component_="docx_91" FileName="2725.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2725\2725.rtf" SelfReg="false"/>
+    <ROW File="docx_178" Component_="docx_43" FileName="2725~1.DOC|2725.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2725.docx" SelfReg="false"/>
+    <ROW File="docx_179" Component_="docx_92" FileName="2726~1.DOC|2726.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2726\2726.docx" SelfReg="false"/>
+    <ROW File="rtf_90" Component_="docx_92" FileName="2726.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2726\2726.rtf" SelfReg="false"/>
+    <ROW File="docx_180" Component_="docx_43" FileName="2726~1.DOC|2726.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57)\2726.docx" SelfReg="false"/>
+    <ROW File="TonKTNLK57.docx" Component_="HaKTNLK57.docx" FileName="TOÁN(K~1.DOC|Toán (KTNLK57).docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Toán (KTNLK57).docx" SelfReg="false"/>
+    <ROW File="docx_181" Component_="docx_93" FileName="2520~1.DOC|2520.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2520\2520.docx" SelfReg="false"/>
+    <ROW File="rtf_91" Component_="docx_93" FileName="2520.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2520\2520.rtf" SelfReg="false"/>
+    <ROW File="docx_182" Component_="docx_94" FileName="2520~1.DOC|2520.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2520.docx" SelfReg="false"/>
+    <ROW File="docx_183" Component_="docx_95" FileName="2521~1.DOC|2521.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2521\2521.docx" SelfReg="false"/>
+    <ROW File="rtf_92" Component_="docx_95" FileName="2521.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2521\2521.rtf" SelfReg="false"/>
+    <ROW File="docx_184" Component_="docx_94" FileName="2521~1.DOC|2521.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2521.docx" SelfReg="false"/>
+    <ROW File="docx_185" Component_="docx_96" FileName="2522~1.DOC|2522.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2522\2522.docx" SelfReg="false"/>
+    <ROW File="rtf_93" Component_="docx_96" FileName="2522.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2522\2522.rtf" SelfReg="false"/>
+    <ROW File="docx_186" Component_="docx_94" FileName="2522~1.DOC|2522.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2522.docx" SelfReg="false"/>
+    <ROW File="docx_187" Component_="docx_97" FileName="2523~1.DOC|2523.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2523\2523.docx" SelfReg="false"/>
+    <ROW File="rtf_94" Component_="docx_97" FileName="2523.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2523\2523.rtf" SelfReg="false"/>
+    <ROW File="docx_188" Component_="docx_94" FileName="2523~1.DOC|2523.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2523.docx" SelfReg="false"/>
+    <ROW File="docx_189" Component_="docx_98" FileName="2524~1.DOC|2524.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2524\2524.docx" SelfReg="false"/>
+    <ROW File="rtf_95" Component_="docx_98" FileName="2524.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2524\2524.rtf" SelfReg="false"/>
+    <ROW File="docx_190" Component_="docx_94" FileName="2524~1.DOC|2524.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2524.docx" SelfReg="false"/>
+    <ROW File="docx_191" Component_="docx_99" FileName="2525~1.DOC|2525.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2525\2525.docx" SelfReg="false"/>
+    <ROW File="rtf_96" Component_="docx_99" FileName="2525.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2525\2525.rtf" SelfReg="false"/>
+    <ROW File="docx_192" Component_="docx_94" FileName="2525~1.DOC|2525.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2525.docx" SelfReg="false"/>
+    <ROW File="docx_193" Component_="docx_100" FileName="2526~1.DOC|2526.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2526\2526.docx" SelfReg="false"/>
+    <ROW File="rtf_97" Component_="docx_100" FileName="2526.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2526\2526.rtf" SelfReg="false"/>
+    <ROW File="docx_194" Component_="docx_94" FileName="2526~1.DOC|2526.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2526.docx" SelfReg="false"/>
+    <ROW File="docx_195" Component_="docx_101" FileName="2527~1.DOC|2527.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2527\2527.docx" SelfReg="false"/>
+    <ROW File="rtf_98" Component_="docx_101" FileName="2527.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2527\2527.rtf" SelfReg="false"/>
+    <ROW File="docx_196" Component_="docx_94" FileName="2527~1.DOC|2527.docx" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2527.docx" SelfReg="false"/>
+    <ROW File="rtf_99" Component_="rtf_1" FileName="2528.rtf" Attributes="0" SourcePath="bin\Debug\Temp\ThongKeDapAn\Vật lý (KTNLK57)\2528\2528.rtf" SelfReg="false"/>
+    <ROW File="PrintResultCopy.doc" Component_="PrintResultCopy.doc" FileName="PRINTR~1.DOC|PrintResult - Copy.doc" Attributes="0" SourcePath="bin\Debug\Template\PrintResult - Copy.doc" SelfReg="false"/>
+    <ROW File="PrintResult.docx" Component_="PrintResultCopy.doc" FileName="PRINTR~2.DOC|PrintResult.docx" Attributes="0" SourcePath="bin\Debug\Template\PrintResult.docx" SelfReg="false"/>
+    <ROW File="PrintResultNull.docx" Component_="PrintResultCopy.doc" FileName="PRINTR~3.DOC|PrintResultNull.docx" Attributes="0" SourcePath="bin\Debug\Template\PrintResultNull.docx" SelfReg="false"/>
+    <ROW File="PrintTest.docx" Component_="PrintResultCopy.doc" FileName="PRINTT~1.DOC|PrintTest.docx" Attributes="0" SourcePath="bin\Debug\Template\PrintTest.docx" SelfReg="false"/>
+    <ROW File="QuestionSpeaking.docx" Component_="PrintResultCopy.doc" FileName="QUESTI~1.DOC|QuestionSpeaking.docx" Attributes="0" SourcePath="bin\Debug\Template\QuestionSpeaking.docx" SelfReg="false"/>
+    <ROW File="QuestionTable.docx" Component_="PrintResultCopy.doc" FileName="QUESTI~2.DOC|QuestionTable.docx" Attributes="0" SourcePath="bin\Debug\Template\QuestionTable.docx" SelfReg="false"/>
+    <ROW File="ThongKe.docx" Component_="PrintResultCopy.doc" FileName="THONGK~1.DOC|ThongKe.docx" Attributes="0" SourcePath="bin\Debug\Template\ThongKe.docx" SelfReg="false"/>
+    <ROW File="WritingAnswer.docx" Component_="PrintResultCopy.doc" FileName="WRITIN~1.DOC|WritingAnswer.docx" Attributes="0" SourcePath="bin\Debug\Template\WritingAnswer.docx" SelfReg="false"/>
+    <ROW File="estionTable.docx" Component_="PrintResultCopy.doc" FileName="~$ESTI~1.DOC|~$estionTable.docx" Attributes="2" SourcePath="bin\Debug\Template\~$estionTable.docx" SelfReg="false"/>
+    <ROW File="TXDrawing.dll" Component_="TXDrawing.dll" FileName="TXDRAW~1.DLL|TXDrawing.dll" Attributes="0" SourcePath="bin\Debug\TXDrawing.dll" SelfReg="false"/>
+    <ROW File="TXDrawing.Windows.Forms.dll" Component_="TXDrawing.Windows.Forms.dll" FileName="TXDRAW~2.DLL|TXDrawing.Windows.Forms.dll" Attributes="0" SourcePath="bin\Debug\TXDrawing.Windows.Forms.dll" SelfReg="false"/>
+    <ROW File="TXDrawing.Windows.Forms.xml" Component_="CircularProgressBar.xml" FileName="TXDRAW~1.XML|TXDrawing.Windows.Forms.xml" Attributes="0" SourcePath="bin\Debug\TXDrawing.Windows.Forms.xml" SelfReg="false"/>
+    <ROW File="TXDrawing.xml" Component_="CircularProgressBar.xml" FileName="TXDRAW~2.XML|TXDrawing.xml" Attributes="0" SourcePath="bin\Debug\TXDrawing.xml" SelfReg="false"/>
+    <ROW File="TXImageProvider.dll" Component_="TXImageProvider.dll" FileName="TXIMAG~1.DLL|TXImageProvider.dll" Attributes="0" SourcePath="bin\Debug\TXImageProvider.dll" SelfReg="false"/>
+    <ROW File="TXTextControl.dll" Component_="TXTextControl.dll" FileName="TXTEXT~1.DLL|TXTextControl.dll" Attributes="0" SourcePath="bin\Debug\TXTextControl.dll" SelfReg="false"/>
+    <ROW File="TXTextControl.Windows.Forms.dll" Component_="TXTextControl.Windows.Forms.dll" FileName="TXTEXT~2.DLL|TXTextControl.Windows.Forms.dll" Attributes="0" SourcePath="bin\Debug\TXTextControl.Windows.Forms.dll" SelfReg="false"/>
+    <ROW File="TXTextControl.Windows.Forms.xml" Component_="CircularProgressBar.xml" FileName="TXTEXT~1.XML|TXTextControl.Windows.Forms.xml" Attributes="0" SourcePath="bin\Debug\TXTextControl.Windows.Forms.xml" SelfReg="false"/>
+    <ROW File="TXTextControl.xml" Component_="CircularProgressBar.xml" FileName="TXTEXT~2.XML|TXTextControl.xml" Attributes="0" SourcePath="bin\Debug\TXTextControl.xml" SelfReg="false"/>
+    <ROW File="WinFormAnimation.dll" Component_="WinFormAnimation.dll" FileName="WINFOR~1.DLL|WinFormAnimation.dll" Attributes="0" SourcePath="bin\Debug\WinFormAnimation.dll" SelfReg="false"/>
+    <ROW File="WinFormAnimation.xml" Component_="CircularProgressBar.xml" FileName="WINFOR~1.XML|WinFormAnimation.xml" Attributes="0" SourcePath="bin\Debug\WinFormAnimation.xml" SelfReg="false"/>
+    <ROW File="txic.dll" Component_="txic.dll" FileName="txic.dll" Attributes="0" SourcePath="..\..\..\..\kernel to build\txic.dll" SelfReg="false"/>
+    <ROW File="txkernel.dll" Component_="txkernel.dll" FileName="txkernel.dll" Attributes="0" SourcePath="..\..\..\..\kernel to build\txkernel.dll" SelfReg="false"/>
+    <ROW File="txtools.dll" Component_="txtools.dll" FileName="txtools.dll" Attributes="0" SourcePath="..\..\..\..\kernel to build\txtools.dll" SelfReg="false"/>
+    <ROW File="tx28_css.dll" Component_="tx28_css.dll" FileName="tx28_css.dll" Attributes="0" SourcePath="..\..\..\..\kernel to build\tx28_css.dll" SelfReg="false"/>
+    <ROW File="tx28_htm.dll" Component_="tx28_htm.dll" FileName="tx28_htm.dll" Attributes="0" SourcePath="..\..\..\..\kernel to build\tx28_htm.dll" SelfReg="false"/>
+    <ROW File="tx28_rtf.dll" Component_="tx28_rtf.dll" FileName="tx28_rtf.dll" Attributes="0" SourcePath="..\..\..\..\kernel to build\tx28_rtf.dll" SelfReg="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
+    <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" PackageFolder="C:\Users\PC\Desktop" PackageFileName="GiamSatThiGDNL 6_2022 " Languages="en" InstallationType="4" UseLargeSchema="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="501"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RemoveButton" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RepairButton" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]" MultiBuildTarget="DefaultBuild:[AppDataFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
+    <ROW Feature_="MainFeature" Component_="APPDIR"/>
+    <ROW Feature_="MainFeature" Component_="ProductInformation"/>
+    <ROW Feature_="MainFeature" Component_="Bunifu_UI_v1.5.3.dll"/>
+    <ROW Feature_="MainFeature" Component_="CircularProgressBar.dll"/>
+    <ROW Feature_="MainFeature" Component_="CircularProgressBar.xml"/>
+    <ROW Feature_="MainFeature" Component_="ClosedXML.dll"/>
+    <ROW Feature_="MainFeature" Component_="TXDrawing.resources.dll"/>
+    <ROW Feature_="MainFeature" Component_="TXTextControl.resources.dll"/>
+    <ROW Feature_="MainFeature" Component_="DevelopmentTool.dll"/>
+    <ROW Feature_="MainFeature" Component_="DocumentFormat.OpenXml.dll"/>
+    <ROW Feature_="MainFeature" Component_="EntityFramework.dll"/>
+    <ROW Feature_="MainFeature" Component_="EntityFramework.SqlServer.dll"/>
+    <ROW Feature_="MainFeature" Component_="EnvDTE.dll"/>
+    <ROW Feature_="MainFeature" Component_="EnvDTE80.dll"/>
+    <ROW Feature_="MainFeature" Component_="ExcelDataReader.DataSet.dll"/>
+    <ROW Feature_="MainFeature" Component_="ExcelDataReader.dll"/>
+    <ROW Feature_="MainFeature" Component_="ExcelNumberFormat.dll"/>
+    <ROW Feature_="MainFeature" Component_="EXON.Common.dll"/>
+    <ROW Feature_="MainFeature" Component_="EXON.GradedEssay.exe"/>
+    <ROW Feature_="MainFeature" Component_="EXON.MONITOR.exe"/>
+    <ROW Feature_="MainFeature" Component_="EXON.SubData.dll"/>
+    <ROW Feature_="MainFeature" Component_="EXON.SubModel.dll"/>
+    <ROW Feature_="MainFeature" Component_="EXON_EM.Data.dll"/>
+    <ROW Feature_="MainFeature" Component_="log4net.dll"/>
+    <ROW Feature_="MainFeature" Component_="MetroFramework.Design.dll"/>
+    <ROW Feature_="MainFeature" Component_="MetroFramework.dll"/>
+    <ROW Feature_="MainFeature" Component_="MetroFramework.Fonts.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.MSXML.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ReportViewer.Common.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ReportViewer.DataVisualization.DLL"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ReportViewer.Design.DLL"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ReportViewer.ProcessingObjectModel.DLL"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ReportViewer.WebDesign.DLL"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ReportViewer.WebForms.DLL"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.ReportViewer.WinForms.DLL"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.SqlServer.Types.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.VisualStudio.OLE.Interop.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.VisualStudio.Shell.Interop.8.0.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.VisualStudio.Shell.Interop.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.VisualStudio.TextManager.Interop.8.0.dll"/>
+    <ROW Feature_="MainFeature" Component_="Microsoft.VisualStudio.TextManager.Interop.dll"/>
+    <ROW Feature_="MainFeature" Component_="Newtonsoft.Json.dll"/>
+    <ROW Feature_="MainFeature" Component_="QuanLyHoiDongThiVer2.exe"/>
+    <ROW Feature_="MainFeature" Component_="rpKetQuaTheoCaThi.rdlc"/>
+    <ROW Feature_="MainFeature" Component_="msvcr120.dll"/>
+    <ROW Feature_="MainFeature" Component_="SqlServerSpatial140.dll"/>
+    <ROW Feature_="MainFeature" Component_="msvcr120.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="SqlServerSpatial140.dll_1"/>
+    <ROW Feature_="MainFeature" Component_="stdole.dll"/>
+    <ROW Feature_="MainFeature" Component_="System.Windows.Forms.Ribbon.dll"/>
+    <ROW Feature_="MainFeature" Component_="docx"/>
+    <ROW Feature_="MainFeature" Component_="docx_1"/>
+    <ROW Feature_="MainFeature" Component_="docx_2"/>
+    <ROW Feature_="MainFeature" Component_="docx_3"/>
+    <ROW Feature_="MainFeature" Component_="docx_4"/>
+    <ROW Feature_="MainFeature" Component_="docx_5"/>
+    <ROW Feature_="MainFeature" Component_="docx_6"/>
+    <ROW Feature_="MainFeature" Component_="docx_7"/>
+    <ROW Feature_="MainFeature" Component_="docx_8"/>
+    <ROW Feature_="MainFeature" Component_="docx_9"/>
+    <ROW Feature_="MainFeature" Component_="docx_10"/>
+    <ROW Feature_="MainFeature" Component_="docx_11"/>
+    <ROW Feature_="MainFeature" Component_="docx_12"/>
+    <ROW Feature_="MainFeature" Component_="docx_13"/>
+    <ROW Feature_="MainFeature" Component_="docx_14"/>
+    <ROW Feature_="MainFeature" Component_="docx_15"/>
+    <ROW Feature_="MainFeature" Component_="docx_16"/>
+    <ROW Feature_="MainFeature" Component_="docx_17"/>
+    <ROW Feature_="MainFeature" Component_="docx_18"/>
+    <ROW Feature_="MainFeature" Component_="docx_19"/>
+    <ROW Feature_="MainFeature" Component_="docx_20"/>
+    <ROW Feature_="MainFeature" Component_="docx_21"/>
+    <ROW Feature_="MainFeature" Component_="docx_22"/>
+    <ROW Feature_="MainFeature" Component_="docx_23"/>
+    <ROW Feature_="MainFeature" Component_="docx_24"/>
+    <ROW Feature_="MainFeature" Component_="docx_25"/>
+    <ROW Feature_="MainFeature" Component_="docx_26"/>
+    <ROW Feature_="MainFeature" Component_="docx_27"/>
+    <ROW Feature_="MainFeature" Component_="docx_28"/>
+    <ROW Feature_="MainFeature" Component_="docx_29"/>
+    <ROW Feature_="MainFeature" Component_="docx_30"/>
+    <ROW Feature_="MainFeature" Component_="docx_31"/>
+    <ROW Feature_="MainFeature" Component_="docx_32"/>
+    <ROW Feature_="MainFeature" Component_="docx_33"/>
+    <ROW Feature_="MainFeature" Component_="docx_34"/>
+    <ROW Feature_="MainFeature" Component_="docx_35"/>
+    <ROW Feature_="MainFeature" Component_="docx_36"/>
+    <ROW Feature_="MainFeature" Component_="docx_37"/>
+    <ROW Feature_="MainFeature" Component_="docx_38"/>
+    <ROW Feature_="MainFeature" Component_="docx_39"/>
+    <ROW Feature_="MainFeature" Component_="docx_40"/>
+    <ROW Feature_="MainFeature" Component_="HaKTNLK57.docx"/>
+    <ROW Feature_="MainFeature" Component_="rtf"/>
+    <ROW Feature_="MainFeature" Component_="docx_41"/>
+    <ROW Feature_="MainFeature" Component_="docx_42"/>
+    <ROW Feature_="MainFeature" Component_="docx_43"/>
+    <ROW Feature_="MainFeature" Component_="docx_44"/>
+    <ROW Feature_="MainFeature" Component_="docx_45"/>
+    <ROW Feature_="MainFeature" Component_="docx_46"/>
+    <ROW Feature_="MainFeature" Component_="docx_47"/>
+    <ROW Feature_="MainFeature" Component_="docx_48"/>
+    <ROW Feature_="MainFeature" Component_="docx_49"/>
+    <ROW Feature_="MainFeature" Component_="docx_50"/>
+    <ROW Feature_="MainFeature" Component_="docx_51"/>
+    <ROW Feature_="MainFeature" Component_="docx_52"/>
+    <ROW Feature_="MainFeature" Component_="docx_53"/>
+    <ROW Feature_="MainFeature" Component_="docx_54"/>
+    <ROW Feature_="MainFeature" Component_="docx_55"/>
+    <ROW Feature_="MainFeature" Component_="docx_56"/>
+    <ROW Feature_="MainFeature" Component_="docx_57"/>
+    <ROW Feature_="MainFeature" Component_="docx_58"/>
+    <ROW Feature_="MainFeature" Component_="docx_59"/>
+    <ROW Feature_="MainFeature" Component_="docx_60"/>
+    <ROW Feature_="MainFeature" Component_="docx_61"/>
+    <ROW Feature_="MainFeature" Component_="docx_62"/>
+    <ROW Feature_="MainFeature" Component_="docx_63"/>
+    <ROW Feature_="MainFeature" Component_="docx_64"/>
+    <ROW Feature_="MainFeature" Component_="docx_65"/>
+    <ROW Feature_="MainFeature" Component_="docx_66"/>
+    <ROW Feature_="MainFeature" Component_="docx_67"/>
+    <ROW Feature_="MainFeature" Component_="docx_68"/>
+    <ROW Feature_="MainFeature" Component_="docx_69"/>
+    <ROW Feature_="MainFeature" Component_="docx_70"/>
+    <ROW Feature_="MainFeature" Component_="docx_71"/>
+    <ROW Feature_="MainFeature" Component_="docx_72"/>
+    <ROW Feature_="MainFeature" Component_="docx_73"/>
+    <ROW Feature_="MainFeature" Component_="docx_74"/>
+    <ROW Feature_="MainFeature" Component_="docx_75"/>
+    <ROW Feature_="MainFeature" Component_="docx_76"/>
+    <ROW Feature_="MainFeature" Component_="docx_77"/>
+    <ROW Feature_="MainFeature" Component_="docx_78"/>
+    <ROW Feature_="MainFeature" Component_="docx_79"/>
+    <ROW Feature_="MainFeature" Component_="docx_80"/>
+    <ROW Feature_="MainFeature" Component_="docx_81"/>
+    <ROW Feature_="MainFeature" Component_="docx_82"/>
+    <ROW Feature_="MainFeature" Component_="docx_83"/>
+    <ROW Feature_="MainFeature" Component_="docx_84"/>
+    <ROW Feature_="MainFeature" Component_="docx_85"/>
+    <ROW Feature_="MainFeature" Component_="docx_86"/>
+    <ROW Feature_="MainFeature" Component_="docx_87"/>
+    <ROW Feature_="MainFeature" Component_="docx_88"/>
+    <ROW Feature_="MainFeature" Component_="docx_89"/>
+    <ROW Feature_="MainFeature" Component_="docx_90"/>
+    <ROW Feature_="MainFeature" Component_="docx_91"/>
+    <ROW Feature_="MainFeature" Component_="docx_92"/>
+    <ROW Feature_="MainFeature" Component_="docx_93"/>
+    <ROW Feature_="MainFeature" Component_="docx_94"/>
+    <ROW Feature_="MainFeature" Component_="docx_95"/>
+    <ROW Feature_="MainFeature" Component_="docx_96"/>
+    <ROW Feature_="MainFeature" Component_="docx_97"/>
+    <ROW Feature_="MainFeature" Component_="docx_98"/>
+    <ROW Feature_="MainFeature" Component_="docx_99"/>
+    <ROW Feature_="MainFeature" Component_="docx_100"/>
+    <ROW Feature_="MainFeature" Component_="docx_101"/>
+    <ROW Feature_="MainFeature" Component_="rtf_1"/>
+    <ROW Feature_="MainFeature" Component_="PrintResultCopy.doc"/>
+    <ROW Feature_="MainFeature" Component_="TXDrawing.dll"/>
+    <ROW Feature_="MainFeature" Component_="TXDrawing.Windows.Forms.dll"/>
+    <ROW Feature_="MainFeature" Component_="TXImageProvider.dll"/>
+    <ROW Feature_="MainFeature" Component_="TXTextControl.dll"/>
+    <ROW Feature_="MainFeature" Component_="TXTextControl.Windows.Forms.dll"/>
+    <ROW Feature_="MainFeature" Component_="WinFormAnimation.dll"/>
+    <ROW Feature_="MainFeature" Component_="txic.dll"/>
+    <ROW Feature_="MainFeature" Component_="txkernel.dll"/>
+    <ROW Feature_="MainFeature" Component_="txtools.dll"/>
+    <ROW Feature_="MainFeature" Component_="tx28_css.dll"/>
+    <ROW Feature_="MainFeature" Component_="tx28_htm.dll"/>
+    <ROW Feature_="MainFeature" Component_="tx28_rtf.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="EXON.MONITOR.exe" SourcePath="Supervisor.ico" Index="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_DpiContentScale" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="GimStThiDGNL6_2022" Directory_="DesktopFolder" Name="GIÁMSÁ~1|Giám Sát Thi DGNL 6_2022" Component_="EXON.MONITOR.exe" Target="[#EXON.MONITOR.exe]" Hotkey="0" Icon_="EXON.MONITOR.exe" IconIndex="0" ShowCmd="1" WkDir="Debug_Dir"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+</DOCUMENT>
