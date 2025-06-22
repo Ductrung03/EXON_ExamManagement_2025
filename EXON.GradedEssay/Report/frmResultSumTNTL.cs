@@ -315,7 +315,7 @@ namespace EXON.GradedEssay.Report
                                MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
                                DiemViet = KetQua2(cs.ContestantShiftID),
                                DiemDoc = KetQua3(cs.ContestantShiftID),
-                               DiemTong = KetQua(cs.ContestantShiftID) + "Bonus: "+ DiemBonus(cs.ContestantShiftID),
+                               DiemTong = KetQua(cs.ContestantShiftID) + " Bonus: "+ DiemBonus(cs.ContestantShiftID),
                                Unit = cs.CONTESTANT.Unit,
                                DiemLamTron = DiemLamTron(cs.ContestantShiftID)
                            }).ToList();
@@ -369,7 +369,7 @@ namespace EXON.GradedEssay.Report
 
                             DiemViet = KetQua2(cs.ContestantShiftID),
                             DiemDoc = KetQua3(cs.ContestantShiftID),
-                            DiemTong = KetQua(cs.ContestantShiftID) + "Bonus: " + DiemBonus(cs.ContestantShiftID),
+                            DiemTong = KetQua(cs.ContestantShiftID) + " Bonus: " + DiemBonus(cs.ContestantShiftID),
                             Unit = cs.CONTESTANT.Unit,
                             MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
                             DiemLamTron = DiemLamTron(cs.ContestantShiftID)
@@ -455,7 +455,7 @@ namespace EXON.GradedEssay.Report
                            DiemNoi = KetQua1(cs.ContestantShiftID),
                            DiemViet = KetQua2(cs.ContestantShiftID),
                            DiemDoc = KetQua3(cs.ContestantShiftID),
-                           DiemTong = KetQua(cs.ContestantShiftID) + "Bonus: " + DiemBonus(cs.ContestantShiftID),
+                           DiemTong = KetQua(cs.ContestantShiftID) + " Bonus: " + DiemBonus(cs.ContestantShiftID),
                            DiemLamTron = DiemLamTron(cs.ContestantShiftID),
                            MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
                            Unit = cs.CONTESTANT.Unit
