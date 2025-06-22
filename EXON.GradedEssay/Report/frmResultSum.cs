@@ -262,6 +262,74 @@ namespace EXON.GradedEssay.Report
 
 
         }
+
+        private string DiemBonus(int contestantShiftID)
+        {
+
+            //////
+            ///
+            double diemKhiChuaBonus = 0;
+
+            CONTESTANTS_TESTS ct = _ContestantTestService.GetByContestantShiftId(contestantShiftID);
+            if (ct != null)
+            {
+                ANSWERSHEET anw = _AnswersheetService.GetByContestantTestID(ct.ContestantTestID);
+                if (anw != null)
+                {
+                    using (var context = new MTAQuizDbContext())
+                    {
+                        List<ANSWERSHEET_DETAILS> LsAnsdetail = context.ANSWERSHEET_DETAILS.Where(x => x.AnswerSheetID == anw.AnswerSheetID).ToList<ANSWERSHEET_DETAILS>();
+
+                        foreach (var ansdetail in LsAnsdetail)
+                        {
+
+                            ANSWER ans = context.ANSWERS.Where(x => x.AnswerID == ansdetail.ChoosenAnswer).FirstOrDefault();
+
+
+
+                            if (ans.IsCorrect)
+                            {
+
+                                SUBQUESTION subQues = context.SUBQUESTIONS.Where(x => x.SubQuestionID == ans.SubQuestionID).FirstOrDefault();
+                                diemKhiChuaBonus += subQues.Score ?? 0;
+                            }
+
+
+
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+            ///////
+
+            if (ct != null)
+            {
+                ANSWERSHEET anw = _AnswersheetService.GetByContestantTestID(ct.ContestantTestID);
+                if (anw != null)
+                {
+
+                    return (anw.TestScores - diemKhiChuaBonus).ToString();
+
+                }
+
+
+            }
+
+
+
+
+
+
+
+            return string.Empty;
+        }
+
         private void frmResultSum_Load(object sender, EventArgs e)
         {
             try
@@ -299,7 +367,7 @@ namespace EXON.GradedEssay.Report
                            DiemNoi = KetQua1(cs.ContestantShiftID),
                            DiemViet = KetQua2(cs.ContestantShiftID),
                            DiemDoc = KetQua3(cs.ContestantShiftID),
-                           DiemTong = KetQua(cs.ContestantShiftID),
+                           DiemTong = KetQua(cs.ContestantShiftID) +"Bonus: " + DiemBonus(cs.ContestantShiftID),
                            DiemLamTron = DiemLamTron(cs.ContestantShiftID),
                            MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
                            Unit = cs.CONTESTANT.Unit
@@ -352,7 +420,7 @@ namespace EXON.GradedEssay.Report
                           DiemViet = KetQua2(cs.ContestantShiftID),
                           DiemDoc = KetQua3(cs.ContestantShiftID),
                           MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
-                          DiemTong = KetQua(cs.ContestantShiftID),
+                          DiemTong = KetQua(cs.ContestantShiftID) + "Bonus: " + DiemBonus(cs.ContestantShiftID),
                           Unit = cs.CONTESTANT.Unit
                       }).ToList();
                         KetQuaTongBindingSource.DataSource = listKetQua;
@@ -429,7 +497,7 @@ namespace EXON.GradedEssay.Report
                            DiemNoi = KetQua1(cs.ContestantShiftID),
                            DiemViet = KetQua2(cs.ContestantShiftID),
                            DiemDoc = KetQua3(cs.ContestantShiftID),
-                           DiemTong = KetQua(cs.ContestantShiftID),
+                           DiemTong = KetQua(cs.ContestantShiftID) + "Bonus: " + DiemBonus(cs.ContestantShiftID),
                            DiemLamTron = DiemLamTron(cs.ContestantShiftID),
                            MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
                            Unit = cs.CONTESTANT.Unit
