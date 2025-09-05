@@ -1,5 +1,6 @@
 ﻿using EXON.Common;
 using EXON.MONITOR.Common;
+using EXON.SubData.Services;
 using EXON.SubModel.Models;
 using Microsoft.Reporting.WinForms;
 
@@ -116,7 +117,7 @@ namespace EXON.MONITOR.Report
                                      SBD = p.CONTESTANT.ContestantCode,
                                      HoTen = p.CONTESTANT.FullName,
                                      NgaySinh = Common.DatetimeConvert.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
-
+                                     DiemGoc = DiemKhiChuaBonus(p.ContestantShiftID),
                                      MonThi = p.SCHEDULE.SUBJECT.SubjectName,
                                      DiemThi = KetQua(p.CONTESTANT),
                                      MaDe = GetTestID(p.ContestantShiftID),
@@ -163,6 +164,58 @@ namespace EXON.MONITOR.Report
             this.rpKetQuaKipThi.LocalReport.Refresh();
             this.rpKetQuaKipThi.RefreshReport();
             this.rpKetQuaKipThi.RefreshReport();
+        }
+
+        //private ContestantTestService _ContestantTestService;
+       //private AnswersheetService _AnswersheetService;
+
+        private string DiemKhiChuaBonus(int contestantShiftID) {
+
+
+
+            double diemKhiChuaBonus = 0;
+            CONTESTANTS_TESTS ct = db.CONTESTANTS_TESTS.Where(x => x.ContestantShiftID == contestantShiftID).FirstOrDefault();
+            if (ct != null)
+            {
+                
+                ANSWERSHEET anw = db.ANSWERSHEETS.Where(x => x.ContestantTestID == ct.ContestantTestID).FirstOrDefault();
+                if (anw != null)
+                {
+                    using (var context = new MTAQuizDbContext())
+                    {
+                        List<ANSWERSHEET_DETAILS> LsAnsdetail = context.ANSWERSHEET_DETAILS.Where(x => x.AnswerSheetID == anw.AnswerSheetID).ToList<ANSWERSHEET_DETAILS>();
+
+                        foreach (var ansdetail in LsAnsdetail)
+                        {
+
+                            ANSWER ans = context.ANSWERS.Where(x => x.AnswerID == ansdetail.ChoosenAnswer).FirstOrDefault();
+
+
+
+                            if (ans.IsCorrect)
+                            {
+
+                                SUBQUESTION subQues = context.SUBQUESTIONS.Where(x => x.SubQuestionID == ans.SubQuestionID).FirstOrDefault();
+                                diemKhiChuaBonus += subQues.Score ?? 0;
+                            }
+
+
+
+
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+            return diemKhiChuaBonus.ToString();
+
+
+
+
         }
 
         private int GetTestID(int contestantShiftID)

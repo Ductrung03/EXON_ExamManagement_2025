@@ -217,7 +217,7 @@ namespace EXON.GradedEssay.Report
 
         private string DiemBonus(int contestantShiftID) {
 
-            //////
+            //////tinh diem khi chua bonus
             ///
             double diemKhiChuaBonus=0;
 
@@ -255,8 +255,8 @@ namespace EXON.GradedEssay.Report
 
 
             }
-            ///////
-           
+            /////// tinh diem bonus = tong diem(anw.TestScores) - diemKhiChuaBonus
+
             if (ct != null)
             {
                 ANSWERSHEET anw = _AnswersheetService.GetByContestantTestID(ct.ContestantTestID);
