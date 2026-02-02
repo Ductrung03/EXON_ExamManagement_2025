@@ -31,7 +31,13 @@ namespace EXON.GradedEssay
                 uc.Dock = DockStyle.Fill;
                 pnlMain.Controls.Add(uc);
             }
-            else
+            else if (_TypeShow == 3)
+            {
+                Control.ucReportCLO uc = new Control.ucReportCLO(_contestID, _locationID);
+                uc.Dock = DockStyle.Fill;
+                pnlMain.Controls.Add(uc);
+            }
+            else 
             {
                 Control.ucReportContests uc = new Control.ucReportContests(_contestID,_locationID);
                 uc.Dock = DockStyle.Fill;

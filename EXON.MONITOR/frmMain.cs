@@ -276,6 +276,11 @@ namespace EXON.MONITOR
                         (f as frmReportEL)._TypeShow = 1;
                         (f as frmReportEL).InitControl();
                     }
+                    else if(cbCLO.Checked)
+                    {
+                        (f as frmReportEL)._TypeShow = 3;
+                        (f as frmReportEL).InitControl();
+                    }
                     else
                     {
                         (f as frmReportEL)._TypeShow = 2;
@@ -452,11 +457,22 @@ namespace EXON.MONITOR
             SplashScreenManager.CloseForm();
         }
 
+        private void cbCLO_CheckBoxCheckChanged(object sender, EventArgs e)
+        {
+            if (cbCLO.Checked)
+            {    
+                cbContest.Checked = false;
+
+                cbShift.Checked = false;
+            }
+        }
+
         private void cbContest_CheckBoxCheckChanged(object sender, EventArgs e)
         {
             if (cbContest.Checked)
             {
                 cbShift.Checked = false;
+                cbCLO.Checked = false;
             }
         }
 
@@ -465,6 +481,8 @@ namespace EXON.MONITOR
             if (cbShift.Checked)
             {
                 cbContest.Checked = false;
+                cbCLO.Checked = false;
+
             }
         }
 

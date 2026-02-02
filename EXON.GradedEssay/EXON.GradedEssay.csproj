@@ -178,6 +178,12 @@
     <Compile Include="Control\ucPrintTest.designer.cs">
       <DependentUpon>ucPrintTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\ucReportCLO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ucReportCLO.Designer.cs">
+      <DependentUpon>ucReportCLO.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\ucReportKetQuaNN.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -405,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\ucPrintTest.resx">
       <DependentUpon>ucPrintTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ucReportCLO.resx">
+      <DependentUpon>ucReportCLO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Control\ucReportKetQuaNN.resx">
       <DependentUpon>ucReportKetQuaNN.cs</DependentUpon>

@@ -742,12 +742,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_908E6D9C69C6717BAD6D8E0C67F56599"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EB2485F6078B419E960357299FCE1A38"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1027,6 +1021,12 @@
         "OwnerKey" = "8:_F3FF551CFBAC0496B8157AE88C691EB3"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_908E6D9C69C6717BAD6D8E0C67F56599"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1045,6 +1045,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -2660,7 +2676,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EXONGiamSat10-2025"
         "ProductCode" = "8:{0292DACF-5446-4F75-A34E-DC8CDEE90A17}"
-        "PackageCode" = "8:{026A69C9-309C-4F54-9CEF-04CFAD86FA3D}"
+        "PackageCode" = "8:{D2680FC3-6120-4997-A58C-3652EF300F59}"
         "UpgradeCode" = "8:{070FD014-8AB0-4956-8F56-544AAA68E0E9}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

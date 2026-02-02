@@ -108,7 +108,7 @@ namespace EXON.MONITOR.Report
                 // Lấy ra danh sách các thí sinh thi c
                 List<CONTESTANTS_SHIFTS> listThiSinh = new List<CONTESTANTS_SHIFTS>();
                 listThiSinh = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status==3005).ToList();
-                // Lấy ra kết quả thi
+                // Lấy ra kết quả thi DiemKhiChuaBonus(p.ContestantShiftID)
                 int stt = 0;
                 var listKetQua = listThiSinh
                                  .Select(p => new
@@ -167,56 +167,40 @@ namespace EXON.MONITOR.Report
         }
 
         //private ContestantTestService _ContestantTestService;
-       //private AnswersheetService _AnswersheetService;
+        //private AnswersheetService _AnswersheetService;
 
-        private string DiemKhiChuaBonus(int contestantShiftID) {
+        private string DiemKhiChuaBonus(int contestantShiftID)
+        {
+            // 1) Tìm bài thi
+            var ct = db.CONTESTANTS_TESTS
+                       .FirstOrDefault(x => x.ContestantShiftID == contestantShiftID);
+            if (ct == null) return "0";
 
+            // 2) Tìm phiếu trả lời
+            var aw = db.ANSWERSHEETS
+                       .FirstOrDefault(x => x.ContestantTestID == ct.ContestantTestID);
+            if (aw == null) return "0";
 
+            // 3) Tính tổng điểm các câu đúng
+            //    - Join DETAILS -> ANSWERS (điều kiện đúng)
+            //    - Join SUBQUESTIONS để lấy Score (có thể null)
+            var total = (from d in db.ANSWERSHEET_DETAILS
+                         join a in db.ANSWERS on d.ChoosenAnswer equals a.AnswerID
+                         join s in db.SUBQUESTIONS on a.SubQuestionID equals s.SubQuestionID into sj
+                         from s in sj.DefaultIfEmpty()
+                         where d.AnswerSheetID == aw.AnswerSheetID && a.IsCorrect
+                         select (double?)(s.Score ?? 0))
+                        .Sum() ?? 0.0;
 
-            double diemKhiChuaBonus = 0;
-            CONTESTANTS_TESTS ct = db.CONTESTANTS_TESTS.Where(x => x.ContestantShiftID == contestantShiftID).FirstOrDefault();
-            if (ct != null)
-            {
-                
-                ANSWERSHEET anw = db.ANSWERSHEETS.Where(x => x.ContestantTestID == ct.ContestantTestID).FirstOrDefault();
-                if (anw != null)
-                {
-                    using (var context = new MTAQuizDbContext())
-                    {
-                        List<ANSWERSHEET_DETAILS> LsAnsdetail = context.ANSWERSHEET_DETAILS.Where(x => x.AnswerSheetID == anw.AnswerSheetID).ToList<ANSWERSHEET_DETAILS>();
+            var totalFillAnswer = (from a in db.ANSWERSHEETS
+                                   join d in db.ANSWERSHEET_DETAILS on a.AnswerSheetID equals d.AnswerSheetID
+                                   where d.AnswerSheetID == aw.AnswerSheetID
+                                   select (double?)(d.Score ?? 0)).Sum() ?? 0.0;
 
-                        foreach (var ansdetail in LsAnsdetail)
-                        {
-
-                            ANSWER ans = context.ANSWERS.Where(x => x.AnswerID == ansdetail.ChoosenAnswer).FirstOrDefault();
-
-
-
-                            if (ans.IsCorrect)
-                            {
-
-                                SUBQUESTION subQues = context.SUBQUESTIONS.Where(x => x.SubQuestionID == ans.SubQuestionID).FirstOrDefault();
-                                diemKhiChuaBonus += subQues.Score ?? 0;
-                            }
-
-
-
-
-                        }
-
-                    }
-
-
-                }
-
-
-            }
-            return diemKhiChuaBonus.ToString();
-
-
-
-
+            // Trả về dạng chuỗi
+            return (total+ totalFillAnswer).ToString();
         }
+
 
         private int GetTestID(int contestantShiftID)
         {

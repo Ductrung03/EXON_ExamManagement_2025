@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -265,69 +266,38 @@ namespace EXON.GradedEssay.Report
 
         private string DiemBonus(int contestantShiftID)
         {
+            // 1) Lấy ContestantTest
+            var ct = _ContestantTestService.GetByContestantShiftId(contestantShiftID);
+            if (ct == null) return "0";
 
-            //////
-            ///
-            double diemKhiChuaBonus = 0;
+            // 2) Lấy AnswerSheet
+            var anw = _AnswersheetService.GetByContestantTestID(ct.ContestantTestID);
+            if (anw == null) return "0";
 
-            CONTESTANTS_TESTS ct = _ContestantTestService.GetByContestantShiftId(contestantShiftID);
-            if (ct != null)
+            // 3) Tính tổng điểm các câu đúng (null-safe)
+            using (var context = new MTAQuizDbContext())
             {
-                ANSWERSHEET anw = _AnswersheetService.GetByContestantTestID(ct.ContestantTestID);
-                if (anw != null)
-                {
-                    using (var context = new MTAQuizDbContext())
-                    {
-                        List<ANSWERSHEET_DETAILS> LsAnsdetail = context.ANSWERSHEET_DETAILS.Where(x => x.AnswerSheetID == anw.AnswerSheetID).ToList<ANSWERSHEET_DETAILS>();
+                // Sum điểm đúng: DETAILS -> ANSWERS (IsCorrect) -> SUBQUESTIONS (Score)
+                // Dùng left join vào SUBQUESTIONS để Score null => 0
+                var tongDiemDung = (
+                    from d in context.ANSWERSHEET_DETAILS
+                    join a in context.ANSWERS on d.ChoosenAnswer equals a.AnswerID
+                    join s in context.SUBQUESTIONS on a.SubQuestionID equals s.SubQuestionID into sj
+                    from s in sj.DefaultIfEmpty()
+                    where d.AnswerSheetID == anw.AnswerSheetID && a.IsCorrect
+                    select (double?)(s.Score ?? 0)
+                ).Sum() ?? 0.0;
 
-                        foreach (var ansdetail in LsAnsdetail)
-                        {
+                // 4) Lấy TestScores (có thể null/float/decimal)
+                double testScores = 0.0;
+                if (anw.TestScores != null)
+                    testScores = Convert.ToDouble(anw.TestScores, CultureInfo.InvariantCulture);
 
-                            ANSWER ans = context.ANSWERS.Where(x => x.AnswerID == ansdetail.ChoosenAnswer).FirstOrDefault();
+                var bonus = testScores - tongDiemDung;
 
-
-
-                            if (ans.IsCorrect)
-                            {
-
-                                SUBQUESTION subQues = context.SUBQUESTIONS.Where(x => x.SubQuestionID == ans.SubQuestionID).FirstOrDefault();
-                                diemKhiChuaBonus += subQues.Score ?? 0;
-                            }
-
-
-
-
-                        }
-
-                    }
-
-
-                }
-
-
+                // Trả về chuỗi chuẩn, tránh lệ thuộc locale (dấu phẩy/chấm)
+                return bonus.ToString("0.##", CultureInfo.InvariantCulture);
             }
-            ///////
-
-            if (ct != null)
-            {
-                ANSWERSHEET anw = _AnswersheetService.GetByContestantTestID(ct.ContestantTestID);
-                if (anw != null)
-                {
-
-                    return (anw.TestScores - diemKhiChuaBonus).ToString();
-
-                }
-
-
-            }
-
-
-
-
-
-
-
-            return string.Empty;
         }
 
         private void frmResultSum_Load(object sender, EventArgs e)

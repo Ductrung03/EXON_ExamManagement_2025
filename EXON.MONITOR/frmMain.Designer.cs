@@ -52,6 +52,8 @@
             this.rbtnWritting = new System.Windows.Forms.RibbonButton();
             this.rbtnReport = new System.Windows.Forms.RibbonButton();
             this.rReScore = new System.Windows.Forms.RibbonButton();
+            this.cbCLO = new System.Windows.Forms.RibbonCheckBox();
+
             this.cbContest = new System.Windows.Forms.RibbonCheckBox();
             this.cbShift = new System.Windows.Forms.RibbonCheckBox();
             this.pnlXuatKetQuaDauRa = new System.Windows.Forms.RibbonPanel();
@@ -268,6 +270,8 @@
             this.ribbonPanel3.Items.Add(this.rbtnWritting);
             this.ribbonPanel3.Items.Add(this.rbtnReport);
             this.ribbonPanel3.Items.Add(this.rReScore);
+            this.ribbonPanel3.Items.Add(this.cbCLO);
+
             this.ribbonPanel3.Items.Add(this.cbContest);
             this.ribbonPanel3.Items.Add(this.cbShift);
             this.ribbonPanel3.Name = "ribbonPanel3";
@@ -313,6 +317,12 @@
             this.rReScore.SmallImage = ((System.Drawing.Image)(resources.GetObject("rReScore.SmallImage")));
             this.rReScore.Text = "Phúc tra";
             this.rReScore.Click += new System.EventHandler(this.RReScore_Click);
+            // 
+            // cbCLO
+            // 
+            this.cbCLO.Name = "cbCLO";
+            this.cbCLO.Text = "CLO";
+            this.cbCLO.CheckBoxCheckChanged += new System.EventHandler(this.cbCLO_CheckBoxCheckChanged);
             // 
             // cbContest
             // 
@@ -576,6 +586,8 @@
         private System.Windows.Forms.RibbonButton rbtnBackupDB;
         private System.Windows.Forms.RibbonButton rbtnWritting;
         private System.Windows.Forms.RibbonButton rbtnSpeaking1;
+        private System.Windows.Forms.RibbonCheckBox cbCLO;
+
         private System.Windows.Forms.RibbonCheckBox cbContest;
         private System.Windows.Forms.RibbonCheckBox cbShift;
         private System.Windows.Forms.RibbonButton rbtnReport;
