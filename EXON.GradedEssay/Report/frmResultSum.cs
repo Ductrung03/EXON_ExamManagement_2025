@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -300,24 +301,17 @@ namespace EXON.GradedEssay.Report
             }
         }
 
-        private long? ConvertSubmitTimeToMilliseconds(int? submitTime)
+        private ShiftTimeInfo GetShiftTimeInfo(int contestantShiftID)
         {
-            if (!submitTime.HasValue || submitTime.Value <= 0)
-            {
-                return null;
-            }
+            const string sql = @"SELECT TOP 1
+    EndTimeMsText AS SubmitTimeText,
+    TimeWorkedMsText AS WorkedTimeText,
+    SubmitTimeUnixMs,
+    TimeWorkedMs
+FROM CONTESTANTS_SHIFTS
+WHERE ContestantShiftID = @p0";
 
-            return submitTime.Value * 1000L;
-        }
-
-        private long? ConvertWorkedTimeToMilliseconds(int? timeWorked)
-        {
-            if (!timeWorked.HasValue)
-            {
-                return null;
-            }
-
-            return Math.Max(timeWorked.Value, 0) * 1000L;
+            return db.Database.SqlQuery<ShiftTimeInfo>(sql, contestantShiftID).FirstOrDefault();
         }
 
         private long GetWorkedTimeForSort(int? timeWorked)
@@ -344,10 +338,51 @@ namespace EXON.GradedEssay.Report
             return 0;
         }
 
-        private long? GetSubmitTime(int contestantShiftID)
+        private string GetSubmitTime(int contestantShiftID)
         {
-            CONTESTANTS_TESTS contestantTest = _ContestantTestService.GetByContestantShiftId(contestantShiftID);
-            return contestantTest == null ? null : ConvertSubmitTimeToMilliseconds(contestantTest.SubmitTime);
+            ShiftTimeInfo timeInfo = GetShiftTimeInfo(contestantShiftID);
+            if (timeInfo == null)
+            {
+                return string.Empty;
+            }
+
+            if (timeInfo.SubmitTimeUnixMs.HasValue)
+            {
+                return timeInfo.SubmitTimeUnixMs.Value.ToString();
+            }
+
+            return timeInfo.SubmitTimeText ?? string.Empty;
+        }
+
+        private string GetWorkedTime(int contestantShiftID)
+        {
+            ShiftTimeInfo timeInfo = GetShiftTimeInfo(contestantShiftID);
+            if (timeInfo == null)
+            {
+                return string.Empty;
+            }
+
+            if (timeInfo.TimeWorkedMs.HasValue)
+            {
+                return timeInfo.TimeWorkedMs.Value.ToString();
+            }
+
+            return timeInfo.WorkedTimeText ?? string.Empty;
+        }
+
+        private void ApplySummaryReportParameters(string contestName, string shiftName, string startDate, string subjectName)
+        {
+            ReportParameter[] listPara = new ReportParameter[]{
+                new ReportParameter("ContestName", contestName ?? string.Empty),
+                new ReportParameter("ShiftName", shiftName ?? string.Empty),
+                new ReportParameter("StartDate", startDate ?? string.Empty),
+                new ReportParameter("SubjectName", subjectName ?? string.Empty),
+                new ReportParameter("RegisterDate",DatetimeConvert.GetDateTimeServer().ToString(@"\n\g\à\y dd \t\h\á\n\g MM \n\ă\m yyyy"))
+            };
+
+            this.rpvSum.LocalReport.SetParameters(listPara);
+            this.rpvSum.LocalReport.Refresh();
+            this.rpvSum.RefreshReport();
         }
 
         private void frmResultSum_Load(object sender, EventArgs e)
@@ -392,10 +427,10 @@ namespace EXON.GradedEssay.Report
                                DiemLamTron = DiemLamTron(x.cs.ContestantShiftID),
                                MonThi = x.cs.SCHEDULE.SUBJECT.SubjectName,
                                Unit = x.cs.CONTESTANT.Unit,
-                               SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
-                                WorkedTime = ConvertWorkedTimeToMilliseconds(x.cs.TimeWorked),
-                               ScoreSort = ParseScore(diemTong),
-                               WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
+                                SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
+                                WorkedTime = GetWorkedTime(x.cs.ContestantShiftID),
+                                ScoreSort = ParseScore(diemTong),
+                                WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
                            };
                        })
                        .OrderByDescending(x => x.ScoreSort)
@@ -471,10 +506,10 @@ namespace EXON.GradedEssay.Report
                                DiemTong = diemTong + " Bonus: " + DiemBonus(x.cs.ContestantShiftID),
                                DiemLamTron = DiemLamTron(x.cs.ContestantShiftID),
                                Unit = x.cs.CONTESTANT.Unit,
-                               SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
-                                WorkedTime = ConvertWorkedTimeToMilliseconds(x.cs.TimeWorked),
-                               ScoreSort = ParseScore(diemTong),
-                               WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
+                                SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
+                                 WorkedTime = GetWorkedTime(x.cs.ContestantShiftID),
+                                ScoreSort = ParseScore(diemTong),
+                                WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
                            };
                        })
                        .OrderByDescending(x => x.ScoreSort)
@@ -525,17 +560,11 @@ namespace EXON.GradedEssay.Report
                         }
                     }
                     // add parameter
-                    ReportParameter[] listPara = new ReportParameter[]{
-                    new ReportParameter("ContestName",kithi.ContestName.ToUpper()),
-                        new ReportParameter("ShiftName", divisionShift.SHIFT.ShiftName),
-                             new ReportParameter("ShiftName", divisionShift.SHIFT.ShiftName),
-                                  new ReportParameter("StartDate", DatetimeConvert.ConvertUnixToDateTime(divisionShift.SHIFT.ShiftDate).ToString("dd/MM/yyyy")),
-                    new ReportParameter("SubjectName",Monthi.ToUpper()),
-                    new ReportParameter("RegisterDate",DatetimeConvert.GetDateTimeServer().ToString(@"\n\g\à\y dd \t\h\á\n\g MM \n\ă\m yyyy"))
-                };
-                    this.rpvSum.LocalReport.SetParameters(listPara);
-                    this.rpvSum.LocalReport.Refresh();
-                    this.rpvSum.RefreshReport();
+                    ApplySummaryReportParameters(
+                        kithi.ContestName.ToUpper(),
+                        divisionShift.SHIFT.ShiftName,
+                        DatetimeConvert.ConvertUnixToDateTime(divisionShift.SHIFT.ShiftDate).ToString("dd/MM/yyyy"),
+                        Monthi.ToUpper());
                 }
                 else
                 {
@@ -545,9 +574,19 @@ namespace EXON.GradedEssay.Report
                         // lấy thông tin của kip thi
 
                         _ScheduleService = new ScheduleService();
-                        SCHEDULE sc = new SCHEDULE();
-                        sc = _ScheduleService.GetAll().Where(x => x.SubjectID == _SubjectID).SingleOrDefault();
+                        SCHEDULE sc = _ScheduleService.GetAll().FirstOrDefault(x => x.SubjectID == _SubjectID);
+                        if (sc == null)
+                        {
+                            MessageBox.Show("Không tìm thấy lịch thi của môn đã chọn.");
+                            return;
+                        }
+
                         CONTEST kithi = db.CONTESTS.Where(p => p.ContestID == sc.ContestID).FirstOrDefault();
+                        if (kithi == null)
+                        {
+                            MessageBox.Show("Không tìm thấy kỳ thi của môn đã chọn.");
+                            return;
+                        }
                         // Lấy ra danh sách các thí sinh thi c
                         // Lấy ra kết quả thi
                         string Monthi = "";
@@ -578,10 +617,10 @@ namespace EXON.GradedEssay.Report
                                DiemLamTron = DiemLamTron(x.cs.ContestantShiftID),
                                MonThi = x.cs.SCHEDULE.SUBJECT.SubjectName,
                                Unit = x.cs.CONTESTANT.Unit,
-                               SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
-                                WorkedTime = ConvertWorkedTimeToMilliseconds(x.cs.TimeWorked),
-                               ScoreSort = ParseScore(diemTong),
-                               WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
+                                SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
+                                 WorkedTime = GetWorkedTime(x.cs.ContestantShiftID),
+                                ScoreSort = ParseScore(diemTong),
+                                WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
                            };
                        })
                        .OrderByDescending(x => x.ScoreSort)
@@ -625,32 +664,17 @@ namespace EXON.GradedEssay.Report
                         if (listKetQua.Count > 0)
                         {
                             Monthi = listKetQua[0].MonThi;
-                            ReportParameter[] listPara = new ReportParameter[]{
-                    new ReportParameter("ContestName",kithi.ContestName.ToUpper()),
-                        new ReportParameter("ShiftName", ""),
-                             new ReportParameter("ShiftName", ""),
-                                  new ReportParameter("StartDate", ""),
-                    new ReportParameter("SubjectName",Monthi.ToUpper()),
-                    new ReportParameter("RegisterDate",DatetimeConvert.GetDateTimeServer().ToString(@"\n\g\à\y dd \t\h\á\n\g MM \n\ă\m yyyy"))
-                };
-                            this.rpvSum.LocalReport.SetParameters(listPara);
-                            this.rpvSum.LocalReport.Refresh();
-                            this.rpvSum.RefreshReport();
+                            ApplySummaryReportParameters(kithi.ContestName.ToUpper(), string.Empty, string.Empty, Monthi.ToUpper());
+                        }
+                        else if (lstThiSinhBoThi.Count > 0)
+                        {
+                            Monthi = lstThiSinhBoThi[0].MonThi;
+                            ApplySummaryReportParameters(kithi.ContestName.ToUpper(), string.Empty, string.Empty, Monthi.ToUpper());
                         }
                         else
                         {
-                            Monthi = lstThiSinhBoThi[0].MonThi;
-                            ReportParameter[] listPara = new ReportParameter[]{
-                        new ReportParameter("ContestName",kithi.ContestName.ToUpper()),
-                        new ReportParameter("ShiftName", ""),
-                             new ReportParameter("ShiftName", ""),
-                                  new ReportParameter("StartDate", ""),
-                    new ReportParameter("SubjectName",Monthi.ToUpper()),
-                    new ReportParameter("RegisterDate",DatetimeConvert.GetDateTimeServer().ToString(@"\n\g\à\y dd \t\h\á\n\g MM \n\ă\m yyyy"))
-                };
-                            this.rpvSum.LocalReport.SetParameters(listPara);
-                            this.rpvSum.LocalReport.Refresh();
-                            this.rpvSum.RefreshReport();
+                            MessageBox.Show("Không có dữ liệu kết quả cho môn đã chọn.");
+                            return;
                         }
 
 
@@ -669,6 +693,14 @@ namespace EXON.GradedEssay.Report
             this.rpvSum.RefreshReport();
             this.rpvSum.RefreshReport();
             this.rpvSum.RefreshReport();
+        }
+
+        private class ShiftTimeInfo
+        {
+            public string SubmitTimeText { get; set; }
+            public string WorkedTimeText { get; set; }
+            public long? SubmitTimeUnixMs { get; set; }
+            public long? TimeWorkedMs { get; set; }
         }
     }
 }

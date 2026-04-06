@@ -1299,7 +1299,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Thời điểm nộp bài (ms)</Value>
+                            <Value>Thời gian nộp bài</Value>
                             <Style>
                               <FontFamily>Times New Roman</FontFamily>
                               <FontSize>9pt</FontSize>
@@ -1357,7 +1357,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Tổng thời gian làm bài (ms)</Value>
+                            <Value>Thời gian làm bài</Value>
                             <Style>
                               <FontFamily>Times New Roman</FontFamily>
                               <FontSize>9pt</FontSize>

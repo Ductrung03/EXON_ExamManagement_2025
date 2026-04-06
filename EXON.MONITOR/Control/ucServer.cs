@@ -5,7 +5,6 @@ using EXON.MONITOR.Report;
 using EXON.SubData.Services;
 using EXON.SubModel.Models;
 using MetroFramework;
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1010,11 +1009,13 @@ namespace EXON.MONITOR.Control
                                                   cp.Note = Reason;
                                                   _ContestantPauseService.Add(cp);
                                                   _ContestantPauseService.Save();
-                                             }
+                                                  SaveInterruptViolation(CS, Reason, InPutTime, timeClickPause);
+                                              }
 
-                                        }
-                                        InPutTime = 0;
-                                        Reason = "";
+                                         }
+                                         _ViolationService.Save();
+                                         InPutTime = 0;
+                                         Reason = "";
                                         EnableButton((int)Constant.StatusDivisionShift.STATUS_PAUSE);
 
 
@@ -1549,6 +1550,8 @@ namespace EXON.MONITOR.Control
                                                   cp.Note = Reason;
                                                   _ContestantPauseService.Add(cp);
                                                   _ContestantPauseService.Save();
+                                                  SaveInterruptViolation(cs, Reason, InPutTime, timeClickPause);
+                                                  _ViolationService.Save();
                                                   frmBienBanContestantPause frmBienBan = new frmBienBanContestantPause(cs.ContestantShiftID, InPutTime, Reason);
                                                   frmBienBan.ShowDialog();
                                                   InPutTime = 0;
@@ -1566,10 +1569,12 @@ namespace EXON.MONITOR.Control
                                              cp.ContestantTestID = ct.ContestantTestID;
                                              cp.ContestantPauseClickTime = timeClickPause;
                                              cp.ContestantRealPauseTime = InPutTime;
-                                             cp.Note = Reason;
-                                             _ContestantPauseService.Add(cp);
-                                             _ContestantPauseService.Save();
-                                             frmBienBanContestantPause frmBienBan = new frmBienBanContestantPause(cs.ContestantShiftID, InPutTime, Reason);
+                                              cp.Note = Reason;
+                                              _ContestantPauseService.Add(cp);
+                                              _ContestantPauseService.Save();
+                                              SaveInterruptViolation(cs, Reason, InPutTime, timeClickPause);
+                                              _ViolationService.Save();
+                                              frmBienBanContestantPause frmBienBan = new frmBienBanContestantPause(cs.ContestantShiftID, InPutTime, Reason);
                                              frmBienBan.ShowDialog();
                                              InPutTime = 0;
                                              Reason = "";
@@ -2134,25 +2139,31 @@ namespace EXON.MONITOR.Control
 
                                    /* LOG bu gio [VIOLATIONS] */
                                     _ViolationService = new ViolationService();
-                                    VIOLATION vp = new VIOLATION();
-                                    vp.ViolationName = _divisionShiftID.ToString();
-                                    vp.Level = Common.Constanst.LEVEL_ADDTIME;
-                                   vp.Status = cs.Status;
-                                   var description = new
-                                   {
-                                        nameContest = _ContestService.GetById(sh.ContestID.Value).ContestName,
-                                        nameShift = sh.ShiftName,
-                                         nameContestant = cs.CONTESTANT.FullName,
-                                         code = cs.CONTESTANT.ContestantCode,
-                                         ContestantRealPauseTime = InPutTime,
-                                         Time = (int)((timeClickPause - InPutTime) / 60),
-                                         LastResponseTime = GetTimeCheckDisplayText(cs.TimeCheck),
-                                         Note = Reason,
+                                    MonitorViolationEventData description = new MonitorViolationEventData
+                                    {
+                                        EventType = EXON.Common.Constant.VIOLATION_EVENT_ADDTIME,
+                                        ContestID = sh.ContestID ?? 0,
+                                        ContestName = _ContestService.GetById(sh.ContestID.Value).ContestName,
+                                        ShiftID = sh.ShiftID,
+                                        ShiftName = sh.ShiftName,
+                                        DivisionShiftId = _divisionShiftID,
+                                        ContestantShiftId = cs.ContestantShiftID,
+                                        ContestantId = cs.ContestantID,
+                                        ContestantCode = cs.CONTESTANT.ContestantCode,
+                                        ContestantName = cs.CONTESTANT.FullName,
+                                        RoomTestId = ds.RoomTestID,
+                                        RoomTestName = ds.ROOMTEST.RoomTestName,
+                                        RoomDiagramId = cs.RoomDiagramID ?? 0,
+                                        ComputerName = cs.ROOMDIAGRAM != null ? cs.ROOMDIAGRAM.ComputerName : string.Empty,
+                                        ServerUnixTime = timeClickPause,
+                                        ServerTimeText = DatetimeConvert.ConvertUnixToDateTime(timeClickPause).ToString("dd-MM-yyyy HH:mm:ss"),
+                                        LastResponseUnixTime = cs.TimeCheck ?? 0,
+                                        LastResponseTimeText = GetTimeCheckDisplayText(cs.TimeCheck),
+                                        PauseUnixTime = InPutTime,
+                                        AddedMinutes = (int)((timeClickPause - InPutTime) / 60),
+                                        Note = Reason,
                                     };
-                                    string jsonDescription = JsonConvert.SerializeObject(description);
-                                    vp.Description = jsonDescription;
-                                    vp.ViolationID = _ViolationService.GetNextViolationId();
-                                    _ViolationService.Add(vp);
+                                    _ViolationService.AddMonitorViolation(description, Common.Constanst.LEVEL_ADDTIME, cs.Status);
                                     _ViolationService.Save();
 
                                    /*Form bien ban*/
@@ -2161,28 +2172,7 @@ namespace EXON.MONITOR.Control
                                    InPutTime = 0;
                                    Reason = "";
                               }
-
-
-                              if (InPutTime > 0 && Reason != null)
-                              {
-
-                                   _ContestantPauseService = new ContestantPauseService();
-                                   int timeClickPause = DatetimeConvert.ConvertDateTimeToUnix(DatetimeConvert.GetDateTimeServer());
-                                   CONTESTANTPAUSE cp = new CONTESTANTPAUSE();
-                                   cp.ContestantTestID = ct.ContestantTestID;
-                                   cp.ContestantRealPauseTime = InPutTime;
-                                   cp.ContestantRealRestartTime = timeClickPause;
-                                   cp.Note = Reason;
-                                   _ContestantPauseService.Add(cp);
-                                   _ContestantPauseService.Save();
-                                   frmBienBanContestantPause frmBienBan = new frmBienBanContestantPause(cs.ContestantShiftID, InPutTime, Reason);
-                                   frmBienBan.ShowDialog();
-                                   InPutTime = 0;
-                                   Reason = "";
-                              }
-
-
-                         }
+                          }
 
 
 
@@ -2230,6 +2220,41 @@ namespace EXON.MONITOR.Control
                     Log.Instance.WriteErrorLog(Properties.Resources.MSG_LOG_ERROR, string.Format("Expetion : {0}  ", ex.Message));
 
                }
+          }
+
+          private void SaveInterruptViolation(CONTESTANTS_SHIFTS contestantShift, string note, int pauseUnixTime, int serverUnixTime)
+          {
+               if (contestantShift == null)
+               {
+                    return;
+               }
+
+               MonitorViolationEventData payload = new MonitorViolationEventData
+               {
+                    EventType = Constant.VIOLATION_EVENT_INTERRUPT,
+                    ContestID = ds != null && ds.ROOMTEST != null && ds.ROOMTEST.LOCATION != null ? ds.ROOMTEST.LOCATION.ContestID : 0,
+                    ContestName = ds != null && ds.ROOMTEST != null && ds.ROOMTEST.LOCATION != null && ds.ROOMTEST.LOCATION.CONTEST != null ? ds.ROOMTEST.LOCATION.CONTEST.ContestName : string.Empty,
+                    ShiftID = _shiftID,
+                    ShiftName = shift != null ? shift.ShiftName : string.Empty,
+                    DivisionShiftId = _divisionShiftID,
+                    ContestantShiftId = contestantShift.ContestantShiftID,
+                    ContestantId = contestantShift.ContestantID,
+                    ContestantCode = contestantShift.CONTESTANT != null ? contestantShift.CONTESTANT.ContestantCode : string.Empty,
+                    ContestantName = contestantShift.CONTESTANT != null ? contestantShift.CONTESTANT.FullName : string.Empty,
+                    RoomTestId = ds != null ? ds.RoomTestID : 0,
+                    RoomTestName = ds != null && ds.ROOMTEST != null ? ds.ROOMTEST.RoomTestName : string.Empty,
+                    RoomDiagramId = contestantShift.RoomDiagramID ?? 0,
+                    ComputerName = contestantShift.ROOMDIAGRAM != null ? contestantShift.ROOMDIAGRAM.ComputerName : string.Empty,
+                    SubjectName = contestantShift.SCHEDULE != null && contestantShift.SCHEDULE.SUBJECT != null ? contestantShift.SCHEDULE.SUBJECT.SubjectName : string.Empty,
+                    ServerUnixTime = serverUnixTime,
+                    ServerTimeText = DatetimeConvert.ConvertUnixToDateTime(serverUnixTime).ToString("dd-MM-yyyy HH:mm:ss"),
+                    LastResponseUnixTime = contestantShift.TimeCheck ?? 0,
+                    LastResponseTimeText = GetTimeCheckDisplayText(contestantShift.TimeCheck),
+                    PauseUnixTime = pauseUnixTime,
+                    Note = note
+               };
+
+               _ViolationService.AddMonitorViolation(payload, Common.Constanst.LEVEL_INTERRUPT, contestantShift.Status);
           }
 
           private void MenuItemDisconnectHistory_Click(object sender, EventArgs e)

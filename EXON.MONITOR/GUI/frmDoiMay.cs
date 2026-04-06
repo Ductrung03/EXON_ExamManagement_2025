@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
-using System.Web.Script.Serialization;
 using EXON.SubData.Services;
 using EXON.SubModel.Models;
 using EXON.MONITOR.Report;
@@ -31,17 +30,16 @@ namespace EXON.MONITOR.GUI
             BindingList<CHANGECOMPUTER_LOG> lstJR = new BindingList<CHANGECOMPUTER_LOG>();
             ViolationService _ViolationService = new ViolationService();
             int dautien = 0;
-            List<VIOLATION> lstVio = _ViolationService.GetAll().Where(x => x.ViolationName.Equals(_dvsID.ToString())).ToList();
+            List<CHANGECOMPUTER_LOG> lstVio = _ViolationService.GetChangeComputerHistoryRecords(_dvsID).ToList();
             foreach(var i in lstVio)
             {
-                CHANGECOMPUTER_LOG js = new JavaScriptSerializer().Deserialize<CHANGECOMPUTER_LOG>(i.Description);
                 if (dautien == 0)
                 {
-                    txtMonThi.Text = js.ProjectName;
+                    txtMonThi.Text = i.ProjectName;
                     
                 }
                     
-                lstJR.Add(js);
+                lstJR.Add(i);
             }
             dGVDoiMay.AutoGenerateColumns = false;
             source = new BindingSource(lstJR, null);

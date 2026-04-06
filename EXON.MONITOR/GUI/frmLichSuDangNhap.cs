@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EXON.SubModel.Models;
+using EXON.Common;
 
 namespace EXON.MONITOR.GUI
 {
@@ -25,23 +26,23 @@ namespace EXON.MONITOR.GUI
                _violationContestantService = new ViolationContestantService();
                _violationService = new ViolationService();
 
-               var listContestant = (
+                var listContestant = (
 
-                    from vtca in _violationService.GetByConstestshiftID(cs.CONTESTANT.ContestantCode)
+                    from vtca in _violationService.GetLoginHistoryRecords(cs.DivisionShiftID, cs.CONTESTANT.ContestantCode, cs.ContestantShiftID)
                     select new
                     {
-                         //ContestantShiftID = cs.ContestantShiftID,
+                          //ContestantShiftID = cs.ContestantShiftID,
                          STT = STT++,
-                         ContestantCode = cs.CONTESTANT.ContestantCode,
-                         Time = DatetimeConvert.ConvertUnixToDateTime(vtca.Level),
-                         TenMay = vtca.ViolationName,
-                         ContestantName = EXON.Common.UserHelper.FromJSONToObject3(vtca.Description).ContestantName,
-                         ContestShift = EXON.Common.UserHelper.FromJSONToObject3(vtca.Description).ContestShift,
-                        ContestSubject = EXON.Common.UserHelper.FromJSONToObject3(vtca.Description).ContestSubject,
-                        RoomTest = EXON.Common.UserHelper.FromJSONToObject3(vtca.Description).RoomTest,
+                          ContestantCode = cs.CONTESTANT.ContestantCode,
+                          Time = vtca.EventTime == DateTime.MinValue ? DatetimeConvert.GetDateTimeServer() : vtca.EventTime,
+                          TenMay = string.IsNullOrWhiteSpace(vtca.ComputerName) ? vtca.EventType : vtca.ComputerName,
+                          ContestantName = string.IsNullOrWhiteSpace(vtca.ContestantName) ? cs.CONTESTANT.FullName : vtca.ContestantName,
+                          ContestShift = vtca.ContestShift,
+                        ContestSubject = vtca.ContestSubject,
+                        RoomTest = vtca.RoomTest,
 
-                    }).ToList();
-               dataGridView1.DataSource = listContestant;
+                     }).ToList();
+                dataGridView1.DataSource = listContestant;
           }
 
          

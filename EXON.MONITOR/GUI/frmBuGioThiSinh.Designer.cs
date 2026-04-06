@@ -41,7 +41,7 @@
                // 
                this.label2.AutoSize = true;
                this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.label2.Location = new System.Drawing.Point(19, 63);
+                this.label2.Location = new System.Drawing.Point(23, 63);
                this.label2.Name = "label2";
                this.label2.Size = new System.Drawing.Size(120, 20);
                this.label2.TabIndex = 10;
@@ -51,7 +51,7 @@
                // 
                this.label1.AutoSize = true;
                this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.label1.Location = new System.Drawing.Point(19, 146);
+                this.label1.Location = new System.Drawing.Point(23, 176);
                this.label1.Name = "label1";
                this.label1.Size = new System.Drawing.Size(205, 20);
                this.label1.TabIndex = 9;
@@ -59,56 +59,56 @@
                // 
                // txtNote
                // 
-               this.txtNote.Location = new System.Drawing.Point(23, 181);
-               this.txtNote.Multiline = true;
-               this.txtNote.Name = "txtNote";
-               this.txtNote.Size = new System.Drawing.Size(339, 127);
-               this.txtNote.TabIndex = 8;
+                this.txtNote.Location = new System.Drawing.Point(23, 211);
+                this.txtNote.Multiline = true;
+                this.txtNote.Name = "txtNote";
+                this.txtNote.Size = new System.Drawing.Size(370, 118);
+                this.txtNote.TabIndex = 8;
                // 
                // mbtnInput
                // 
-               this.mbtnInput.Location = new System.Drawing.Point(151, 314);
-               this.mbtnInput.Name = "mbtnInput";
-               this.mbtnInput.Size = new System.Drawing.Size(88, 29);
-               this.mbtnInput.TabIndex = 6;
+                this.mbtnInput.Location = new System.Drawing.Point(157, 340);
+                this.mbtnInput.Name = "mbtnInput";
+                this.mbtnInput.Size = new System.Drawing.Size(100, 30);
+                this.mbtnInput.TabIndex = 6;
                this.mbtnInput.Text = "Nhập";
                this.mbtnInput.UseSelectable = true;
                this.mbtnInput.Click += new System.EventHandler(this.mbtnInput_Click);
                // 
                // textBox1
                // 
-               this.textBox1.Location = new System.Drawing.Point(23, 100);
-               this.textBox1.Multiline = true;
-               this.textBox1.Name = "textBox1";
-               this.textBox1.Size = new System.Drawing.Size(231, 30);
-               this.textBox1.TabIndex = 11;
-               this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+                this.textBox1.Location = new System.Drawing.Point(23, 95);
+                this.textBox1.Multiline = true;
+                this.textBox1.Name = "textBox1";
+                this.textBox1.Size = new System.Drawing.Size(120, 30);
+                this.textBox1.TabIndex = 11;
+                this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
                // 
                // label3
                // 
                this.label3.AutoSize = true;
                this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.label3.Location = new System.Drawing.Point(20, 136);
-               this.label3.Name = "label3";
-               this.label3.Size = new System.Drawing.Size(156, 17);
-               this.label3.TabIndex = 12;
-               this.label3.Text = "Lần phản hồi cuối cùng:";
+                this.label3.Location = new System.Drawing.Point(23, 140);
+                this.label3.Name = "label3";
+                this.label3.Size = new System.Drawing.Size(156, 17);
+                this.label3.TabIndex = 12;
+                this.label3.Text = "Lần phản hồi cuối cùng:";
                // 
                // lblLastResponseValue
                // 
                this.lblLastResponseValue.AutoSize = true;
                this.lblLastResponseValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-               this.lblLastResponseValue.Location = new System.Drawing.Point(182, 136);
-               this.lblLastResponseValue.Name = "lblLastResponseValue";
-               this.lblLastResponseValue.Size = new System.Drawing.Size(103, 17);
-               this.lblLastResponseValue.TabIndex = 13;
-               this.lblLastResponseValue.Text = "00:00:00";
+                this.lblLastResponseValue.Location = new System.Drawing.Point(185, 140);
+                this.lblLastResponseValue.Name = "lblLastResponseValue";
+                this.lblLastResponseValue.Size = new System.Drawing.Size(140, 17);
+                this.lblLastResponseValue.TabIndex = 13;
+                this.lblLastResponseValue.Text = "00:00:00";
                // 
                // frmBuGioThiSinh
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-               this.ClientSize = new System.Drawing.Size(416, 361);
+                this.ClientSize = new System.Drawing.Size(416, 392);
                this.Controls.Add(this.lblLastResponseValue);
                this.Controls.Add(this.label3);
                this.Controls.Add(this.textBox1);

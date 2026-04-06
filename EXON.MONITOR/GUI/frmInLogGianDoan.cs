@@ -7,7 +7,6 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using EXON.MONITOR.Report;
-using Newtonsoft.Json.Linq;
 
 namespace EXON.MONITOR.GUI
 {
@@ -45,9 +44,9 @@ namespace EXON.MONITOR.GUI
                 _divisionShiftService = new DivisionShiftService();
                 source = new BindingSource();
                 btnBaoCao.Enabled = false;
-                Text = _isDisconnectHistory
+                 Text = _isDisconnectHistory
                     ? contestantShiftID.HasValue ? "In lịch sử mất kết nối thí sinh" : "In lịch sử mất kết nối"
-                    : "In lịch sử bù giờ";
+                    : "In lịch sử gián đoạn, bù giờ";
                 LoadDivisionShiftInfo();
           }
 
@@ -97,9 +96,9 @@ namespace EXON.MONITOR.GUI
                dGVGianDoan.Columns[0].HeaderText = "STT";
                dGVGianDoan.Columns[1].HeaderText = "Thí sinh";
                dGVGianDoan.Columns[2].HeaderText = "Số báo danh";
-               dGVGianDoan.Columns[3].HeaderText = "Thời điểm mất kết nối";
-               dGVGianDoan.Columns[4].HeaderText = "Ghi chú";
-               dGVGianDoan.Columns[5].HeaderText = "Nguồn phát hiện";
+                dGVGianDoan.Columns[3].HeaderText = _isDisconnectHistory ? "Thời điểm mất kết nối" : "Thời gian";
+                dGVGianDoan.Columns[4].HeaderText = "Ghi chú";
+                dGVGianDoan.Columns[5].HeaderText = _isDisconnectHistory ? "Nguồn phát hiện" : "Loại lịch sử";
 
                 source = new BindingSource(dataTable, null);
                 btnBaoCao.Enabled = dataTable.Rows.Count > 0;
@@ -126,18 +125,14 @@ namespace EXON.MONITOR.GUI
 
           private void LoadAddTimeHistory(DataTable dataTable)
           {
-                List<VIOLATION> violations = _violationService
-                    .GetByDivisionShiftAndLevel(divisionShiftID, Common.Constanst.LEVEL_ADDTIME)
+                List<AddTimeHistoryRecord> violations = _violationService
+                    .GetAddTimeHistoryRecords(divisionShiftID, _contestantShiftID)
                     .OrderByDescending(x => x.ViolationID)
                     .ToList();
 
-                for (int i = 0; i < violations.Count; i++)
-                {
-                    AddTimeHistoryRecord record;
-                    if (!TryCreateAddTimeHistoryRecord(violations[i], out record))
-                    {
-                        continue;
-                    }
+                 for (int i = 0; i < violations.Count; i++)
+                 {
+                    AddTimeHistoryRecord record = violations[i];
 
                     dataTable.Rows.Add(
                         dataTable.Rows.Count + 1,
@@ -145,7 +140,7 @@ namespace EXON.MONITOR.GUI
                         record.ContestantCode,
                         record.AddedMinutesText,
                         record.Note,
-                        "Bù giờ");
+                        record.HistoryType);
                 }
           }
 
@@ -157,84 +152,6 @@ namespace EXON.MONITOR.GUI
                }
 
                 return string.Format("{0} (Lần phản hồi cuối: {1})", record.Note, record.LastResponseTimeText);
-          }
-
-          private static bool TryCreateAddTimeHistoryRecord(VIOLATION violation, out AddTimeHistoryRecord record)
-          {
-              record = null;
-              if (violation == null || string.IsNullOrWhiteSpace(violation.Description))
-              {
-                  return false;
-              }
-
-              try
-              {
-                  JObject data = JObject.Parse(violation.Description);
-                  string lastResponseTime = ReadString(data, "LastResponseTime");
-                  string note = ReadString(data, "Note");
-                  if (!string.IsNullOrWhiteSpace(lastResponseTime))
-                  {
-                      note = string.IsNullOrWhiteSpace(note)
-                          ? string.Format("Lần phản hồi cuối: {0}", lastResponseTime)
-                          : string.Format("{0} (Lần phản hồi cuối: {1})", note, lastResponseTime);
-                  }
-
-                  record = new AddTimeHistoryRecord
-                  {
-                      ContestantName = ReadString(data, "nameContestant"),
-                      ContestantCode = ReadString(data, "code"),
-                      AddedMinutesText = string.Format("{0} phút", ReadInt(data, "Time")),
-                      Note = note
-                  };
-
-                  return !string.IsNullOrWhiteSpace(record.ContestantCode) || !string.IsNullOrWhiteSpace(record.ContestantName);
-              }
-              catch
-              {
-                  return false;
-              }
-          }
-
-          private static string ReadString(JObject data, params string[] keys)
-          {
-              foreach (string key in keys)
-              {
-                  JToken token = data[key];
-                  if (token != null && token.Type != JTokenType.Null)
-                  {
-                      return token.ToString();
-                  }
-              }
-
-              return string.Empty;
-          }
-
-          private static int ReadInt(JObject data, params string[] keys)
-          {
-              foreach (string key in keys)
-              {
-                  JToken token = data[key];
-                  if (token == null || token.Type == JTokenType.Null)
-                  {
-                      continue;
-                  }
-
-                  int value;
-                  if (int.TryParse(token.ToString(), out value))
-                  {
-                      return value;
-                  }
-              }
-
-              return 0;
-          }
-
-          private class AddTimeHistoryRecord
-          {
-              public string ContestantName { get; set; }
-              public string ContestantCode { get; set; }
-              public string AddedMinutesText { get; set; }
-              public string Note { get; set; }
           }
 
           private void btnBaoCao_Click(object sender, EventArgs e)

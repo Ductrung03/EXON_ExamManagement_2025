@@ -149,6 +149,14 @@ namespace EXON.Common
         public static int LEVEL_INTERRUPT = 8002; // bù giờ, gián đoạn
         public static int LEVEL_CHANGECMP = 8003; // đổi máy khi thi
         public static int LEVEL_CHANGEAWS = 8004; // đổi câu trả lời
+        public static int LEVEL_ADDTIME = 8005; // bù giờ
+
+        public const string VIOLATION_SCHEMA_MONITOR_EVENT_V1 = "monitor.violation.event.v1";
+        public const string VIOLATION_EVENT_LOGIN = "SYS_EVT::CONTESTANT_LOGIN";
+        public const string VIOLATION_EVENT_DISCONNECT = "SYS_EVT::CONTESTANT_DISCONNECTED";
+        public const string VIOLATION_EVENT_CHANGE_COMPUTER = "SYS_EVT::CONTESTANT_CHANGE_COMPUTER";
+        public const string VIOLATION_EVENT_INTERRUPT = "SYS_EVT::CONTESTANT_INTERRUPT";
+        public const string VIOLATION_EVENT_ADDTIME = "SYS_EVT::CONTESTANT_ADD_TIME";
 
         public static DateTime DATETIME_ORIGINAL_DATE = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 

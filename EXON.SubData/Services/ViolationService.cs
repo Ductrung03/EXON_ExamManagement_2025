@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EXON.Common;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 namespace EXON.SubData.Services
 {
     public interface IViolationService
     {
         VIOLATION Add(VIOLATION _VIOLATION);
+        VIOLATION AddMonitorViolation(MonitorViolationEventData eventData, int level, int status);
 
         void Update(VIOLATION _VIOLATION);
 
@@ -21,7 +23,10 @@ namespace EXON.SubData.Services
         IEnumerable<VIOLATION> GetAll();
         IEnumerable<VIOLATION> GetByConstestshiftID(string contestantCodeID);
         IEnumerable<VIOLATION> GetByDivisionShiftAndLevel(int divisionShiftID, int level);
+        IEnumerable<AddTimeHistoryRecord> GetAddTimeHistoryRecords(int divisionShiftID, int? contestantShiftID = null);
+        IEnumerable<CHANGECOMPUTER_LOG> GetChangeComputerHistoryRecords(int divisionShiftID, int? contestantShiftID = null);
         IEnumerable<DisconnectHistoryRecord> GetDisconnectHistoryRecords(int divisionShiftID, int? contestantShiftID = null);
+        IEnumerable<LoginHistoryRecord> GetLoginHistoryRecords(int divisionShiftID, string contestantCode, int? contestantShiftID = null);
         VIOLATION GetById(int id);
         int GetNextViolationId();
 
@@ -51,10 +56,75 @@ namespace EXON.SubData.Services
         public int Level { get; set; }
     }
 
+    public class AddTimeHistoryRecord
+    {
+        public int ViolationID { get; set; }
+        public string EventType { get; set; }
+        public int ContestantShiftID { get; set; }
+        public int ContestantID { get; set; }
+        public string ContestantCode { get; set; }
+        public string ContestantName { get; set; }
+        public int DivisionShiftID { get; set; }
+        public int AddedMinutes { get; set; }
+        public string AddedMinutesText { get; set; }
+        public int PauseUnixTime { get; set; }
+        public int ServerUnixTime { get; set; }
+        public string ServerTimeText { get; set; }
+        public string LastResponseTimeText { get; set; }
+        public string Note { get; set; }
+        public string HistoryType { get; set; }
+    }
+
+    public class LoginHistoryRecord
+    {
+        public int ViolationID { get; set; }
+        public string EventType { get; set; }
+        public int ContestantShiftID { get; set; }
+        public string ContestantCode { get; set; }
+        public string ContestantName { get; set; }
+        public string ComputerName { get; set; }
+        public string ContestShift { get; set; }
+        public string ContestSubject { get; set; }
+        public string RoomTest { get; set; }
+        public int DivisionShiftID { get; set; }
+        public int ServerUnixTime { get; set; }
+        public DateTime EventTime { get; set; }
+    }
+
+    public class MonitorViolationEventData
+    {
+        public string SchemaVersion { get; set; }
+        public string EventType { get; set; }
+        public int ContestID { get; set; }
+        public string ContestName { get; set; }
+        public int ShiftID { get; set; }
+        public string ShiftName { get; set; }
+        public int DivisionShiftId { get; set; }
+        public int ContestantShiftId { get; set; }
+        public int ContestantId { get; set; }
+        public string ContestantCode { get; set; }
+        public string ContestantName { get; set; }
+        public int RoomTestId { get; set; }
+        public string RoomTestName { get; set; }
+        public int RoomDiagramId { get; set; }
+        public string ComputerName { get; set; }
+        public string SubjectName { get; set; }
+        public int ServerUnixTime { get; set; }
+        public string ServerTimeText { get; set; }
+        public int LastResponseUnixTime { get; set; }
+        public string LastResponseTimeText { get; set; }
+        public int PauseUnixTime { get; set; }
+        public int AddedMinutes { get; set; }
+        public string DetectSource { get; set; }
+        public string OldComputerName { get; set; }
+        public string NewComputerName { get; set; }
+        public string Note { get; set; }
+    }
+
     public class ViolationService : IViolationService
     {
-        private const string DisconnectEventName = "SYS_EVT::CONTESTANT_DISCONNECTED";
         private const int LegacyInterruptLevel = 8002;
+        private const int LegacyAddTimeLevel = 8005;
         private ViolationRepository _ViolationRepository;
         private IUnitOfWork _unitOfWork;
         private IDbFactory dbFactory;
@@ -69,6 +139,21 @@ namespace EXON.SubData.Services
         public VIOLATION Add(VIOLATION _VIOLATION)
         {
             return _ViolationRepository.Add(_VIOLATION);
+        }
+
+        public VIOLATION AddMonitorViolation(MonitorViolationEventData eventData, int level, int status)
+        {
+            MonitorViolationEventData normalizedEventData = NormalizeMonitorViolationEventData(eventData);
+            VIOLATION violation = new VIOLATION
+            {
+                ViolationID = GetNextViolationId(),
+                ViolationName = normalizedEventData.EventType,
+                Level = level,
+                Status = status,
+                Description = JObject.FromObject(normalizedEventData).ToString(Formatting.None)
+            };
+
+            return Add(violation);
         }
 
         public VIOLATION Delete(int id)
@@ -92,6 +177,54 @@ namespace EXON.SubData.Services
             return _ViolationRepository.GetMulti(x => x.ViolationName == violationName && x.Level == level);
         }
 
+        public IEnumerable<AddTimeHistoryRecord> GetAddTimeHistoryRecords(int divisionShiftID, int? contestantShiftID = null)
+        {
+            List<AddTimeHistoryRecord> result = new List<AddTimeHistoryRecord>();
+            List<VIOLATION> violations = _ViolationRepository.GetAll().OrderByDescending(x => x.ViolationID).ToList();
+
+            foreach (VIOLATION violation in violations)
+            {
+                AddTimeHistoryRecord record;
+                if (!TryCreateAddTimeHistoryRecord(violation, divisionShiftID, out record))
+                {
+                    continue;
+                }
+
+                if (contestantShiftID.HasValue && record.ContestantShiftID > 0 && record.ContestantShiftID != contestantShiftID.Value)
+                {
+                    continue;
+                }
+
+                result.Add(record);
+            }
+
+            return result.OrderByDescending(x => x.ServerUnixTime).ThenByDescending(x => x.ViolationID);
+        }
+
+        public IEnumerable<CHANGECOMPUTER_LOG> GetChangeComputerHistoryRecords(int divisionShiftID, int? contestantShiftID = null)
+        {
+            List<CHANGECOMPUTER_LOG> result = new List<CHANGECOMPUTER_LOG>();
+            List<VIOLATION> violations = _ViolationRepository.GetAll().OrderByDescending(x => x.ViolationID).ToList();
+
+            foreach (VIOLATION violation in violations)
+            {
+                CHANGECOMPUTER_LOG record;
+                if (!TryCreateChangeComputerHistoryRecord(violation, divisionShiftID, out record))
+                {
+                    continue;
+                }
+
+                if (contestantShiftID.HasValue && record.ContestantID > 0 && record.ContestantID != contestantShiftID.Value)
+                {
+                    continue;
+                }
+
+                result.Add(record);
+            }
+
+            return result;
+        }
+
         public IEnumerable<DisconnectHistoryRecord> GetDisconnectHistoryRecords(int divisionShiftID, int? contestantShiftID = null)
         {
             List<DisconnectHistoryRecord> result = new List<DisconnectHistoryRecord>();
@@ -106,6 +239,30 @@ namespace EXON.SubData.Services
                 }
 
                 if (contestantShiftID.HasValue && record.ContestantShiftID != contestantShiftID.Value)
+                {
+                    continue;
+                }
+
+                result.Add(record);
+            }
+
+            return result.OrderByDescending(x => x.ServerUnixTime).ThenByDescending(x => x.ViolationID);
+        }
+
+        public IEnumerable<LoginHistoryRecord> GetLoginHistoryRecords(int divisionShiftID, string contestantCode, int? contestantShiftID = null)
+        {
+            List<LoginHistoryRecord> result = new List<LoginHistoryRecord>();
+            List<VIOLATION> violations = _ViolationRepository.GetAll().OrderByDescending(x => x.ViolationID).ToList();
+
+            foreach (VIOLATION violation in violations)
+            {
+                LoginHistoryRecord record;
+                if (!TryCreateLoginHistoryRecord(violation, divisionShiftID, contestantCode, out record))
+                {
+                    continue;
+                }
+
+                if (contestantShiftID.HasValue && record.ContestantShiftID > 0 && record.ContestantShiftID != contestantShiftID.Value)
                 {
                     continue;
                 }
@@ -141,16 +298,15 @@ namespace EXON.SubData.Services
             {
                 try
                 {
-                    VIOLATION c;
-                    UserLoginComputerDifferent b;
-                    c = all[i];
-                    b = UserHelper.FromJSONToObject3(all[i].Description);
-                    if (b.ContestantCode == contestantCodeID)
+                    string contestantCode = ReadContestantCodeSafe(all[i]);
+                    if (string.Equals(contestantCode, contestantCodeID, StringComparison.OrdinalIgnoreCase))
                     {
-                        a.Add(c.ViolationID);
+                        a.Add(all[i].ViolationID);
                     }
                 }
-                catch { }
+                catch
+                {
+                }
                 
             }
             foreach (var i in a)
@@ -164,15 +320,15 @@ namespace EXON.SubData.Services
         private bool TryCreateDisconnectHistoryRecord(VIOLATION violation, int divisionShiftID, out DisconnectHistoryRecord record)
         {
             record = null;
-            if (violation == null || string.IsNullOrWhiteSpace(violation.Description))
+            JObject data;
+            if (!TryParseDescription(violation, out data))
             {
                 return false;
             }
 
             try
             {
-                JObject data = JObject.Parse(violation.Description);
-                bool isNewDisconnectEvent = string.Equals(violation.ViolationName, DisconnectEventName, StringComparison.OrdinalIgnoreCase);
+                bool isNewDisconnectEvent = IsMonitorEvent(violation, data, Constant.VIOLATION_EVENT_DISCONNECT);
                 bool isLegacyDisconnectEvent = violation.Level == LegacyInterruptLevel
                     && string.Equals(violation.ViolationName, divisionShiftID.ToString(), StringComparison.OrdinalIgnoreCase);
 
@@ -207,10 +363,10 @@ namespace EXON.SubData.Services
                     RoomTestName = ReadString(data, "RoomTestName"),
                     DetectSource = ReadString(data, "DetectSource", "DetectionSource"),
                     Status = ReadInt(data, "Status"),
-                    ServerTimeText = ReadString(data, "ServerTime", "ServerTimeText", "Time"),
-                    ServerUnixTime = ReadInt(data, "ServerUnix", "ServerUnixTime"),
-                    LastResponseTimeText = ReadString(data, "LastResponseTime", "LastResponseTimeText"),
-                    LastResponseUnixTime = ReadInt(data, "LastResponseUnix", "LastResponseUnixTime", "ContestantRealPauseTime"),
+                    ServerTimeText = ReadString(data, "ServerTimeText", "ServerTime", "Time"),
+                    ServerUnixTime = ReadInt(data, "ServerUnixTime", "ServerUnix"),
+                    LastResponseTimeText = ReadString(data, "LastResponseTimeText", "LastResponseTime"),
+                    LastResponseUnixTime = ReadInt(data, "LastResponseUnixTime", "LastResponseUnix", "ContestantRealPauseTime"),
                     Note = ReadString(data, "Note"),
                     Level = violation.Level
                 };
@@ -241,6 +397,235 @@ namespace EXON.SubData.Services
             {
                 return false;
             }
+        }
+
+        private bool TryCreateAddTimeHistoryRecord(VIOLATION violation, int divisionShiftID, out AddTimeHistoryRecord record)
+        {
+            record = null;
+            JObject data;
+            if (!TryParseDescription(violation, out data))
+            {
+                return false;
+            }
+
+            bool isNewAddTimeEvent = IsMonitorEvent(violation, data, Constant.VIOLATION_EVENT_ADDTIME);
+            bool isNewInterruptEvent = IsMonitorEvent(violation, data, Constant.VIOLATION_EVENT_INTERRUPT);
+            bool isLegacyAddTimeEvent = violation.Level == LegacyAddTimeLevel
+                && string.Equals(violation.ViolationName, divisionShiftID.ToString(), StringComparison.OrdinalIgnoreCase);
+
+            if (!isNewAddTimeEvent && !isNewInterruptEvent && !isLegacyAddTimeEvent)
+            {
+                return false;
+            }
+
+            int payloadDivisionShiftId = ReadInt(data, "DivisionShiftId", "DivisionShiftID");
+            if (payloadDivisionShiftId <= 0)
+            {
+                payloadDivisionShiftId = isLegacyAddTimeEvent ? divisionShiftID : 0;
+            }
+
+            if (payloadDivisionShiftId != divisionShiftID)
+            {
+                return false;
+            }
+
+            int addedMinutes = ReadInt(data, "AddedMinutes", "Time");
+            string lastResponseTime = ReadString(data, "LastResponseTimeText", "LastResponseTime");
+            string note = ReadString(data, "Note");
+            if (!string.IsNullOrWhiteSpace(lastResponseTime))
+            {
+                note = string.IsNullOrWhiteSpace(note)
+                    ? string.Format("Lần phản hồi cuối: {0}", lastResponseTime)
+                    : string.Format("{0} (Lần phản hồi cuối: {1})", note, lastResponseTime);
+            }
+
+            record = new AddTimeHistoryRecord
+            {
+                ViolationID = violation.ViolationID,
+                EventType = ReadString(data, "EventType"),
+                ContestantShiftID = ReadInt(data, "ContestantShiftId", "ContestantShiftID"),
+                ContestantID = ReadInt(data, "ContestantId", "ContestantID"),
+                ContestantCode = ReadString(data, "ContestantCode", "code"),
+                ContestantName = ReadString(data, "ContestantName", "nameContestant"),
+                DivisionShiftID = payloadDivisionShiftId,
+                AddedMinutes = addedMinutes,
+                AddedMinutesText = string.Format("{0} phút", addedMinutes),
+                PauseUnixTime = ReadInt(data, "PauseUnixTime", "ContestantRealPauseTime"),
+                ServerUnixTime = ReadInt(data, "ServerUnixTime", "ServerUnix"),
+                ServerTimeText = ReadString(data, "ServerTimeText", "ServerTime"),
+                LastResponseTimeText = lastResponseTime,
+                Note = note,
+                HistoryType = isNewInterruptEvent ? "Gián đoạn" : "Bù giờ"
+            };
+
+            if (record.ServerUnixTime <= 0)
+            {
+                record.ServerUnixTime = violation.ViolationID;
+            }
+
+            return !string.IsNullOrWhiteSpace(record.ContestantCode) || !string.IsNullOrWhiteSpace(record.ContestantName);
+        }
+
+        private bool TryCreateChangeComputerHistoryRecord(VIOLATION violation, int divisionShiftID, out CHANGECOMPUTER_LOG record)
+        {
+            record = null;
+            JObject data;
+            if (!TryParseDescription(violation, out data))
+            {
+                return false;
+            }
+
+            bool isNewChangeComputerEvent = IsMonitorEvent(violation, data, Constant.VIOLATION_EVENT_CHANGE_COMPUTER);
+            bool isLegacyChangeComputerEvent = string.Equals(violation.ViolationName, divisionShiftID.ToString(), StringComparison.OrdinalIgnoreCase)
+                && (!string.IsNullOrWhiteSpace(ReadString(data, "oldComputer")) || !string.IsNullOrWhiteSpace(ReadString(data, "newComputer")));
+
+            if (!isNewChangeComputerEvent && !isLegacyChangeComputerEvent)
+            {
+                return false;
+            }
+
+            int payloadDivisionShiftId = ReadInt(data, "DivisionShiftId", "DivisionShiftID");
+            if (payloadDivisionShiftId <= 0)
+            {
+                payloadDivisionShiftId = isLegacyChangeComputerEvent ? divisionShiftID : 0;
+            }
+
+            if (payloadDivisionShiftId != divisionShiftID)
+            {
+                return false;
+            }
+
+            record = new CHANGECOMPUTER_LOG
+            {
+                ContestID = ReadInt(data, "ContestID", "ContestId"),
+                ShiftID = ReadInt(data, "ShiftID", "ShiftId"),
+                RoomContest = ReadInt(data, "RoomContest", "RoomTestId", "RoomTestID"),
+                ProjectName = ReadString(data, "SubjectName", "ProjectName", "ContestSubject"),
+                ContestantID = ReadInt(data, "ContestantShiftId", "ContestantShiftID", "ContestantID", "ContestantId"),
+                ContestantCode = ReadString(data, "ContestantCode", "code"),
+                ContestantName = ReadString(data, "ContestantName", "nameContestant"),
+                oldComputer = ReadString(data, "OldComputerName", "oldComputer"),
+                newComputer = ReadString(data, "NewComputerName", "newComputer", "ComputerName"),
+                time_changecmp = ReadString(data, "ServerTimeText", "ServerTime", "time_changecmp")
+            };
+
+            return !string.IsNullOrWhiteSpace(record.ContestantCode)
+                || !string.IsNullOrWhiteSpace(record.oldComputer)
+                || !string.IsNullOrWhiteSpace(record.newComputer);
+        }
+
+        private bool TryCreateLoginHistoryRecord(VIOLATION violation, int divisionShiftID, string contestantCode, out LoginHistoryRecord record)
+        {
+            record = null;
+            JObject data;
+            if (!TryParseDescription(violation, out data))
+            {
+                return false;
+            }
+
+            string payloadContestantCode = ReadString(data, "ContestantCode", "code");
+            if (!string.Equals(payloadContestantCode, contestantCode, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            bool isNewLoginEvent = IsMonitorEvent(violation, data, Constant.VIOLATION_EVENT_LOGIN);
+            bool isLegacyLoginEvent = violation.Level == Constant.LEVEL_LOGIN
+                || !string.IsNullOrWhiteSpace(ReadString(data, "ContestShift", "ShiftName", "nameShift"))
+                || !string.IsNullOrWhiteSpace(ReadString(data, "ContestSubject", "SubjectName", "ProjectName"))
+                || !string.IsNullOrWhiteSpace(ReadString(data, "RoomTest", "RoomTestName"));
+
+            if (!isNewLoginEvent && !isLegacyLoginEvent)
+            {
+                return false;
+            }
+
+            int payloadDivisionShiftId = ReadInt(data, "DivisionShiftId", "DivisionShiftID");
+            if (payloadDivisionShiftId > 0 && payloadDivisionShiftId != divisionShiftID)
+            {
+                return false;
+            }
+
+            int serverUnixTime = ReadInt(data, "ServerUnixTime", "ServerUnix");
+            if (serverUnixTime <= 0)
+            {
+                serverUnixTime = violation.Level;
+            }
+
+            record = new LoginHistoryRecord
+            {
+                ViolationID = violation.ViolationID,
+                EventType = ReadString(data, "EventType"),
+                ContestantShiftID = ReadInt(data, "ContestantShiftId", "ContestantShiftID"),
+                ContestantCode = payloadContestantCode,
+                ContestantName = ReadString(data, "ContestantName", "nameContestant"),
+                ComputerName = ReadString(data, "ComputerName", "TenMay"),
+                ContestShift = ReadString(data, "ShiftName", "ContestShift", "nameShift"),
+                ContestSubject = ReadString(data, "SubjectName", "ContestSubject", "ProjectName"),
+                RoomTest = ReadString(data, "RoomTestName", "RoomTest"),
+                DivisionShiftID = payloadDivisionShiftId,
+                ServerUnixTime = serverUnixTime,
+                EventTime = serverUnixTime > 0 ? ConvertUnixToDateTime(serverUnixTime) : DateTime.MinValue
+            };
+
+            return true;
+        }
+
+        private static MonitorViolationEventData NormalizeMonitorViolationEventData(MonitorViolationEventData eventData)
+        {
+            MonitorViolationEventData normalizedEventData = eventData ?? new MonitorViolationEventData();
+            normalizedEventData.SchemaVersion = string.IsNullOrWhiteSpace(normalizedEventData.SchemaVersion)
+                ? Constant.VIOLATION_SCHEMA_MONITOR_EVENT_V1
+                : normalizedEventData.SchemaVersion;
+
+            if (normalizedEventData.ServerUnixTime > 0 && string.IsNullOrWhiteSpace(normalizedEventData.ServerTimeText))
+            {
+                normalizedEventData.ServerTimeText = ConvertUnixToDateTime(normalizedEventData.ServerUnixTime).ToString("dd-MM-yyyy HH:mm:ss");
+            }
+
+            if (normalizedEventData.LastResponseUnixTime > 0 && string.IsNullOrWhiteSpace(normalizedEventData.LastResponseTimeText))
+            {
+                normalizedEventData.LastResponseTimeText = ConvertUnixToDateTime(normalizedEventData.LastResponseUnixTime).ToString("HH:mm:ss");
+            }
+
+            return normalizedEventData;
+        }
+
+        private static bool TryParseDescription(VIOLATION violation, out JObject data)
+        {
+            data = null;
+            if (violation == null || string.IsNullOrWhiteSpace(violation.Description))
+            {
+                return false;
+            }
+
+            try
+            {
+                data = JObject.Parse(violation.Description);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static bool IsMonitorEvent(VIOLATION violation, JObject data, string eventType)
+        {
+            string payloadEventType = ReadString(data, "EventType");
+            return string.Equals(payloadEventType, eventType, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(violation.ViolationName, eventType, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string ReadContestantCodeSafe(VIOLATION violation)
+        {
+            JObject data;
+            if (!TryParseDescription(violation, out data))
+            {
+                return string.Empty;
+            }
+
+            return ReadString(data, "ContestantCode", "code");
         }
 
         private static int ReadInt(JObject data, params string[] keys)

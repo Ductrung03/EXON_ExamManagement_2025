@@ -11,7 +11,6 @@ using EXON.SubModel.Models;
 using EXON.SubData.Services;
 using EXON.MONITOR.Common;
 using EXON.Common;
-using Newtonsoft.Json;
 
 namespace EXON.MONITOR.Control
 {
@@ -256,14 +255,14 @@ namespace EXON.MONITOR.Control
                      {
                          statusStr = "Mất kết nối";
                          color = Color.Fuchsia;
-                         if (!_disconnectActive && _previousStatus > 1)
+                         if (_previousStatus != Constant.STATUS_DOING_BUT_INTERRUPT)
                          {
                               EXON.Common.NotificationBox.Show(String.Format("Thí sinh tại máy {0} mất kết nối", GetDisconnectComputerName()), EXON.Common.NotificationBox.AlertType.error);
                               SaveDisconnectViolation(detectSource);
+                              _previousStatus = Constant.STATUS_DOING_BUT_INTERRUPT;
                          }
 
                          _disconnectActive = true;
-                         _previousStatus = Constant.STATUS_DOING_BUT_INTERRUPT;
                      }
                      else
                      {
@@ -364,48 +363,47 @@ namespace EXON.MONITOR.Control
                      return;
                 }
 
-                try
-                {
-                     ViolationService violationService = new ViolationService();
-                     DateTime serverTime = DatetimeConvert.GetDateTimeServer();
-                     int unixTime = DatetimeConvert.ConvertDateTimeToUnix(serverTime);
-                     string computerName = GetDisconnectComputerName();
-                     string lastResponseTime = GetTimeCheckDisplayText(_contestantshift.TimeCheck);
+                 try
+                 {
+                      ViolationService violationService = new ViolationService();
+                      DateTime serverTime = DatetimeConvert.GetDateTimeServer();
+                      int unixTime = DatetimeConvert.ConvertDateTimeToUnix(serverTime);
+                      string computerName = GetDisconnectComputerName();
+                      string lastResponseTime = GetTimeCheckDisplayText(_contestantshift.TimeCheck);
 
-                     var payload = new
-                     {
-                          EventType = "SYS_EVT::CONTESTANT_DISCONNECTED",
-                          ContestantShiftId = _contestantshift.ContestantShiftID,
-                          ContestantId = _contestantshift.ContestantID,
-                          ContestantCode = _contestant != null ? _contestant.ContestantCode : string.Empty,
-                          ContestantName = _contestant != null ? _contestant.FullName : string.Empty,
-                          DivisionShiftId = _divisionshiftid,
-                          ComputerName = computerName,
-                          RoomDiagramId = _roomdiagram != null ? _roomdiagram.RoomDiagramID : 0,
-                          RoomTestId = _roomdiagram != null ? _roomdiagram.RoomTestID : 0,
-                          Status = _contestantshift.Status,
-                          DetectSource = detectSource,
-                          ServerTime = serverTime.ToString("dd-MM-yyyy HH:mm:ss"),
-                          ServerUnix = unixTime,
-                          LastResponseTime = lastResponseTime,
-                          LastResponseUnix = _contestantshift.TimeCheck ?? 0,
-                          Note = "Tự động phát hiện thí sinh mất kết nối"
-                     };
+                       var payload = new
+                       {
+                            EventType = Constant.VIOLATION_EVENT_DISCONNECT,
+                            ContestantShiftId = _contestantshift.ContestantShiftID,
+                            ContestantId = _contestantshift.ContestantID,
+                            ContestantCode = _contestant != null ? _contestant.ContestantCode : string.Empty,
+                            ContestantName = _contestant != null ? _contestant.FullName : string.Empty,
+                            DivisionShiftId = _divisionshiftid,
+                            ComputerName = computerName,
+                            RoomDiagramId = _roomdiagram != null ? _roomdiagram.RoomDiagramID : 0,
+                            RoomTestId = _roomdiagram != null ? (_roomdiagram.RoomTestID ?? 0) : 0,
+                            Status = _contestantshift.Status,
+                            ServerTime = serverTime.ToString("dd-MM-yyyy HH:mm:ss"),
+                            ServerUnix = unixTime,
+                            DetectSource = detectSource,
+                            LastResponseTime = lastResponseTime,
+                            LastResponseUnix = _contestantshift.TimeCheck ?? 0,
+                            Note = "Tự động phát hiện thí sinh mất kết nối"
+                       };
 
-                     VIOLATION violation = new VIOLATION();
-                     violation.ViolationID = violationService.GetNextViolationId();
-                     violation.ViolationName = "SYS_EVT::CONTESTANT_DISCONNECTED";
-                     violation.Level = 0;
-                     violation.Status = _contestantshift.Status;
-                     violation.Description = JsonConvert.SerializeObject(payload);
-
-                     violationService.Add(violation);
-                     violationService.Save();
-                }
-                catch
-                {
-                }
-         }
+                       VIOLATION violation = new VIOLATION();
+                       violation.ViolationName = Constant.VIOLATION_EVENT_DISCONNECT;
+                       violation.Level = 0;
+                       violation.Status = _contestantshift.Status;
+                       violation.Description = Newtonsoft.Json.JsonConvert.SerializeObject(payload);
+                       violationService.Add(violation);
+                       violationService.Save();
+                 }
+                 catch (Exception ex)
+                 {
+                      Log.Instance.WriteErrorLog(Properties.Resources.MSG_LOG_ERROR, string.Format("Lưu lịch sử mất kết nối thất bại: {0}", ex.Message));
+                 }
+          }
 
          private string GetTimeCheckDisplayText(int? timeCheck)
          {

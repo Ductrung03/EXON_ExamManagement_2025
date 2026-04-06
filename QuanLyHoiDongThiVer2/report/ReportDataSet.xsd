@@ -62,12 +62,14 @@
               <xs:element name="HoTen" msprop:Generator_ColumnVarNameInTable="columnHoTen" msprop:Generator_ColumnPropNameInRow="HoTen" msprop:Generator_ColumnPropNameInTable="HoTenColumn" msprop:Generator_UserColumnName="HoTen" type="xs:string" minOccurs="0" />
               <xs:element name="NgaySinh" msprop:Generator_ColumnVarNameInTable="columnNgaySinh" msprop:Generator_ColumnPropNameInRow="NgaySinh" msprop:Generator_ColumnPropNameInTable="NgaySinhColumn" msprop:Generator_UserColumnName="NgaySinh" type="xs:string" minOccurs="0" />
               <xs:element name="MonThi" msprop:Generator_ColumnVarNameInTable="columnMonThi" msprop:Generator_ColumnPropNameInRow="MonThi" msprop:Generator_ColumnPropNameInTable="MonThiColumn" msprop:Generator_UserColumnName="MonThi" type="xs:string" minOccurs="0" />
-              <xs:element name="DiemThi" msprop:Generator_ColumnVarNameInTable="columnDiemThi" msprop:Generator_ColumnPropNameInRow="DiemThi" msprop:Generator_ColumnPropNameInTable="DiemThiColumn" msprop:Generator_UserColumnName="DiemThi" type="xs:string" minOccurs="0" />
-              <xs:element name="MaDe" msprop:Generator_ColumnVarNameInTable="columnMaDe" msprop:Generator_ColumnPropNameInRow="MaDe" msprop:Generator_ColumnPropNameInTable="MaDeColumn" msprop:Generator_UserColumnName="MaDe" type="xs:string" minOccurs="0" />
-              <xs:element name="Unit" msprop:Generator_ColumnVarNameInTable="columnUnit" msprop:Generator_ColumnPropNameInRow="Unit" msprop:Generator_ColumnPropNameInTable="UnitColumn" msprop:Generator_UserColumnName="Unit" type="xs:string" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
+               <xs:element name="DiemThi" msprop:Generator_ColumnVarNameInTable="columnDiemThi" msprop:Generator_ColumnPropNameInRow="DiemThi" msprop:Generator_ColumnPropNameInTable="DiemThiColumn" msprop:Generator_UserColumnName="DiemThi" type="xs:string" minOccurs="0" />
+               <xs:element name="MaDe" msprop:Generator_ColumnVarNameInTable="columnMaDe" msprop:Generator_ColumnPropNameInRow="MaDe" msprop:Generator_ColumnPropNameInTable="MaDeColumn" msprop:Generator_UserColumnName="MaDe" type="xs:string" minOccurs="0" />
+               <xs:element name="Unit" msprop:Generator_ColumnVarNameInTable="columnUnit" msprop:Generator_ColumnPropNameInRow="Unit" msprop:Generator_ColumnPropNameInTable="UnitColumn" msprop:Generator_UserColumnName="Unit" type="xs:string" minOccurs="0" />
+               <xs:element name="SubmitTime" msprop:Generator_ColumnVarNameInTable="columnSubmitTime" msprop:Generator_ColumnPropNameInRow="SubmitTime" msprop:Generator_ColumnPropNameInTable="SubmitTimeColumn" msprop:Generator_UserColumnName="SubmitTime" type="xs:long" minOccurs="0" />
+               <xs:element name="WorkedTime" msprop:Generator_ColumnVarNameInTable="columnWorkedTime" msprop:Generator_ColumnPropNameInRow="WorkedTime" msprop:Generator_ColumnPropNameInTable="WorkedTimeColumn" msprop:Generator_UserColumnName="WorkedTime" type="xs:long" minOccurs="0" />
+             </xs:sequence>
+           </xs:complexType>
+         </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

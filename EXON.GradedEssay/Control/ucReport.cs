@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using EXON.SubData.Services;
 using EXON.SubModel.Models;
 using EXON.Common;
+using System.Data.Entity;
 
 
 namespace EXON.GradedEssay.Control
@@ -215,6 +216,7 @@ namespace EXON.GradedEssay.Control
                 int index = 1;
                 DIVISION_SHIFTS CurrentDs = new DIVISION_SHIFTS();
                 CurrentDs = _DivisionShiftService.GetByShiftAndRoomTest(CurrentShiftID, CurrentRoomTestID);
+                MTAQuizDbContext db = new MTAQuizDbContext();
                 var listContestant = (from cs in _ContestantShiftService.GetAllByDivisionShiftID(CurrentDs.DivisionShiftID)
                                       where  cs.SCHEDULE.SubjectID == CurrentSubjectID
                                       select new
@@ -227,13 +229,15 @@ namespace EXON.GradedEssay.Control
                                             .ToShortDateString(),
                                           // TestID = ct.TestID,
                                           ScoreSpeaking = KetQuaNoi(cs.ContestantShiftID),
-                                          ScoreWritting = KetQuaViet(cs.ContestantShiftID),
-                                         // ScoreListening = KetQuaNghe(cs.ContestantShiftID),
-                                          Score = (float.Parse(KetQuaTracNghiem(cs.ContestantShiftID))) ,
-                                          SumScore = KetQuaTong(cs.ContestantShiftID),
-                                          ContestantShiftID = cs.ContestantShiftID,
-                                        
-                                      }).ToList();
+                                           ScoreWritting = KetQuaViet(cs.ContestantShiftID),
+                                          // ScoreListening = KetQuaNghe(cs.ContestantShiftID),
+                                           Score = (float.Parse(KetQuaTracNghiem(cs.ContestantShiftID))) ,
+                                           SumScore = KetQuaTong(cs.ContestantShiftID),
+                                           ContestantShiftID = cs.ContestantShiftID,
+                                           SubmitTime = GetSubmitTimeDisplay(db, cs.ContestantShiftID),
+                                           WorkedTime = GetWorkedTimeDisplay(db, cs.ContestantShiftID),
+                                         
+                                       }).ToList();
                 gvMain.DataSource = listContestant;
             }
         }
@@ -250,8 +254,9 @@ namespace EXON.GradedEssay.Control
                 int index = 1;
                 DIVISION_SHIFTS CurrentDs = new DIVISION_SHIFTS();
                 CurrentDs = _DivisionShiftService.GetByShiftAndRoomTest(CurrentShiftID, CurrentRoomTestID);
+                MTAQuizDbContext db = new MTAQuizDbContext();
                 var listContestant = (from cs in _ContestantShiftService.GetAllByDivisionShiftID(CurrentDs.DivisionShiftID).Where(x=>x.CONTESTANT.Unit==CurrentUnit)
-                                      
+                                       
                                       select new
                                       {
                                           STT = index++,
@@ -263,14 +268,69 @@ namespace EXON.GradedEssay.Control
                                           // TestID = ct.TestID,
                                           ScoreSpeaking = KetQuaNoi(cs.ContestantShiftID),
                                           ScoreWritting = KetQuaViet(cs.ContestantShiftID),
-                                          //ScoreListening = KetQuaNghe(cs.ContestantShiftID),
-                                          Score = (float.Parse(KetQuaTracNghiem(cs.ContestantShiftID))),
-                                          SumScore = KetQuaTong(cs.ContestantShiftID),
-                                          ContestantShiftID = cs.ContestantShiftID,
-                                         
-                                      }).ToList();
+                                           //ScoreListening = KetQuaNghe(cs.ContestantShiftID),
+                                           Score = (float.Parse(KetQuaTracNghiem(cs.ContestantShiftID))),
+                                           SumScore = KetQuaTong(cs.ContestantShiftID),
+                                           ContestantShiftID = cs.ContestantShiftID,
+                                           SubmitTime = GetSubmitTimeDisplay(db, cs.ContestantShiftID),
+                                           WorkedTime = GetWorkedTimeDisplay(db, cs.ContestantShiftID),
+                                          
+                                       }).ToList();
                 gvMain.DataSource = listContestant;
             }
+        }
+
+        private ShiftTimeInfo GetShiftTimeInfo(MTAQuizDbContext db, int contestantShiftID)
+        {
+            const string sql = @"SELECT TOP 1
+    EndTimeMsText AS SubmitTimeText,
+    TimeWorkedMsText AS WorkedTimeText,
+    SubmitTimeUnixMs,
+    TimeWorkedMs
+FROM CONTESTANTS_SHIFTS
+WHERE ContestantShiftID = @p0";
+
+            return db.Database.SqlQuery<ShiftTimeInfo>(sql, contestantShiftID).FirstOrDefault();
+        }
+
+        private string GetSubmitTimeDisplay(MTAQuizDbContext db, int contestantShiftID)
+        {
+            ShiftTimeInfo info = GetShiftTimeInfo(db, contestantShiftID);
+            if (info == null)
+            {
+                return string.Empty;
+            }
+
+            if (info.SubmitTimeUnixMs.HasValue)
+            {
+                return info.SubmitTimeUnixMs.Value.ToString();
+            }
+
+            return info.SubmitTimeText ?? string.Empty;
+        }
+
+        private string GetWorkedTimeDisplay(MTAQuizDbContext db, int contestantShiftID)
+        {
+            ShiftTimeInfo info = GetShiftTimeInfo(db, contestantShiftID);
+            if (info == null)
+            {
+                return string.Empty;
+            }
+
+            if (info.TimeWorkedMs.HasValue)
+            {
+                return info.TimeWorkedMs.Value.ToString();
+            }
+
+            return info.WorkedTimeText ?? string.Empty;
+        }
+
+        private class ShiftTimeInfo
+        {
+            public string SubmitTimeText { get; set; }
+            public string WorkedTimeText { get; set; }
+            public long? SubmitTimeUnixMs { get; set; }
+            public long? TimeWorkedMs { get; set; }
         }
         private string KetQuaTracNghiem(int contestantShiftID)
         {
@@ -476,37 +536,16 @@ namespace EXON.GradedEssay.Control
             {
                 if (rbSubject.Checked)
                 {
-                    DIVISION_SHIFTS CurrentDs = new DIVISION_SHIFTS();
                     _DivisionShiftService = new DivisionShiftService();
-                    MTAQuizDbContext db = new MTAQuizDbContext();
-                    List<PrintSpeakingQuestion> lstSubSpeaking = new List<PrintSpeakingQuestion>();
-
-                    lstSubSpeaking = (
-
-                                  from cts in _ContestantShiftService.GetAllByDivisionShiftID(CurrentDs.DivisionShiftID).ToList()
-                                  from ctt in _ContestantTestService.GetAll().Where(x => x.ContestantShiftID == cts.ContestantShiftID).ToList()
-                                  from td in db.TEST_DETAILS.Where(x => x.TestID == ctt.TestID).ToList()
-                                  from qt in db.QUESTIONS.Where(x => x.QuestionID == td.QuestionID && x.Type == 5).ToList()
-                                  from sqt in qt.SUBQUESTIONS.ToList()
-                                  where cts.SCHEDULE.SubjectID == CurrentSubjectID
-                                  select new PrintSpeakingQuestion
-                                  {
-                                      TestID = ctt.TestID
-
-                                  }
-                              ).OrderBy(x => x.TestID).ToList();
-                    CurrentDs = _DivisionShiftService.GetByShiftAndRoomTest(CurrentShiftID, CurrentRoomTestID);
-                    if (lstSubSpeaking.Count > 0)
-
+                    DIVISION_SHIFTS CurrentDs = _DivisionShiftService.GetByShiftAndRoomTest(CurrentShiftID, CurrentRoomTestID);
+                    if (CurrentDs == null)
                     {
-                        Report.frmResultSum frm = new Report.frmResultSum(CurrentDs.DivisionShiftID,CurrentSubjectID);
-                        frm.ShowDialog();
+                        MessageBox.Show("Không tìm thấy ca thi/phòng thi.");
+                        return;
                     }
-                    else
-                    {
-                        Report.frmResultSumTNTL frm = new Report.frmResultSumTNTL(CurrentDs.DivisionShiftID, CurrentSubjectID);
-                        frm.ShowDialog();
-                    }
+
+                    Report.frmResultSum frm = new Report.frmResultSum(CurrentDs.DivisionShiftID, CurrentSubjectID);
+                    frm.ShowDialog();
                 }
                 else
                 {
@@ -527,37 +566,16 @@ namespace EXON.GradedEssay.Control
             {
                 if (rbUnit.Checked)
                 {
-                    DIVISION_SHIFTS CurrentDs = new DIVISION_SHIFTS();
                     _DivisionShiftService = new DivisionShiftService();
-                    MTAQuizDbContext db = new MTAQuizDbContext();
-                    List<PrintSpeakingQuestion> lstSubSpeaking = new List<PrintSpeakingQuestion>();
-
-                    lstSubSpeaking = (
-
-                                  from cts in _ContestantShiftService.GetAllByDivisionShiftID(CurrentDs.DivisionShiftID).ToList()
-                                  from ctt in _ContestantTestService.GetAll().Where(x => x.ContestantShiftID == cts.ContestantShiftID).ToList()
-                                  from td in db.TEST_DETAILS.Where(x => x.TestID == ctt.TestID).ToList()
-                                  from qt in db.QUESTIONS.Where(x => x.QuestionID == td.QuestionID && x.Type == 5).ToList()
-                                  from sqt in qt.SUBQUESTIONS.ToList()
-                                  where cts.SCHEDULE.SubjectID == CurrentSubjectID
-                                  select new PrintSpeakingQuestion
-                                  {
-                                      TestID = ctt.TestID
-
-                                  }
-                              ).OrderBy(x => x.TestID).ToList();
-                    CurrentDs = _DivisionShiftService.GetByShiftAndRoomTest(CurrentShiftID, CurrentRoomTestID);
-                    if (lstSubSpeaking.Count > 0)
-
+                    DIVISION_SHIFTS CurrentDs = _DivisionShiftService.GetByShiftAndRoomTest(CurrentShiftID, CurrentRoomTestID);
+                    if (CurrentDs == null)
                     {
-                        Report.frmResultSum frm = new Report.frmResultSum(CurrentDs.DivisionShiftID,CurrentUnit);
-                        frm.ShowDialog();
+                        MessageBox.Show("Không tìm thấy ca thi/phòng thi.");
+                        return;
                     }
-                    else
-                    {
-                        Report.frmResultSumTNTL frm = new Report.frmResultSumTNTL(CurrentDs.DivisionShiftID,CurrentUnit);
-                        frm.ShowDialog();
-                    }
+
+                    Report.frmResultSum frm = new Report.frmResultSum(CurrentDs.DivisionShiftID, CurrentUnit);
+                    frm.ShowDialog();
                 }
                 else
                 {

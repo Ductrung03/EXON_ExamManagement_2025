@@ -91,6 +91,42 @@ namespace QuanLyHoiDongThiVer2.report
                 return -1;
             }
         }
+
+        private CONTESTANTS_TESTS GetContestantTest(int contestantShiftID)
+        {
+            return db.CONTESTANTS_TESTS.FirstOrDefault(x => x.Status > 0 && x.ContestantShiftID == contestantShiftID);
+        }
+
+        private long? ConvertSubmitTimeToMilliseconds(int? submitTime)
+        {
+            if (!submitTime.HasValue || submitTime.Value <= 0)
+            {
+                return null;
+            }
+
+            return submitTime.Value * 1000L;
+        }
+
+        private long? ConvertWorkedTimeToMilliseconds(int? timeWorked)
+        {
+            if (!timeWorked.HasValue)
+            {
+                return null;
+            }
+
+            return Math.Max(timeWorked.Value, 0) * 1000L;
+        }
+
+        private double ParseScore(string scoreText)
+        {
+            double score;
+            return double.TryParse(scoreText, out score) ? score : 0;
+        }
+
+        private long GetWorkedTimeForSort(int? timeWorked)
+        {
+            return timeWorked.HasValue && timeWorked.Value >= 0 ? timeWorked.Value * 1000L : long.MaxValue;
+        }
         #endregion
 
         private void FrmRpKetQuaCaThi_Load(object sender, EventArgs e)
@@ -106,35 +142,57 @@ namespace QuanLyHoiDongThiVer2.report
                 List<CONTESTANTS_SHIFTS> listThiSinh = new List<CONTESTANTS_SHIFTS>();
                 listThiSinh = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status == 3005).ToList();
                 // Lấy ra kết quả thi
-                int stt = 0;
                 var listKetQua = listThiSinh
-                                 .Select(p => new
-                                 {
-                                     STT = ++stt,
-                                     SBD = p.CONTESTANT.ContestantCode,
-                                     HoTen = p.CONTESTANT.FullName,
-                                     NgaySinh = DateTimeHelpers.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                                 .Select(p =>
+                                  {
+                                      string diemThi = KetQua(p.CONTESTANT);
+                                      CONTESTANTS_TESTS contestantTest = GetContestantTest(p.ContestantShiftID);
 
-                                     MonThi = p.SCHEDULE.SUBJECT.SubjectName,
-                                     DiemThi = KetQua(p.CONTESTANT),
-                                     MaDe = GetTestID(p.ContestantShiftID),
-                                     Unit = p.CONTESTANT.Unit
+                                      return new
+                                      {
+                                          SBD = p.CONTESTANT.ContestantCode,
+                                          HoTen = p.CONTESTANT.FullName,
+                                          NgaySinh = DateTimeHelpers.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                                          MonThi = p.SCHEDULE.SUBJECT.SubjectName,
+                                          DiemThi = diemThi,
+                                          MaDe = GetTestID(p.ContestantShiftID),
+                                          Unit = p.CONTESTANT.Unit,
+                                          SubmitTime = ConvertSubmitTimeToMilliseconds(contestantTest != null ? contestantTest.SubmitTime : (int?)null),
+                                          WorkedTime = ConvertWorkedTimeToMilliseconds(p.TimeWorked),
+                                          ScoreSort = ParseScore(diemThi),
+                                          WorkedTimeSort = GetWorkedTimeForSort(p.TimeWorked)
+                                      };
+                                  })
+                                 .OrderByDescending(p => p.ScoreSort)
+                                 .ThenBy(p => p.WorkedTimeSort)
+                                 .Select((p, index) => new
+                                 {
+                                     STT = index + 1,
+                                     p.SBD,
+                                     p.HoTen,
+                                     p.NgaySinh,
+                                     p.MonThi,
+                                     p.DiemThi,
+                                     p.MaDe,
+                                     p.Unit,
+                                     p.SubmitTime,
+                                     p.WorkedTime
                                  })
                                  .ToList();
                 ketQuaThiTheoCaThi1BindingSource1.DataSource = listKetQua;
                 List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
                 listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status == 4001).ToList();
                 var lstThiSinhBoThi = listThiSinhBoThi
-                                 .Select(p => new
-                                 {
-                                     STT = ++stt,
-                                     SBD = p.CONTESTANT.ContestantCode,
-                                     HoTen = p.CONTESTANT.FullName,
-                                     NgaySinh = DateTimeHelpers.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
-                                     CMND = p.CONTESTANT.IdentityCardNumber,
-                                     MonThi = p.SCHEDULE.SUBJECT.SubjectName,
-                                     Unit = p.CONTESTANT.Unit
-                                 })
+                                 .Select((p, index) => new
+                                  {
+                                       STT = index + 1,
+                                       SBD = p.CONTESTANT.ContestantCode,
+                                       HoTen = p.CONTESTANT.FullName,
+                                      NgaySinh = DateTimeHelpers.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                                      CMND = p.CONTESTANT.IdentityCardNumber,
+                                      MonThi = p.SCHEDULE.SUBJECT.SubjectName,
+                                      Unit = p.CONTESTANT.Unit
+                                  })
                                  .ToList();
                 thiSinhBoThiBindingSource1.DataSource = lstThiSinhBoThi;
 

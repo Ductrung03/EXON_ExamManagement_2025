@@ -39,6 +39,8 @@
             this.ScoreWritting = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cDiemNghe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cDiemTong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cSubmitTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cWorkedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cContestantShiftID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cbShift = new System.Windows.Forms.ComboBox();
@@ -77,6 +79,8 @@
             this.ScoreWritting,
             this.cDiemNghe,
             this.cDiemTong,
+            this.cSubmitTime,
+            this.cWorkedTime,
             this.cContestantShiftID});
             this.gvMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gvMain.Location = new System.Drawing.Point(3, 16);
@@ -153,6 +157,20 @@
             this.cDiemTong.DataPropertyName = "SumScore";
             this.cDiemTong.HeaderText = "Tổng Điểm";
             this.cDiemTong.Name = "cDiemTong";
+            // 
+            // cSubmitTime
+            // 
+            this.cSubmitTime.DataPropertyName = "SubmitTime";
+            this.cSubmitTime.HeaderText = "Thời gian nộp bài";
+            this.cSubmitTime.Name = "cSubmitTime";
+            this.cSubmitTime.Width = 140;
+            // 
+            // cWorkedTime
+            // 
+            this.cWorkedTime.DataPropertyName = "WorkedTime";
+            this.cWorkedTime.HeaderText = "Thời gian làm bài";
+            this.cWorkedTime.Name = "cWorkedTime";
+            this.cWorkedTime.Width = 140;
             // 
             // cContestantShiftID
             // 
@@ -356,6 +374,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ScoreWritting;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDiemNghe;
         private System.Windows.Forms.DataGridViewTextBoxColumn cDiemTong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cSubmitTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cWorkedTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn cContestantShiftID;
     }
 }
