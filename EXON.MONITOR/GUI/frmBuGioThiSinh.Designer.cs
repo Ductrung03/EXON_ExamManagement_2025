@@ -33,6 +33,8 @@
                this.txtNote = new System.Windows.Forms.TextBox();
                this.mbtnInput = new MetroFramework.Controls.MetroButton();
                this.textBox1 = new System.Windows.Forms.TextBox();
+               this.label3 = new System.Windows.Forms.Label();
+               this.lblLastResponseValue = new System.Windows.Forms.Label();
                this.SuspendLayout();
                // 
                // label2
@@ -82,11 +84,33 @@
                this.textBox1.TabIndex = 11;
                this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
                // 
+               // label3
+               // 
+               this.label3.AutoSize = true;
+               this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.label3.Location = new System.Drawing.Point(20, 136);
+               this.label3.Name = "label3";
+               this.label3.Size = new System.Drawing.Size(156, 17);
+               this.label3.TabIndex = 12;
+               this.label3.Text = "Lần phản hồi cuối cùng:";
+               // 
+               // lblLastResponseValue
+               // 
+               this.lblLastResponseValue.AutoSize = true;
+               this.lblLastResponseValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+               this.lblLastResponseValue.Location = new System.Drawing.Point(182, 136);
+               this.lblLastResponseValue.Name = "lblLastResponseValue";
+               this.lblLastResponseValue.Size = new System.Drawing.Size(103, 17);
+               this.lblLastResponseValue.TabIndex = 13;
+               this.lblLastResponseValue.Text = "00:00:00";
+               // 
                // frmBuGioThiSinh
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
                this.ClientSize = new System.Drawing.Size(416, 361);
+               this.Controls.Add(this.lblLastResponseValue);
+               this.Controls.Add(this.label3);
                this.Controls.Add(this.textBox1);
                this.Controls.Add(this.label2);
                this.Controls.Add(this.label1);
@@ -102,9 +126,11 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNote;
-        private MetroFramework.Controls.MetroButton mbtnInput;
-        private System.Windows.Forms.TextBox textBox1;
-    }
+         private System.Windows.Forms.Label label1;
+         private System.Windows.Forms.TextBox txtNote;
+         private MetroFramework.Controls.MetroButton mbtnInput;
+         private System.Windows.Forms.TextBox textBox1;
+         private System.Windows.Forms.Label label3;
+         private System.Windows.Forms.Label lblLastResponseValue;
+     }
 }

@@ -88,9 +88,10 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuItemChangeShift = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemNgheLaiTuDau = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemSuaLoiDe = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenyItemLichSu = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemchangelogsAWS = new System.Windows.Forms.ToolStripMenuItem();
+             this.MenuItemSuaLoiDe = new System.Windows.Forms.ToolStripMenuItem();
+             this.MenyItemLichSu = new System.Windows.Forms.ToolStripMenuItem();
+             this.MenuItemDisconnectHistory = new System.Windows.Forms.ToolStripMenuItem();
+             this.MenuItemchangelogsAWS = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerCount = new System.Windows.Forms.Timer(this.components);
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -731,11 +732,12 @@
             this.MenuItemBuGio,
             this.toolStripMenuItem1,
             this.MenuItemChangeShift,
-            this.MenuItemNgheLaiTuDau,
-            this.MenuItemSuaLoiDe,
-            this.MenyItemLichSu,
-            this.MenuItemchangelogsAWS,
-            this.xemBToolStripMenuItem});
+             this.MenuItemNgheLaiTuDau,
+             this.MenuItemSuaLoiDe,
+             this.MenyItemLichSu,
+             this.MenuItemDisconnectHistory,
+             this.MenuItemchangelogsAWS,
+             this.xemBToolStripMenuItem});
             this.metroContextMenu1.Name = "metroContextMenu1";
             this.metroContextMenu1.Size = new System.Drawing.Size(265, 374);
             // 
@@ -842,12 +844,19 @@
             // 
             this.MenyItemLichSu.Name = "MenyItemLichSu";
             this.MenyItemLichSu.Size = new System.Drawing.Size(264, 24);
-            this.MenyItemLichSu.Text = "Lịch Sử Đăng Nhập";
-            this.MenyItemLichSu.Click += new System.EventHandler(this.MenyItemLichSu_Click);
-            // 
-            // MenuItemchangelogsAWS
-            // 
-            this.MenuItemchangelogsAWS.Name = "MenuItemchangelogsAWS";
+             this.MenyItemLichSu.Text = "Lịch Sử Đăng Nhập";
+             this.MenyItemLichSu.Click += new System.EventHandler(this.MenyItemLichSu_Click);
+             // 
+             // MenuItemDisconnectHistory
+             // 
+             this.MenuItemDisconnectHistory.Name = "MenuItemDisconnectHistory";
+             this.MenuItemDisconnectHistory.Size = new System.Drawing.Size(264, 24);
+              this.MenuItemDisconnectHistory.Text = "Xem lịch sử mất kết nối";
+             this.MenuItemDisconnectHistory.Click += new System.EventHandler(this.MenuItemDisconnectHistory_Click);
+             // 
+             // MenuItemchangelogsAWS
+             // 
+             this.MenuItemchangelogsAWS.Name = "MenuItemchangelogsAWS";
             this.MenuItemchangelogsAWS.Size = new System.Drawing.Size(264, 24);
             this.MenuItemchangelogsAWS.Text = "Xem log thay đổi đáp án";
             this.MenuItemchangelogsAWS.Click += new System.EventHandler(this.MenuItemchangelogsAWS_Click);
@@ -961,9 +970,10 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemSuaLoiDe;
         private System.Windows.Forms.ToolStripMenuItem MenuItemPauseC;
         private System.Windows.Forms.ToolStripMenuItem MenuItemBuGio;
-        private System.Windows.Forms.ToolStripMenuItem MenyItemLichSu;
+         private System.Windows.Forms.ToolStripMenuItem MenyItemLichSu;
+         private System.Windows.Forms.ToolStripMenuItem MenuItemDisconnectHistory;
 
-        private System.Windows.Forms.ToolStripMenuItem MenuItemchangelogsAWS;
+         private System.Windows.Forms.ToolStripMenuItem MenuItemchangelogsAWS;
 
         private MetroFramework.Controls.MetroButton mbtnDivisionShiftRemake;
 

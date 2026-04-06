@@ -90,7 +90,7 @@ namespace EXON.MONITOR.GUI
                this.btnBaoCao.Name = "btnBaoCao";
                this.btnBaoCao.Size = new System.Drawing.Size(89, 23);
                this.btnBaoCao.TabIndex = 9;
-               this.btnBaoCao.Text = "Xuất báo cáo";
+                this.btnBaoCao.Text = "In báo cáo";
                this.btnBaoCao.UseVisualStyleBackColor = true;
                this.btnBaoCao.Click += new System.EventHandler(this.btnBaoCao_Click);
                // 
@@ -108,7 +108,7 @@ namespace EXON.MONITOR.GUI
                this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
                this.Name = "frmInLogGianDoan";
                this.Padding = new System.Windows.Forms.Padding(15, 49, 15, 16);
-               this.Text = "Lịch sử bù giờ";
+                 this.Text = "Lịch sử bù giờ";
                this.Load += new System.EventHandler(this.frmInLogGianDoan_Load);
                ((System.ComponentModel.ISupportInitialize)(this.dGVGianDoan)).EndInit();
                this.ResumeLayout(false);

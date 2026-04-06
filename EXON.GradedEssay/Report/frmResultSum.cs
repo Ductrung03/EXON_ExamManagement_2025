@@ -300,6 +300,56 @@ namespace EXON.GradedEssay.Report
             }
         }
 
+        private long? ConvertSubmitTimeToMilliseconds(int? submitTime)
+        {
+            if (!submitTime.HasValue || submitTime.Value <= 0)
+            {
+                return null;
+            }
+
+            return submitTime.Value * 1000L;
+        }
+
+        private long? ConvertWorkedTimeToMilliseconds(int? timeWorked)
+        {
+            if (!timeWorked.HasValue)
+            {
+                return null;
+            }
+
+            return Math.Max(timeWorked.Value, 0) * 1000L;
+        }
+
+        private long GetWorkedTimeForSort(int? timeWorked)
+        {
+            return timeWorked.HasValue && timeWorked.Value >= 0
+                ? timeWorked.Value * 1000L
+                : long.MaxValue;
+        }
+
+        private double ParseScore(string scoreText)
+        {
+            double score;
+
+            if (double.TryParse(scoreText, NumberStyles.Float, CultureInfo.InvariantCulture, out score))
+            {
+                return score;
+            }
+
+            if (double.TryParse(scoreText, NumberStyles.Float, CultureInfo.CurrentCulture, out score))
+            {
+                return score;
+            }
+
+            return 0;
+        }
+
+        private long? GetSubmitTime(int contestantShiftID)
+        {
+            CONTESTANTS_TESTS contestantTest = _ContestantTestService.GetByContestantShiftId(contestantShiftID);
+            return contestantTest == null ? null : ConvertSubmitTimeToMilliseconds(contestantTest.SubmitTime);
+        }
+
         private void frmResultSum_Load(object sender, EventArgs e)
         {
             try
@@ -315,37 +365,63 @@ namespace EXON.GradedEssay.Report
                     List<CONTESTANTS_SHIFTS> listThiSinh = new List<CONTESTANTS_SHIFTS>();
                     listThiSinh = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status == 3005).ToList();
                     // Lấy ra kết quả thi
-                    int stt = 0;
-                    string Monthi = "";
-                    if (_SubjectID > 0)
-                    {
+                        string Monthi = "";
+                        if (_SubjectID > 0)
+                        {
                         var listKetQua = (
-
                        from cs in _ContestantShiftService.GetAllByDivisionShiftID(divisionShift.DivisionShiftID).Where(x => x.Status == 3005)
-
                        from tn in _TestNumberService.GetAll()
                        where cs.ContestantShiftID == tn.ContestantShiftID && cs.SCHEDULE.SubjectID == _SubjectID
-                       select new
+                       select new { cs, tn })
+                       .ToList()
+                       .Select(x =>
                        {
-                           STT = ++stt,
-                           SBD = cs.CONTESTANT.ContestantCode,
-                           HoTen = cs.CONTESTANT.FullName,
-                           PhongThi = cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
-                           SoPhach = divisionShift.DivisionShiftID.ToString() + "." + tn.TestNumberIndex.ToString(),
-                           NgaySinh = DatetimeConvert.ConvertUnixToDateTime((int)cs.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
-                           Phongthi = cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
-                           DiemNoi = KetQua1(cs.ContestantShiftID),
-                           DiemViet = KetQua2(cs.ContestantShiftID),
-                           DiemDoc = KetQua3(cs.ContestantShiftID),
-                           DiemTong = KetQua(cs.ContestantShiftID) +" Bonus: " + DiemBonus(cs.ContestantShiftID),
-                           DiemLamTron = DiemLamTron(cs.ContestantShiftID),
-                           MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
-                           Unit = cs.CONTESTANT.Unit
+                           string diemTong = KetQua(x.cs.ContestantShiftID);
+
+                           return new
+                           {
+                               x.cs.CONTESTANT.ContestantCode,
+                               x.cs.CONTESTANT.FullName,
+                               PhongThi = x.cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
+                               SoPhach = divisionShift.DivisionShiftID.ToString() + "." + x.tn.TestNumberIndex.ToString(),
+                               NgaySinh = DatetimeConvert.ConvertUnixToDateTime((int)x.cs.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                               DiemNoi = KetQua1(x.cs.ContestantShiftID),
+                               DiemViet = KetQua2(x.cs.ContestantShiftID),
+                               DiemDoc = KetQua3(x.cs.ContestantShiftID),
+                               DiemTong = diemTong + " Bonus: " + DiemBonus(x.cs.ContestantShiftID),
+                               DiemLamTron = DiemLamTron(x.cs.ContestantShiftID),
+                               MonThi = x.cs.SCHEDULE.SUBJECT.SubjectName,
+                               Unit = x.cs.CONTESTANT.Unit,
+                               SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
+                                WorkedTime = ConvertWorkedTimeToMilliseconds(x.cs.TimeWorked),
+                               ScoreSort = ParseScore(diemTong),
+                               WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
+                           };
+                       })
+                       .OrderByDescending(x => x.ScoreSort)
+                       .ThenBy(x => x.WorkedTimeSort)
+                       .Select((x, index) => new
+                       {
+                           STT = index + 1,
+                           SBD = x.ContestantCode,
+                           HoTen = x.FullName,
+                           x.PhongThi,
+                           x.SoPhach,
+                           x.NgaySinh,
+                           x.DiemNoi,
+                           x.DiemViet,
+                           x.DiemDoc,
+                           x.DiemTong,
+                           x.DiemLamTron,
+                           x.MonThi,
+                           x.Unit,
+                           x.SubmitTime,
+                           x.WorkedTime
                        }).ToList();
-                        KetQuaTongBindingSource.DataSource = listKetQua;
-                        List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
-                        listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status != 3005).ToList();
-                        stt = 0;
+                         KetQuaTongBindingSource.DataSource = listKetQua;
+                         List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
+                         listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status != 3005).ToList();
+                         int stt = 0;
 
                         var lstThiSinhBoThi = listThiSinhBoThi
                                          .Select(p => new
@@ -372,31 +448,59 @@ namespace EXON.GradedEssay.Report
                     else if (_Unit != string.Empty)
                     {
                         var listKetQua = (
-                      //from ds in _DivisionShiftService.GetByShift(CurrentShiftID)
-                      from cs in _ContestantShiftService.GetAllByDivisionShiftID(divisionShift.DivisionShiftID).Where(x => x.Status == 3005)
+                       from cs in _ContestantShiftService.GetAllByDivisionShiftID(divisionShift.DivisionShiftID).Where(x => x.Status == 3005)
+                       from tn in _TestNumberService.GetAll()
+                       where cs.ContestantShiftID == tn.ContestantShiftID && cs.CONTESTANT.Unit == _Unit
+                       select new { cs, tn })
+                       .ToList()
+                       .Select(x =>
+                       {
+                           string diemTong = KetQua(x.cs.ContestantShiftID);
 
-                      from tn in _TestNumberService.GetAll()
-                      where cs.ContestantShiftID == tn.ContestantShiftID && cs.CONTESTANT.Unit == _Unit
-                      select new
-                      {
-                          STT = ++stt,
-                          SBD = cs.CONTESTANT.ContestantCode,
-                          HoTen = cs.CONTESTANT.FullName,
-                          PhongThi = cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
-                          SoPhach = divisionShift.DivisionShiftID.ToString() + "." + tn.TestNumberIndex.ToString(),
-                          NgaySinh = DatetimeConvert.ConvertUnixToDateTime((int)cs.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
-                          Phongthi = cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
-                          DiemNoi = KetQua1(cs.ContestantShiftID),
-                          DiemViet = KetQua2(cs.ContestantShiftID),
-                          DiemDoc = KetQua3(cs.ContestantShiftID),
-                          MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
-                          DiemTong = KetQua(cs.ContestantShiftID) + " Bonus: " + DiemBonus(cs.ContestantShiftID),
-                          Unit = cs.CONTESTANT.Unit
-                      }).ToList();
-                        KetQuaTongBindingSource.DataSource = listKetQua;
-                        List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
-                        listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status != 3005).ToList();
-                        stt = 0;
+                           return new
+                           {
+                               x.cs.CONTESTANT.ContestantCode,
+                               x.cs.CONTESTANT.FullName,
+                               PhongThi = x.cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
+                               SoPhach = divisionShift.DivisionShiftID.ToString() + "." + x.tn.TestNumberIndex.ToString(),
+                               NgaySinh = DatetimeConvert.ConvertUnixToDateTime((int)x.cs.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                               DiemNoi = KetQua1(x.cs.ContestantShiftID),
+                               DiemViet = KetQua2(x.cs.ContestantShiftID),
+                               DiemDoc = KetQua3(x.cs.ContestantShiftID),
+                               MonThi = x.cs.SCHEDULE.SUBJECT.SubjectName,
+                               DiemTong = diemTong + " Bonus: " + DiemBonus(x.cs.ContestantShiftID),
+                               DiemLamTron = DiemLamTron(x.cs.ContestantShiftID),
+                               Unit = x.cs.CONTESTANT.Unit,
+                               SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
+                                WorkedTime = ConvertWorkedTimeToMilliseconds(x.cs.TimeWorked),
+                               ScoreSort = ParseScore(diemTong),
+                               WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
+                           };
+                       })
+                       .OrderByDescending(x => x.ScoreSort)
+                       .ThenBy(x => x.WorkedTimeSort)
+                       .Select((x, index) => new
+                       {
+                           STT = index + 1,
+                           SBD = x.ContestantCode,
+                           HoTen = x.FullName,
+                           x.PhongThi,
+                           x.SoPhach,
+                           x.NgaySinh,
+                           x.DiemNoi,
+                           x.DiemViet,
+                           x.DiemDoc,
+                           x.MonThi,
+                           x.DiemTong,
+                           x.DiemLamTron,
+                           x.Unit,
+                           x.SubmitTime,
+                           x.WorkedTime
+                       }).ToList();
+                         KetQuaTongBindingSource.DataSource = listKetQua;
+                         List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
+                         listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status != 3005).ToList();
+                         int stt = 0;
 
                         var lstThiSinhBoThi = listThiSinhBoThi
                                          .Select(p => new
@@ -446,7 +550,6 @@ namespace EXON.GradedEssay.Report
                         CONTEST kithi = db.CONTESTS.Where(p => p.ContestID == sc.ContestID).FirstOrDefault();
                         // Lấy ra danh sách các thí sinh thi c
                         // Lấy ra kết quả thi
-                        int stt = 0;
                         string Monthi = "";
 
                         var listKetQua = (
@@ -455,27 +558,56 @@ namespace EXON.GradedEssay.Report
 
                        from tn in _TestNumberService.GetAll()
                        where cs.ContestantShiftID == tn.ContestantShiftID
-                       select new
+                       select new { cs, tn })
+                       .ToList()
+                       .Select(x =>
                        {
-                           STT = ++stt,
-                           SBD = cs.CONTESTANT.ContestantCode,
-                           HoTen = cs.CONTESTANT.FullName,
-                           PhongThi = cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
-                           SoPhach = cs.DivisionShiftID.ToString() + "." + tn.TestNumberIndex.ToString(),
-                           NgaySinh = DatetimeConvert.ConvertUnixToDateTime((int)cs.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
-                           Phongthi = cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
-                           DiemNoi = KetQua1(cs.ContestantShiftID),
-                           DiemViet = KetQua2(cs.ContestantShiftID),
-                           DiemDoc = KetQua3(cs.ContestantShiftID),
-                           DiemTong = KetQua(cs.ContestantShiftID) + " Bonus: " + DiemBonus(cs.ContestantShiftID),
-                           DiemLamTron = DiemLamTron(cs.ContestantShiftID),
-                           MonThi = cs.SCHEDULE.SUBJECT.SubjectName,
-                           Unit = cs.CONTESTANT.Unit
+                           string diemTong = KetQua(x.cs.ContestantShiftID);
+
+                           return new
+                           {
+                               x.cs.CONTESTANT.ContestantCode,
+                               x.cs.CONTESTANT.FullName,
+                               PhongThi = x.cs.DIVISION_SHIFTS.ROOMTEST.RoomTestName,
+                               SoPhach = x.cs.DivisionShiftID.ToString() + "." + x.tn.TestNumberIndex.ToString(),
+                               NgaySinh = DatetimeConvert.ConvertUnixToDateTime((int)x.cs.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                               DiemNoi = KetQua1(x.cs.ContestantShiftID),
+                               DiemViet = KetQua2(x.cs.ContestantShiftID),
+                               DiemDoc = KetQua3(x.cs.ContestantShiftID),
+                               DiemTong = diemTong + " Bonus: " + DiemBonus(x.cs.ContestantShiftID),
+                               DiemLamTron = DiemLamTron(x.cs.ContestantShiftID),
+                               MonThi = x.cs.SCHEDULE.SUBJECT.SubjectName,
+                               Unit = x.cs.CONTESTANT.Unit,
+                               SubmitTime = GetSubmitTime(x.cs.ContestantShiftID),
+                                WorkedTime = ConvertWorkedTimeToMilliseconds(x.cs.TimeWorked),
+                               ScoreSort = ParseScore(diemTong),
+                               WorkedTimeSort = GetWorkedTimeForSort(x.cs.TimeWorked)
+                           };
+                       })
+                       .OrderByDescending(x => x.ScoreSort)
+                       .ThenBy(x => x.WorkedTimeSort)
+                       .Select((x, index) => new
+                       {
+                           STT = index + 1,
+                           SBD = x.ContestantCode,
+                           HoTen = x.FullName,
+                           x.PhongThi,
+                           x.SoPhach,
+                           x.NgaySinh,
+                           x.DiemNoi,
+                           x.DiemViet,
+                           x.DiemDoc,
+                           x.DiemTong,
+                           x.DiemLamTron,
+                           x.MonThi,
+                           x.Unit,
+                           x.SubmitTime,
+                           x.WorkedTime
                        }).ToList();
-                        KetQuaTongBindingSource.DataSource = listKetQua;
-                        List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
-                        listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.SCHEDULE.SubjectID == _SubjectID && x.Status != 3005).ToList();
-                        stt = 0;
+                         KetQuaTongBindingSource.DataSource = listKetQua;
+                         List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
+                         listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.SCHEDULE.SubjectID == _SubjectID && x.Status != 3005).ToList();
+                         int stt = 0;
 
                         var lstThiSinhBoThi = listThiSinhBoThi
                                          .Select(p => new

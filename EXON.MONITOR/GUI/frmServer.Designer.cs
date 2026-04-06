@@ -49,8 +49,9 @@
                this.mItemPrintContestant = new System.Windows.Forms.ToolStripMenuItem();
                this.mItemPrintResultContestant = new System.Windows.Forms.ToolStripMenuItem();
                this.mItemPrintChangeAws = new System.Windows.Forms.ToolStripMenuItem();
-               this.mItemPrintViolations = new System.Windows.Forms.ToolStripMenuItem();
-               this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+                this.mItemPrintViolations = new System.Windows.Forms.ToolStripMenuItem();
+                this.mItemDisconnectHistory = new System.Windows.Forms.ToolStripMenuItem();
+                this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
                this.mItemStartForAll = new System.Windows.Forms.ToolStripMenuItem();
                this.tsmReadytest = new System.Windows.Forms.ToolStripMenuItem();
                this.tsmTesting = new System.Windows.Forms.ToolStripMenuItem();
@@ -231,16 +232,17 @@
                // 
                this.metroContextMenu2.ImageScalingSize = new System.Drawing.Size(20, 20);
                this.metroContextMenu2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mItemPrintContestant,
-            this.mItemPrintResultContestant,
-            this.mItemPrintChangeAws,
-            this.mItemPrintViolations,
-            this.toolStripSeparator2,
-            this.mItemStartForAll,
-            this.testToolStripMenuItem,
-            this.changeHeightToDIsplayToolStripMenuItem});
-               this.metroContextMenu2.Name = "metroContextMenu2";
-               this.metroContextMenu2.Size = new System.Drawing.Size(259, 164);
+             this.mItemPrintContestant,
+             this.mItemPrintResultContestant,
+             this.mItemPrintChangeAws,
+             this.mItemPrintViolations,
+             this.mItemDisconnectHistory,
+             this.toolStripSeparator2,
+             this.mItemStartForAll,
+             this.testToolStripMenuItem,
+             this.changeHeightToDIsplayToolStripMenuItem});
+                this.metroContextMenu2.Name = "metroContextMenu2";
+                this.metroContextMenu2.Size = new System.Drawing.Size(259, 186);
                // 
                // mItemPrintContestant
                // 
@@ -267,12 +269,19 @@
                // 
                this.mItemPrintViolations.Name = "mItemPrintViolations";
                this.mItemPrintViolations.Size = new System.Drawing.Size(258, 22);
-               this.mItemPrintViolations.Text = "In lịch sử bù giờ";
-               this.mItemPrintViolations.Click += new System.EventHandler(this.mItemPrintViolations_Click);
-               // 
-               // toolStripSeparator2
-               // 
-               this.toolStripSeparator2.Name = "toolStripSeparator2";
+                  this.mItemPrintViolations.Text = "In lịch sử bù giờ";
+                this.mItemPrintViolations.Click += new System.EventHandler(this.mItemPrintViolations_Click);
+                // 
+                // mItemDisconnectHistory
+                // 
+                this.mItemDisconnectHistory.Name = "mItemDisconnectHistory";
+                this.mItemDisconnectHistory.Size = new System.Drawing.Size(258, 22);
+                this.mItemDisconnectHistory.Text = "Xem lịch sử mất kết nối";
+                this.mItemDisconnectHistory.Click += new System.EventHandler(this.mItemDisconnectHistory_Click);
+                // 
+                // toolStripSeparator2
+                // 
+                this.toolStripSeparator2.Name = "toolStripSeparator2";
                this.toolStripSeparator2.Size = new System.Drawing.Size(255, 6);
                // 
                // mItemStartForAll
@@ -372,8 +381,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmReadytest;
         private System.Windows.Forms.ToolStripMenuItem tsmTesting;
         private System.Windows.Forms.ToolStripMenuItem tsmCompleteTest;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mItemPrintViolations;
-        private System.Windows.Forms.ToolStripMenuItem changeHeightToDIsplayToolStripMenuItem;
+         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+         private System.Windows.Forms.ToolStripMenuItem mItemPrintViolations;
+         private System.Windows.Forms.ToolStripMenuItem mItemDisconnectHistory;
+         private System.Windows.Forms.ToolStripMenuItem changeHeightToDIsplayToolStripMenuItem;
     }
 }

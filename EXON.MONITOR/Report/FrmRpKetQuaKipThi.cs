@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,6 +97,55 @@ namespace EXON.MONITOR.Report
             return (Conv(a) + Conv(b) + Conv(c)).ToString();
         }
 
+        private CONTESTANTS_TESTS GetContestantTest(int contestantShiftID)
+        {
+            return db.CONTESTANTS_TESTS.FirstOrDefault(x => x.Status > 0 && x.ContestantShiftID == contestantShiftID);
+        }
+
+        private long? ConvertSubmitTimeToMilliseconds(int? submitTime)
+        {
+            if (!submitTime.HasValue || submitTime.Value <= 0)
+            {
+                return null;
+            }
+
+            return submitTime.Value * 1000L;
+        }
+
+        private long? ConvertWorkedTimeToMilliseconds(int? timeWorked)
+        {
+            if (!timeWorked.HasValue)
+            {
+                return null;
+            }
+
+            return Math.Max(timeWorked.Value, 0) * 1000L;
+        }
+
+        private long GetWorkedTimeForSort(int? timeWorked)
+        {
+            return timeWorked.HasValue && timeWorked.Value >= 0
+                ? timeWorked.Value * 1000L
+                : long.MaxValue;
+        }
+
+        private double ParseScore(string scoreText)
+        {
+            double score;
+
+            if (double.TryParse(scoreText, NumberStyles.Float, CultureInfo.InvariantCulture, out score))
+            {
+                return score;
+            }
+
+            if (double.TryParse(scoreText, NumberStyles.Float, CultureInfo.CurrentCulture, out score))
+            {
+                return score;
+            }
+
+            return 0;
+        }
+
         private void FrmRpKetQuaKipThi_Load(object sender, EventArgs e)
         {
             try
@@ -109,27 +159,52 @@ namespace EXON.MONITOR.Report
                 List<CONTESTANTS_SHIFTS> listThiSinh = new List<CONTESTANTS_SHIFTS>();
                 listThiSinh = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status==3005).ToList();
                 // Lấy ra kết quả thi DiemKhiChuaBonus(p.ContestantShiftID)
-                int stt = 0;
                 var listKetQua = listThiSinh
-                                 .Select(p => new
+                                 .Select(p =>
                                  {
-                                     STT = ++stt,
-                                     SBD = p.CONTESTANT.ContestantCode,
-                                     HoTen = p.CONTESTANT.FullName,
-                                     NgaySinh = Common.DatetimeConvert.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
-                                     DiemGoc = DiemKhiChuaBonus(p.ContestantShiftID),
-                                     MonThi = p.SCHEDULE.SUBJECT.SubjectName,
-                                     DiemThi = KetQua(p.CONTESTANT),
-                                     MaDe = GetTestID(p.ContestantShiftID),
-                                     Unit = p.CONTESTANT.Unit
+                                     CONTESTANTS_TESTS contestantTest = GetContestantTest(p.ContestantShiftID);
+                                     string diemThi = KetQua(p.CONTESTANT);
+
+                                     return new
+                                     {
+                                         p.CONTESTANT.ContestantCode,
+                                         p.CONTESTANT.FullName,
+                                         NgaySinh = Common.DatetimeConvert.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                                         DiemGoc = DiemKhiChuaBonus(p.ContestantShiftID),
+                                         MonThi = p.SCHEDULE.SUBJECT.SubjectName,
+                                         DiemThi = diemThi,
+                                         MaDe = GetTestID(p.ContestantShiftID),
+                                         Unit = p.CONTESTANT.Unit,
+                                          SubmitTime = ConvertSubmitTimeToMilliseconds(contestantTest?.SubmitTime),
+                                          WorkedTime = ConvertWorkedTimeToMilliseconds(p.TimeWorked),
+                                         ScoreSort = ParseScore(diemThi),
+                                         WorkedTimeSort = GetWorkedTimeForSort(p.TimeWorked)
+                                     };
+                                  })
+                                 .OrderByDescending(p => p.ScoreSort)
+                                 .ThenBy(p => p.WorkedTimeSort)
+                                 .Select((p, index) => new
+                                 {
+                                     STT = index + 1,
+                                     SBD = p.ContestantCode,
+                                     HoTen = p.FullName,
+                                     p.NgaySinh,
+                                     p.DiemGoc,
+                                     p.MonThi,
+                                     p.DiemThi,
+                                     p.MaDe,
+                                     p.Unit,
+                                     p.SubmitTime,
+                                     p.WorkedTime
                                  })
                                  .ToList();
                 ketQuaThiTheoCaThiBindingSource.DataSource = listKetQua;
                 List<CONTESTANTS_SHIFTS> listThiSinhBoThi = new List<CONTESTANTS_SHIFTS>();
                 listThiSinhBoThi = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status == 4001).ToList();
+                int stt = 0;
                 var lstThiSinhBoThi = listThiSinhBoThi
                                  .Select(p => new
-                                 {
+                                  {
                                      STT = ++stt,
                                      SBD = p.CONTESTANT.ContestantCode,
                                      HoTen = p.CONTESTANT.FullName,

@@ -11,6 +11,7 @@ using EXON.SubModel.Models;
 using EXON.SubData.Services;
 using EXON.MONITOR.Common;
 using EXON.Common;
+using Newtonsoft.Json;
 
 namespace EXON.MONITOR.Control
 {
@@ -37,6 +38,7 @@ namespace EXON.MONITOR.Control
         public int status;
         public string ComputerName;
         private int _previousStatus=1;
+        private bool _disconnectActive = false;
         public string current_com_name;
 
 
@@ -84,8 +86,8 @@ namespace EXON.MONITOR.Control
                {
                     _roomdiagram = new ROOMDIAGRAM();
                     _roomdiagram = _RoomDiagramService.GetById(_roomdiagramid);
-                    string fullnameCom = _roomdiagram.ComputerName;
-                    //ComputerName = _roomdiagram.ComputerName;
+                     string fullnameCom = _roomdiagram.ComputerName;
+                     ComputerName = _roomdiagram.ComputerName;
 
                     if (_roomdiagram.Status == 4002)
                     {
@@ -211,17 +213,31 @@ namespace EXON.MONITOR.Control
                     contestantid = _contestantshift.ContestantID;
                     contestanshifttid = _contestantshift.ContestantShiftID;
                     _contestant = new CONTESTANT();
-                    _contestant = GetInfoContestant(_contestantshift.ContestantID);
+                _contestant = GetInfoContestant(_contestantshift.ContestantID);
 
-                    lbContestantCode.Text = _contestant.ContestantCode;
-                    lbContestantName.Text = _contestant.FullName;
-                    if (_contestantshift.Status != (int)Constant.STATUS_DOING_BUT_INTERRUPT)
-                    {
-                         _previousStatus = _contestantshift.Status;
-
-                    }
+                lbContestantCode.Text = _contestant.ContestantCode;
+                lbContestantName.Text = _contestant.FullName;
                     #region status
                     string statusStr = "";
+                    bool isDisconnected = false;
+                    string detectSource = string.Empty;
+                    if (_contestantshift.Status == Constant.STATUS_DOING_BUT_INTERRUPT)
+                    {
+                         isDisconnected = true;
+                         detectSource = "STATUS_3004";
+                    }
+                    else if (_contestantshift.Status == Constant.STATUS_DOING && _contestantshift.TimeCheck.HasValue)
+                    {
+                         DateTime serverTime = DatetimeConvert.GetDateTimeServer();
+                         int nowUnix = DatetimeConvert.ConvertDateTimeToUnix(serverTime);
+                         int delta = nowUnix - _contestantshift.TimeCheck.Value;
+                         if (delta > 10)
+                         {
+                              isDisconnected = true;
+                              detectSource = "TIMECHECK_TIMEOUT";
+                         }
+                    }
+
                     //if (_contestantshift.IsCheckFingerprint == 1 || _contestantshift.IsCheckFingerprint == 2 || _contestantshift.Status != 4001 )
                     if (_contestantshift.Status != 4001)
                     {
@@ -234,73 +250,81 @@ namespace EXON.MONITOR.Control
                          //  cBCheckFP.Checked = false;
                          this.BackColor = Color.Gray;
                          ptbImage.Image = EXON.MONITOR.Properties.Resources.monitor;
-                    }
-                    Color color = new Color();
-                    switch (_contestantshift.Status)
-                    {
-                         case 3000:
-                              statusStr = "Đăng nhập";
-                              color = Color.SpringGreen;
-                              if (!ChangedStatus)
-                              {
-                                   ChangedStatus = true;
-                                   CheckedConfirmtoload = true;
-                              }
+                     }
+                     Color color = new Color();
+                     if (isDisconnected)
+                     {
+                         statusStr = "Mất kết nối";
+                         color = Color.Fuchsia;
+                         if (!_disconnectActive && _previousStatus > 1)
+                         {
+                              EXON.Common.NotificationBox.Show(String.Format("Thí sinh tại máy {0} mất kết nối", GetDisconnectComputerName()), EXON.Common.NotificationBox.AlertType.error);
+                              SaveDisconnectViolation(detectSource);
+                         }
 
-                              break;
-                         case 3001:
-                              statusStr = "Đăng nhập lại ";
-                              color = Color.GreenYellow;
-                              break;
-                         case 3002:
-                              statusStr = "Sẵn sàng thi";
-                              color = Color.DeepSkyBlue;
-                              break;
-                         case 3003:
-                              statusStr = "Đang thi";
-                              color = Color.DodgerBlue;
-                              break;
-                         case 3004:
+                         _disconnectActive = true;
+                         _previousStatus = Constant.STATUS_DOING_BUT_INTERRUPT;
+                     }
+                     else
+                     {
+                         _disconnectActive = false;
+                         _previousStatus = _contestantshift.Status;
+                         switch (_contestantshift.Status)
+                         {
+                              case 3000:
+                                   statusStr = "Đăng nhập";
+                                   color = Color.SpringGreen;
+                                   if (!ChangedStatus)
+                                   {
+                                        ChangedStatus = true;
+                                        CheckedConfirmtoload = true;
+                                   }
 
-                              statusStr = "Mất kết nối";
-                              color = Color.Fuchsia;
-                              if (_previousStatus != 3004 && _previousStatus > 1)
-                              {
-                                   EXON.Common.NotificationBox.Show(String.Format("Thí sinh tại máy {0} mất kết nối", ComputerName), EXON.Common.NotificationBox.AlertType.error);
-                                   _previousStatus = _contestantshift.Status;
-                              }
-                              break;
-                         case 3005:
-                              statusStr = "Hoàn thành thi";
-                              color = Color.Turquoise;
-                              break;
+                                   break;
+                              case 3001:
+                                   statusStr = "Đăng nhập lại ";
+                                   color = Color.GreenYellow;
+                                   break;
+                              case 3002:
+                                   statusStr = "Sẵn sàng thi";
+                                   color = Color.DeepSkyBlue;
+                                   break;
+                              case 3003:
+                                   statusStr = "Đang thi";
+                                   color = Color.DodgerBlue;
+                                   break;
+                              case 3005:
+                                   statusStr = "Hoàn thành thi";
+                                   color = Color.Turquoise;
+                                   break;
 
-                         case 3009:
-                              statusStr = "Bắt đầu thi";
-                              break;
-                         case 3010:
-                              statusStr = "Sẵn sàng nhận đề";
-                              color = Color.SpringGreen;
-                              if (!ChangedStatus)
-                              {
-                                   ChangedStatus = true;
-                                   CheckedConfirmtoload = true;
-                              }
-                              break;
-                              
-                         case 3011:
-                              statusStr = "Phát đề";
-                              break;
-                         case 4001:
-                              statusStr = "Chưa đăng nhập";
-                              color = Color.Yellow;
-                              break;
-                         case 5000:
-                              statusStr = "Tạm ngừng";
-                              color = Color.Yellow;
-                              break;
-                    }
-                    SetText(statusStr, color);
+                              case 3009:
+                                   statusStr = "Bắt đầu thi";
+                                   break;
+                              case 3010:
+                                   statusStr = "Sẵn sàng nhận đề";
+                                   color = Color.SpringGreen;
+                                   if (!ChangedStatus)
+                                   {
+                                        ChangedStatus = true;
+                                        CheckedConfirmtoload = true;
+                                   }
+                                   break;
+
+                              case 3011:
+                                   statusStr = "Phát đề";
+                                   break;
+                              case 4001:
+                                   statusStr = "Chưa đăng nhập";
+                                   color = Color.Yellow;
+                                   break;
+                              case 5000:
+                                   statusStr = "Tạm ngừng";
+                                   color = Color.Yellow;
+                                   break;
+                         }
+                     }
+                     SetText(statusStr, color);
 
                     //this.BackColor = color;
                     #endregion
@@ -311,11 +335,87 @@ namespace EXON.MONITOR.Control
                     this.BackColor = Color.Gray;
                     ptbImage.Image = EXON.MONITOR.Properties.Resources.monitor_khongcothisinh;
                     lbContestantCode.Text = "SBD";
-                    lbStatus.Text = "Trạng thái";
-                    lbStatus.BackColor = Color.Gray;
-               }
+                lbStatus.Text = "Trạng thái";
+                lbStatus.BackColor = Color.Gray;
+                    _disconnectActive = false;
+                }
 
-        }
+         }
+
+         private string GetDisconnectComputerName()
+         {
+                if (!string.IsNullOrWhiteSpace(ComputerName))
+                {
+                     return ComputerName;
+                }
+
+                if (_roomdiagram != null && !string.IsNullOrWhiteSpace(_roomdiagram.ComputerName))
+                {
+                     return _roomdiagram.ComputerName;
+                }
+
+                return lbComputername.Text;
+         }
+
+         private void SaveDisconnectViolation(string detectSource)
+         {
+                if (_contestantshift == null || _contestantshift.ContestantShiftID <= 0)
+                {
+                     return;
+                }
+
+                try
+                {
+                     ViolationService violationService = new ViolationService();
+                     DateTime serverTime = DatetimeConvert.GetDateTimeServer();
+                     int unixTime = DatetimeConvert.ConvertDateTimeToUnix(serverTime);
+                     string computerName = GetDisconnectComputerName();
+                     string lastResponseTime = GetTimeCheckDisplayText(_contestantshift.TimeCheck);
+
+                     var payload = new
+                     {
+                          EventType = "SYS_EVT::CONTESTANT_DISCONNECTED",
+                          ContestantShiftId = _contestantshift.ContestantShiftID,
+                          ContestantId = _contestantshift.ContestantID,
+                          ContestantCode = _contestant != null ? _contestant.ContestantCode : string.Empty,
+                          ContestantName = _contestant != null ? _contestant.FullName : string.Empty,
+                          DivisionShiftId = _divisionshiftid,
+                          ComputerName = computerName,
+                          RoomDiagramId = _roomdiagram != null ? _roomdiagram.RoomDiagramID : 0,
+                          RoomTestId = _roomdiagram != null ? _roomdiagram.RoomTestID : 0,
+                          Status = _contestantshift.Status,
+                          DetectSource = detectSource,
+                          ServerTime = serverTime.ToString("dd-MM-yyyy HH:mm:ss"),
+                          ServerUnix = unixTime,
+                          LastResponseTime = lastResponseTime,
+                          LastResponseUnix = _contestantshift.TimeCheck ?? 0,
+                          Note = "Tự động phát hiện thí sinh mất kết nối"
+                     };
+
+                     VIOLATION violation = new VIOLATION();
+                     violation.ViolationID = violationService.GetNextViolationId();
+                     violation.ViolationName = "SYS_EVT::CONTESTANT_DISCONNECTED";
+                     violation.Level = 0;
+                     violation.Status = _contestantshift.Status;
+                     violation.Description = JsonConvert.SerializeObject(payload);
+
+                     violationService.Add(violation);
+                     violationService.Save();
+                }
+                catch
+                {
+                }
+         }
+
+         private string GetTimeCheckDisplayText(int? timeCheck)
+         {
+                if (!timeCheck.HasValue || timeCheck.Value <= 0)
+                {
+                     return "Chưa có dữ liệu";
+                }
+
+                return DatetimeConvert.ConvertUnixToDateTime(timeCheck.Value).ToString("HH:mm:ss");
+         }
 
        
         public void LoadInfoContestantByContestantID(int _divisionShiftId, int _ContestantId)

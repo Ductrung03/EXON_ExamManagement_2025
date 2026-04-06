@@ -108,7 +108,8 @@ namespace EXON.MONITOR.Control
                _TestService = new TestService();
                _ContestantPauseService = new ContestantPauseService();
                _DivisionShiftPauseService = new DivisionShiftPauseService();
-          }
+               _ViolationService = new ViolationService();
+           }
           #endregion
           private void GenNumberIndex()
           {
@@ -299,12 +300,11 @@ namespace EXON.MONITOR.Control
 
           private void TimerLoadStatusContestant_Tick(object sender, EventArgs e)
           {
-
-               foreach (ucComputer uc in pnlUcComputer.Controls)
-               {
-                    uc.LoadInfoContestant();
-                    try
-                    {
+                foreach (ucComputer uc in pnlUcComputer.Controls)
+                {
+                     uc.LoadInfoContestant();
+                     try
+                     {
 
                          if (uc.CheckedConfirmtoload)
                          {
@@ -321,10 +321,20 @@ namespace EXON.MONITOR.Control
                     }
 
                }
-               string text = countContestant.ToString();
-               SetText(text);
+                string text = countContestant.ToString();
+                SetText(text);
           }
           delegate void SetTextCallback(string text);
+          private string GetTimeCheckDisplayText(int? timeCheck)
+          {
+               if (!timeCheck.HasValue || timeCheck.Value <= 0)
+               {
+                    return "Chưa có dữ liệu";
+               }
+
+               return DatetimeConvert.ConvertUnixToDateTime(timeCheck.Value).ToString("HH:mm:ss");
+          }
+
           private void SetText(string text)
           {
 
@@ -2097,7 +2107,7 @@ namespace EXON.MONITOR.Control
                          DialogResult dr = MetroMessageBox.Show(this, "Bạn có chắc chắn bù giờ thí sinh?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 100);
                          if (dr == DialogResult.Yes)
                          {
-                              frmBuGioThiSinh frm = new frmBuGioThiSinh();
+                              frmBuGioThiSinh frm = new frmBuGioThiSinh(GetTimeCheckDisplayText(cs.TimeCheck));
                               frm.Sender += Frm_Sender1;
                               frm.ShowDialog();
                               // kiểm tra thời gian gián đoạn: timenow - timestart > thoigianbugio (Inputtime < timestart)
@@ -2123,28 +2133,27 @@ namespace EXON.MONITOR.Control
                                    _ContestantPauseService.Save();
 
                                    /* LOG bu gio [VIOLATIONS] */
-                                   _ViolationService = new ViolationService();
-                                   var count = _ViolationService.GetAll().OrderByDescending(x => x.ViolationID).ToList();
-                                   var count1 = count[0].ViolationID + 1;
-                                   VIOLATION vp = new VIOLATION();
-                                   vp.ViolationName = _divisionShiftID.ToString();
-                                   vp.Level = Common.Constanst.LEVEL_ADDTIME;
+                                    _ViolationService = new ViolationService();
+                                    VIOLATION vp = new VIOLATION();
+                                    vp.ViolationName = _divisionShiftID.ToString();
+                                    vp.Level = Common.Constanst.LEVEL_ADDTIME;
                                    vp.Status = cs.Status;
                                    var description = new
                                    {
                                         nameContest = _ContestService.GetById(sh.ContestID.Value).ContestName,
                                         nameShift = sh.ShiftName,
-                                        nameContestant = cs.CONTESTANT.FullName,
-                                        code = cs.CONTESTANT.ContestantCode,
-                                        ContestantRealPauseTime = InPutTime,
-                                        Time = (int)((timeClickPause - InPutTime) / 60),
-                                        Note = Reason,
-                                   };
-                                   string jsonDescription = JsonConvert.SerializeObject(description);
-                                   vp.Description = jsonDescription;
-                                   vp.ViolationID = count1;
-                                   _ViolationService.Add(vp);
-                                   _ViolationService.Save();
+                                         nameContestant = cs.CONTESTANT.FullName,
+                                         code = cs.CONTESTANT.ContestantCode,
+                                         ContestantRealPauseTime = InPutTime,
+                                         Time = (int)((timeClickPause - InPutTime) / 60),
+                                         LastResponseTime = GetTimeCheckDisplayText(cs.TimeCheck),
+                                         Note = Reason,
+                                    };
+                                    string jsonDescription = JsonConvert.SerializeObject(description);
+                                    vp.Description = jsonDescription;
+                                    vp.ViolationID = _ViolationService.GetNextViolationId();
+                                    _ViolationService.Add(vp);
+                                    _ViolationService.Save();
 
                                    /*Form bien ban*/
                                    frmBienBanContestantPause frmBienBan = new frmBienBanContestantPause(cs.ContestantShiftID, InPutTime, Reason);
@@ -2220,6 +2229,30 @@ namespace EXON.MONITOR.Control
                     MetroMessageBox.Show(this, "Có lỗi khi kiểm tra đăng nhập " + ex.Message.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Log.Instance.WriteErrorLog(Properties.Resources.MSG_LOG_ERROR, string.Format("Expetion : {0}  ", ex.Message));
 
+               }
+          }
+
+          private void MenuItemDisconnectHistory_Click(object sender, EventArgs e)
+          {
+               try
+               {
+                    CONTESTANTS_SHIFTS cs = new CONTESTANTS_SHIFTS();
+                    _ContestantShiftService = new ContestantShiftService();
+                    cs = _ContestantShiftService.GetById(_cshID);
+                    if (cs != null)
+                    {
+                         frmLichSuMatKetNoi frm = new frmLichSuMatKetNoi(_divisionShiftID, cs.ContestantShiftID);
+                         frm.ShowDialog();
+                    }
+                    else
+                    {
+                         txtMessageBox.Text = "Không có thí sinh";
+                    }
+               }
+               catch (Exception ex)
+               {
+                    MetroMessageBox.Show(this, "Có lỗi khi xem lịch sử mất kết nối " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Log.Instance.WriteErrorLog(Properties.Resources.MSG_LOG_ERROR, string.Format("Expetion : {0}  ", ex.Message));
                }
           }
 

@@ -313,6 +313,12 @@
     <Compile Include="GUI\frmLichSuDangNhap.Designer.cs">
       <DependentUpon>frmLichSuDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmLichSuMatKetNoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmLichSuMatKetNoi.Designer.cs">
+      <DependentUpon>frmLichSuMatKetNoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmLoadingGIF.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -442,10 +442,7 @@ namespace EXON.MONITOR.GUI
         {
             try
             {
-                _ViolationService = new ViolationService();
-                VIOLATION ds = _ViolationService.GetById(divisionShiftID);
-
-                frmInLogGianDoan log = new frmInLogGianDoan(ds, divisionShiftID);
+                frmInLogGianDoan log = new frmInLogGianDoan(divisionShiftID);
                 log.ShowDialog();
             }
             catch (Exception ex)
@@ -455,6 +452,20 @@ namespace EXON.MONITOR.GUI
 
             }
 
+        }
+
+        private void mItemDisconnectHistory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmLichSuMatKetNoi frm = new frmLichSuMatKetNoi(divisionShiftID);
+                frm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi" + ex.Message);
+                Log.Instance.WriteErrorLog(Properties.Resources.MSG_LOG_ERROR, string.Format("Expetion : {0}  ", ex.Message));
+            }
         }
 
         private void changeHeightToDIsplayToolStripMenuItem_Click(object sender, EventArgs e)

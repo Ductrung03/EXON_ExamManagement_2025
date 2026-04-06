@@ -16,12 +16,20 @@ namespace EXON.MONITOR.GUI
      public partial class frmBuGioThiSinh : MetroForm
      {
           public delegate void SendDateTime(int ThoiGianGianDoan, string Note);
+          private readonly string _lastResponseTimeText;
 
           public event SendDateTime Sender;
           public frmBuGioThiSinh()
+               : this("Chưa có dữ liệu")
+          {
+          }
+
+          public frmBuGioThiSinh(string lastResponseTimeText)
           {
                InitializeComponent();
+               _lastResponseTimeText = string.IsNullOrWhiteSpace(lastResponseTimeText) ? "Chưa có dữ liệu" : lastResponseTimeText;
                textBox1.Text = "5";
+               lblLastResponseValue.Text = _lastResponseTimeText;
           }
 
           private void mbtnInput_Click(object sender, EventArgs e)
