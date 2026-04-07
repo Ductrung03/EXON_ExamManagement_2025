@@ -105,7 +105,7 @@
                this.txtPassword.PasswordChar = '*';
                this.txtPassword.Size = new System.Drawing.Size(292, 38);
                this.txtPassword.TabIndex = 2;
-               this.txtPassword.Text = "120584";
+                this.txtPassword.Text = "27102017";
                // 
                // txtUserName
                // 
@@ -115,7 +115,7 @@
                this.txtUserName.Name = "txtUserName";
                this.txtUserName.Size = new System.Drawing.Size(292, 38);
                this.txtUserName.TabIndex = 1;
-               this.txtUserName.Text = "nhitv";
+                this.txtUserName.Text = "thieunv";
                // 
                // pictureBox2
                // 
