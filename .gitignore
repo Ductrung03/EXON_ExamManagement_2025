@@ -62,6 +62,10 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+!artifacts/
+artifacts/*
+!artifacts/publish/
+!artifacts/publish/**
 
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
@@ -186,6 +190,9 @@ publish/
 # but database connection strings (with potential passwords) will be unencrypted
 *.pubxml
 *.publishproj
+
+!artifacts/publish/
+!artifacts/publish/**
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
 # checkin your Azure Web App publish settings, but sensitive information containedsq
