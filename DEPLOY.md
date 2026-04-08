@@ -18,7 +18,7 @@ Build everything into portable output folders:
 powershell -ExecutionPolicy Bypass -File .\scripts\Publish-Portable.ps1
 ```
 
-Outputs are written to:
+Outputs are written locally to:
 
 ```text
 artifacts\publish\EXON.MONITOR\
@@ -30,3 +30,4 @@ Notes:
 - `EXON.GradedEssay` and `EXON.MONITOR` now resolve `TXTextControl` from `Program Files` by default instead of a developer-specific absolute path.
 - If `TXTextControl` is installed in a custom folder, pass `-TxTextControlInstallDir "C:\path\to\Assembly"` to the script.
 - The script restores NuGet packages automatically by downloading `nuget.exe` into `tools\` when needed.
+- `artifacts/publish/` is build output only and is not committed to git.
