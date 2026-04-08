@@ -102,24 +102,27 @@ namespace EXON.MONITOR.Report
             return db.CONTESTANTS_TESTS.FirstOrDefault(x => x.Status > 0 && x.ContestantShiftID == contestantShiftID);
         }
 
-        private long? ConvertSubmitTimeToMilliseconds(int? submitTime)
+        private string FormatSubmitTime(int? submitTime)
         {
             if (!submitTime.HasValue || submitTime.Value <= 0)
             {
-                return null;
+                return string.Empty;
             }
 
-            return submitTime.Value * 1000L;
+            return Common.DatetimeConvert.ConvertUnixToDateTime(submitTime.Value).ToString("HH:mm:ss");
         }
 
-        private long? ConvertWorkedTimeToMilliseconds(int? timeWorked)
+        private string FormatWorkedTime(int? timeWorked)
         {
             if (!timeWorked.HasValue)
             {
-                return null;
+                return string.Empty;
             }
 
-            return Math.Max(timeWorked.Value, 0) * 1000L;
+            int safeSeconds = Math.Max(timeWorked.Value, 0);
+            TimeSpan duration = TimeSpan.FromSeconds(safeSeconds);
+            int totalHours = (int)duration.TotalHours;
+            return string.Format("{0:00}:{1:00}:{2:00}", totalHours, duration.Minutes, duration.Seconds);
         }
 
         private long GetWorkedTimeForSort(int? timeWorked)
@@ -159,28 +162,36 @@ namespace EXON.MONITOR.Report
                 List<CONTESTANTS_SHIFTS> listThiSinh = new List<CONTESTANTS_SHIFTS>();
                 listThiSinh = db.CONTESTANTS_SHIFTS.Where(x => x.DivisionShiftID == divisionShift.DivisionShiftID && x.Status==3005).ToList();
                 // Lấy ra kết quả thi DiemKhiChuaBonus(p.ContestantShiftID)
+                ExamSessionLogService examSessionLogService = new ExamSessionLogService();
                 var listKetQua = listThiSinh
                                  .Select(p =>
-                                 {
-                                     CONTESTANTS_TESTS contestantTest = GetContestantTest(p.ContestantShiftID);
-                                     string diemThi = KetQua(p.CONTESTANT);
+                                  {
+                                      CONTESTANTS_TESTS contestantTest = GetContestantTest(p.ContestantShiftID);
+                                      string diemThi = KetQua(p.CONTESTANT);
+                                       var audit = examSessionLogService.GetLatestByContestantShiftId(p.ContestantShiftID);
+                                       string submitTimeDisplay = !string.IsNullOrWhiteSpace(audit?.Audit?.SubmitTimeText)
+                                           ? audit.Audit.SubmitTimeText
+                                           : FormatSubmitTime(contestantTest?.SubmitTime);
+                                       string workedTimeDisplay = !string.IsNullOrWhiteSpace(audit?.Audit?.TimeWorkedText)
+                                           ? audit.Audit.TimeWorkedText
+                                           : FormatWorkedTime(p.TimeWorked);
 
-                                     return new
-                                     {
-                                         p.CONTESTANT.ContestantCode,
-                                         p.CONTESTANT.FullName,
-                                         NgaySinh = Common.DatetimeConvert.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
-                                         DiemGoc = DiemKhiChuaBonus(p.ContestantShiftID),
-                                         MonThi = p.SCHEDULE.SUBJECT.SubjectName,
-                                         DiemThi = diemThi,
-                                         MaDe = GetTestID(p.ContestantShiftID),
-                                         Unit = p.CONTESTANT.Unit,
-                                          SubmitTime = ConvertSubmitTimeToMilliseconds(contestantTest?.SubmitTime),
-                                          WorkedTime = ConvertWorkedTimeToMilliseconds(p.TimeWorked),
-                                         ScoreSort = ParseScore(diemThi),
-                                         WorkedTimeSort = GetWorkedTimeForSort(p.TimeWorked)
-                                     };
-                                  })
+                                      return new
+                                      {
+                                          p.CONTESTANT.ContestantCode,
+                                          p.CONTESTANT.FullName,
+                                          NgaySinh = Common.DatetimeConvert.ConvertUnixToDateTime((int)p.CONTESTANT.DOB).ToString("dd/MM/yyyy"),
+                                          DiemGoc = DiemKhiChuaBonus(p.ContestantShiftID),
+                                          MonThi = p.SCHEDULE.SUBJECT.SubjectName,
+                                          DiemThi = diemThi,
+                                          MaDe = GetTestID(p.ContestantShiftID),
+                                          Unit = p.CONTESTANT.Unit,
+                                           SubmitTime = submitTimeDisplay,
+                                           WorkedTime = workedTimeDisplay,
+                                          ScoreSort = ParseScore(diemThi),
+                                          WorkedTimeSort = GetWorkedTimeForSort(p.TimeWorked)
+                                      };
+                                   })
                                  .OrderByDescending(p => p.ScoreSort)
                                  .ThenBy(p => p.WorkedTimeSort)
                                  .Select((p, index) => new
