@@ -32,6 +32,9 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
+  <PropertyGroup>
+    <TxTextControlInstallDir Condition="'$(TxTextControlInstallDir)' == ''">$(ProgramFiles)\Text Control GmbH\TX Text Control 28.0.NET for Windows Forms\Assembly</TxTextControlInstallDir>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
@@ -129,11 +132,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="TXTextControl, Version=28.0.2100.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Text Control GmbH\TX Text Control 28.0.NET for Windows Forms\Assembly\TXTextControl.dll</HintPath>
+      <HintPath>$(TxTextControlInstallDir)\TXTextControl.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="TXTextControl.Windows.Forms, Version=28.0.1300.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\Text Control GmbH\TX Text Control 28.0.NET for Windows Forms\Assembly\TXTextControl.Windows.Forms.dll</HintPath>
+      <HintPath>$(TxTextControlInstallDir)\TXTextControl.Windows.Forms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WinFormAnimation, Version=1.5.6298.3372, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WinFormAnimation.1.5.6298.3372\lib\net35-client\WinFormAnimation.dll</HintPath>
