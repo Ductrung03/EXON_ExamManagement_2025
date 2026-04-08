@@ -28,7 +28,7 @@ function Get-MSBuildCommand {
         }
     }
 
-    return @{ FilePath = "dotnet"; Prefix = @("msbuild") }
+    throw "MSBuild.exe not found. Install Visual Studio Build Tools with .NET Framework desktop build support."
 }
 
 if (-not (Test-Path $toolsDir)) {
