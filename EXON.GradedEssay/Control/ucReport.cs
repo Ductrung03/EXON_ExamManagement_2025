@@ -301,11 +301,6 @@ WHERE ContestantShiftID = @p0";
                 return string.Empty;
             }
 
-            if (info.SubmitTimeUnixMs.HasValue)
-            {
-                return info.SubmitTimeUnixMs.Value.ToString();
-            }
-
             return info.SubmitTimeText ?? string.Empty;
         }
 
@@ -315,11 +310,6 @@ WHERE ContestantShiftID = @p0";
             if (info == null)
             {
                 return string.Empty;
-            }
-
-            if (info.TimeWorkedMs.HasValue)
-            {
-                return info.TimeWorkedMs.Value.ToString();
             }
 
             return info.WorkedTimeText ?? string.Empty;

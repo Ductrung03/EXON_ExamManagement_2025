@@ -1616,7 +1616,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>HỌC VIỆN KỸ THUẬT QUÂN SỰ</Value>
+                <Value>HỘI THAO GDQP VÀ AN</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>13pt</FontSize>
@@ -1631,7 +1631,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>HỘI ĐỒNG TUYỂN SINH</Value>
+                <Value>LẦN THỨ IV</Value>
                 <Style>
                   <FontFamily>Times New Roman</FontFamily>
                   <FontSize>13pt</FontSize>
@@ -2526,8 +2526,8 @@
   </Body>
   <Width>17.77973cm</Width>
   <Page>
-    <PageHeight>29.7cm</PageHeight>
-    <PageWidth>21cm</PageWidth>
+    <PageHeight>21cm</PageHeight>
+    <PageWidth>29.7cm</PageWidth>
     <LeftMargin>2.5cm</LeftMargin>
     <RightMargin>1.5cm</RightMargin>
     <TopMargin>1.5cm</TopMargin>
@@ -2606,11 +2606,11 @@
         </Field>
         <Field Name="SubmitTime">
           <DataField>SubmitTime</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="WorkedTime">
           <DataField>WorkedTime</DataField>
-          <rd:TypeName>System.Int64</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

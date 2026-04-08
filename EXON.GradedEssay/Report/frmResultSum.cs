@@ -305,11 +305,9 @@ namespace EXON.GradedEssay.Report
         {
             const string sql = @"SELECT TOP 1
     EndTimeMsText AS SubmitTimeText,
-    TimeWorkedMsText AS WorkedTimeText,
-    SubmitTimeUnixMs,
-    TimeWorkedMs
-FROM CONTESTANTS_SHIFTS
-WHERE ContestantShiftID = @p0";
+    TimeWorkedMsText AS WorkedTimeText
+ FROM CONTESTANTS_SHIFTS
+ WHERE ContestantShiftID = @p0";
 
             return db.Database.SqlQuery<ShiftTimeInfo>(sql, contestantShiftID).FirstOrDefault();
         }
@@ -346,11 +344,6 @@ WHERE ContestantShiftID = @p0";
                 return string.Empty;
             }
 
-            if (timeInfo.SubmitTimeUnixMs.HasValue)
-            {
-                return timeInfo.SubmitTimeUnixMs.Value.ToString();
-            }
-
             return timeInfo.SubmitTimeText ?? string.Empty;
         }
 
@@ -360,11 +353,6 @@ WHERE ContestantShiftID = @p0";
             if (timeInfo == null)
             {
                 return string.Empty;
-            }
-
-            if (timeInfo.TimeWorkedMs.HasValue)
-            {
-                return timeInfo.TimeWorkedMs.Value.ToString();
             }
 
             return timeInfo.WorkedTimeText ?? string.Empty;
@@ -699,8 +687,6 @@ WHERE ContestantShiftID = @p0";
         {
             public string SubmitTimeText { get; set; }
             public string WorkedTimeText { get; set; }
-            public long? SubmitTimeUnixMs { get; set; }
-            public long? TimeWorkedMs { get; set; }
         }
     }
 }
