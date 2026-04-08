@@ -1,0 +1,71 @@
+<Project>
+  <PropertyGroup>
+    <PortableRuntimeCopyEnabled Condition="'$(OutputType)' == 'WinExe'">true</PortableRuntimeCopyEnabled>
+  </PropertyGroup>
+
+  <Target Name="CopyPortableRuntimeDependencies"
+          AfterTargets="Build"
+          Condition="'$(PortableRuntimeCopyEnabled)' == 'true'">
+    <ItemGroup>
+      <PortableRuntimeTopLevel Include="$(MSBuildThisFileDirectory)EXON.Common\Bunifu_UI_v1.5.3.dll"
+                               Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\Bunifu_UI_v1.5.3.dll')" />
+      <PortableRuntimeTopLevel Include="$(MSBuildThisFileDirectory)EXON.Common\Libs\DevelopmentTool.dll"
+                               Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\Libs\DevelopmentTool.dll')" />
+      <PortableRuntimeTopLevel Include="$(MSBuildThisFileDirectory)EXON.Common\Libs\MetroFramework.dll"
+                               Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\Libs\MetroFramework.dll')" />
+      <PortableRuntimeTopLevel Include="$(MSBuildThisFileDirectory)EXON.Common\Libs\MetroFramework.Design.dll"
+                               Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\Libs\MetroFramework.Design.dll')" />
+      <PortableRuntimeTopLevel Include="$(MSBuildThisFileDirectory)EXON.Common\Libs\MetroFramework.Fonts.dll"
+                               Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\Libs\MetroFramework.Fonts.dll')" />
+      <PortableRuntimeTopLevel Include="$(MSBuildThisFileDirectory)EXON.Common\Libs\System.Windows.Forms.Ribbon.dll"
+                               Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\Libs\System.Windows.Forms.Ribbon.dll')" />
+      <PortableRuntimeTopLevel Include="$(MSBuildThisFileDirectory)EXON.Common\Libs\System.Windows.Forms.Ribbon35.dll"
+                               Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\Libs\System.Windows.Forms.Ribbon35.dll')" />
+
+      <PortableManagedOutputs Include="$(MSBuildThisFileDirectory)EXON.Common\bin\$(Configuration)\EXON.Common.dll"
+                              Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\bin\$(Configuration)\EXON.Common.dll')" />
+      <PortableManagedOutputs Include="$(MSBuildThisFileDirectory)EXON.Common\bin\$(Configuration)\EXON.Common.dll.config"
+                              Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\bin\$(Configuration)\EXON.Common.dll.config')" />
+      <PortableManagedOutputs Include="$(MSBuildThisFileDirectory)EXON.SubModel\bin\$(Configuration)\EXON.SubModel.dll"
+                              Condition="Exists('$(MSBuildThisFileDirectory)EXON.SubModel\bin\$(Configuration)\EXON.SubModel.dll')" />
+      <PortableManagedOutputs Include="$(MSBuildThisFileDirectory)EXON.SubModel\bin\$(Configuration)\EXON.SubModel.dll.config"
+                              Condition="Exists('$(MSBuildThisFileDirectory)EXON.SubModel\bin\$(Configuration)\EXON.SubModel.dll.config')" />
+      <PortableManagedOutputs Include="$(MSBuildThisFileDirectory)EXON.SubData\bin\$(Configuration)\EXON.SubData.dll"
+                              Condition="Exists('$(MSBuildThisFileDirectory)EXON.SubData\bin\$(Configuration)\EXON.SubData.dll')" />
+      <PortableManagedOutputs Include="$(MSBuildThisFileDirectory)EXON.SubData\bin\$(Configuration)\EXON.SubData.dll.config"
+                              Condition="Exists('$(MSBuildThisFileDirectory)EXON.SubData\bin\$(Configuration)\EXON.SubData.dll.config')" />
+
+      <PortableSqlTypesRoot Include="$(MSBuildThisFileDirectory)EXON.Common\SqlServerTypes\readme.htm"
+                            Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\SqlServerTypes\readme.htm')" />
+      <PortableSqlTypesX64 Include="$(MSBuildThisFileDirectory)EXON.Common\SqlServerTypes\x64\*.dll"
+                           Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\SqlServerTypes\x64')" />
+      <PortableSqlTypesX86 Include="$(MSBuildThisFileDirectory)EXON.Common\SqlServerTypes\x86\*.dll"
+                           Condition="Exists('$(MSBuildThisFileDirectory)EXON.Common\SqlServerTypes\x86')" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(PortableRuntimeTopLevel)"
+          DestinationFolder="$(OutDir)"
+          SkipUnchangedFiles="true"
+          Condition="'@(PortableRuntimeTopLevel)' != ''" />
+
+    <Copy SourceFiles="@(PortableManagedOutputs)"
+          DestinationFolder="$(OutDir)"
+          SkipUnchangedFiles="true"
+          Condition="'@(PortableManagedOutputs)' != ''" />
+
+    <Copy SourceFiles="@(PortableSqlTypesRoot)"
+          DestinationFolder="$(OutDir)SqlServerTypes\"
+          SkipUnchangedFiles="true"
+          Condition="'@(PortableSqlTypesRoot)' != ''" />
+
+    <Copy SourceFiles="@(PortableSqlTypesX64)"
+          DestinationFolder="$(OutDir)SqlServerTypes\x64\"
+          SkipUnchangedFiles="true"
+          Condition="'@(PortableSqlTypesX64)' != ''" />
+
+    <Copy SourceFiles="@(PortableSqlTypesX86)"
+          DestinationFolder="$(OutDir)SqlServerTypes\x86\"
+          SkipUnchangedFiles="true"
+          Condition="'@(PortableSqlTypesX86)' != ''" />
+  </Target>
+</Project>
