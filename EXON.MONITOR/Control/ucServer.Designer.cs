@@ -536,6 +536,7 @@
             this.btnImportExportTestInfor.UseCustomBackColor = true;
             this.btnImportExportTestInfor.UseCustomForeColor = true;
             this.btnImportExportTestInfor.UseSelectable = true;
+            this.btnImportExportTestInfor.Visible = false;
             this.btnImportExportTestInfor.Click += new System.EventHandler(this.btnImportExportTestInfor_Click);
             // 
             // mbtnDivisionShiftPause
@@ -572,6 +573,7 @@
             this.mbtnDivisionShiftRemake.UseCustomBackColor = true;
             this.mbtnDivisionShiftRemake.UseCustomForeColor = true;
             this.mbtnDivisionShiftRemake.UseSelectable = true;
+            this.mbtnDivisionShiftRemake.Visible = false;
             this.mbtnDivisionShiftRemake.Click += new System.EventHandler(this.mbtnDivisionShiftRemake_Click);
             // 
             // mbtnCompleteDivisionShift
@@ -793,6 +795,7 @@
             this.MenuItemScore.Name = "MenuItemScore";
             this.MenuItemScore.Size = new System.Drawing.Size(264, 24);
             this.MenuItemScore.Text = "Xem điểm hiện tại";
+            this.MenuItemScore.Visible = false;
             this.MenuItemScore.Click += new System.EventHandler(this.MenuItemScore_Click);
             // 
             // MenuItemPauseC

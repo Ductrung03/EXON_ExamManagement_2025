@@ -669,6 +669,7 @@ namespace EXON.MONITOR.Control
                          menuItemUpdateDoingTest.Enabled = true;
                          menuDeleteSeat.Enabled = true;
                          MenuItemScore.Enabled = true;
+                         MenuItemScore.Visible = false;
                          MenuItemPauseC.Enabled = true;
                          MenuItemSigned.Enabled = true;
                          MenuItemBuGio.Enabled = true;
