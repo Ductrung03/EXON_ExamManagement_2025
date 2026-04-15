@@ -660,6 +660,28 @@ namespace EXON.MONITOR.Control
                     cs = _ContestantShiftService.GetById(uc.contestanshifttid);
                     if (cs != null)
                     {
+                         _ctID = cs.ContestantID;
+                         _cshID = cs.ContestantShiftID;
+
+                         metroContextMenu1.Enabled = true;
+                         MenuItemChangeTestID.Enabled = true;
+                         miResetContestant.Enabled = true;
+                         menuItemUpdateDoingTest.Enabled = true;
+                         menuDeleteSeat.Enabled = true;
+                         MenuItemScore.Enabled = true;
+                         MenuItemPauseC.Enabled = true;
+                         MenuItemSigned.Enabled = true;
+                         MenuItemBuGio.Enabled = true;
+                         MenuItemChangeShift.Enabled = true;
+                         MenuItemNgheLaiTuDau.Enabled = true;
+                         MenuItemSuaLoiDe.Enabled = true;
+                         MenyItemLichSu.Enabled = true;
+                         MenuItemDisconnectHistory.Enabled = true;
+                         MenuItemExamSessionLogs.Enabled = true;
+                         MenuItemchangelogsAWS.Enabled = true;
+                         testToolStripMenuItem.Enabled = true;
+                         xemBToolStripMenuItem.Enabled = true;
+
                          if (cs.Status == Constant.STATUS_PAUSE)
                          {
                               MenuItemPauseC.Text = "Cho phép thí sính tiếp tục thi";
@@ -669,11 +691,8 @@ namespace EXON.MONITOR.Control
                               MenuItemPauseC.Text = "Tạm dừng thí sinh";
                          }
                          metroContextMenu1.Show(uc, new Point(45, 45));
-                         _ctID = cs.ContestantID;
-                         _cshID = cs.ContestantShiftID;
-                         miResetContestant.Enabled = true;
                     }
-               }
+                }
                catch (Exception ex)
                {
                     txtMessageBox.Text = String.Format(ex.Message);
@@ -2278,6 +2297,30 @@ namespace EXON.MONITOR.Control
                {
                     MetroMessageBox.Show(this, "Có lỗi khi xem lịch sử mất kết nối " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Log.Instance.WriteErrorLog(Properties.Resources.MSG_LOG_ERROR, string.Format("Expetion : {0}  ", ex.Message));
+               }
+          }
+
+          private void MenuItemExamSessionLogs_Click(object sender, EventArgs e)
+          {
+               try
+               {
+                    _ContestantShiftService = new ContestantShiftService();
+                    CONTESTANTS_SHIFTS cs = _ContestantShiftService.GetById(_cshID);
+                    if (cs != null)
+                    {
+                         string contestantCode = cs.CONTESTANT != null ? cs.CONTESTANT.ContestantCode : string.Empty;
+                         frmExamSessionLogs frm = new frmExamSessionLogs(cs.ContestantShiftID, contestantCode);
+                         frm.ShowDialog();
+                    }
+                    else
+                    {
+                         txtMessageBox.Text = "Không có thí sinh";
+                    }
+               }
+               catch (Exception ex)
+               {
+                    MetroMessageBox.Show(this, "Có lỗi khi xem logs ca thi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Log.Instance.WriteErrorLog(Properties.Resources.MSG_LOG_ERROR, string.Format("Exception: {0}", ex));
                }
           }
 

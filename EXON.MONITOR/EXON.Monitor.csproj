@@ -307,6 +307,12 @@
     <Compile Include="GUI\frmImportExportTestInfor.Designer.cs">
       <DependentUpon>frmImportExportTestInfor.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmExamSessionLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmExamSessionLogs.Designer.cs">
+      <DependentUpon>frmExamSessionLogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmLichSuDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>

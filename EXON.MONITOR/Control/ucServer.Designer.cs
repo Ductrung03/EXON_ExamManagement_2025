@@ -91,6 +91,7 @@
              this.MenuItemSuaLoiDe = new System.Windows.Forms.ToolStripMenuItem();
              this.MenyItemLichSu = new System.Windows.Forms.ToolStripMenuItem();
              this.MenuItemDisconnectHistory = new System.Windows.Forms.ToolStripMenuItem();
+             this.MenuItemExamSessionLogs = new System.Windows.Forms.ToolStripMenuItem();
              this.MenuItemchangelogsAWS = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerCount = new System.Windows.Forms.Timer(this.components);
@@ -736,6 +737,7 @@
              this.MenuItemSuaLoiDe,
              this.MenyItemLichSu,
              this.MenuItemDisconnectHistory,
+             this.MenuItemExamSessionLogs,
              this.MenuItemchangelogsAWS,
              this.xemBToolStripMenuItem});
             this.metroContextMenu1.Name = "metroContextMenu1";
@@ -853,6 +855,13 @@
              this.MenuItemDisconnectHistory.Size = new System.Drawing.Size(264, 24);
               this.MenuItemDisconnectHistory.Text = "Xem lịch sử mất kết nối";
              this.MenuItemDisconnectHistory.Click += new System.EventHandler(this.MenuItemDisconnectHistory_Click);
+             // 
+             // MenuItemExamSessionLogs
+             // 
+             this.MenuItemExamSessionLogs.Name = "MenuItemExamSessionLogs";
+             this.MenuItemExamSessionLogs.Size = new System.Drawing.Size(264, 24);
+             this.MenuItemExamSessionLogs.Text = "Xem logs ca thi";
+             this.MenuItemExamSessionLogs.Click += new System.EventHandler(this.MenuItemExamSessionLogs_Click);
              // 
              // MenuItemchangelogsAWS
              // 
@@ -972,8 +981,9 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemBuGio;
          private System.Windows.Forms.ToolStripMenuItem MenyItemLichSu;
          private System.Windows.Forms.ToolStripMenuItem MenuItemDisconnectHistory;
+         private System.Windows.Forms.ToolStripMenuItem MenuItemExamSessionLogs;
 
-         private System.Windows.Forms.ToolStripMenuItem MenuItemchangelogsAWS;
+          private System.Windows.Forms.ToolStripMenuItem MenuItemchangelogsAWS;
 
         private MetroFramework.Controls.MetroButton mbtnDivisionShiftRemake;
 

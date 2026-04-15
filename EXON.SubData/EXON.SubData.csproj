@@ -106,6 +106,7 @@
     <Compile Include="Services\ContestService.cs" />
     <Compile Include="Services\DivisionShiftPauseService.cs" />
     <Compile Include="Services\DivisionShiftService.cs" />
+    <Compile Include="Services\ExamSessionLogService.cs" />
     <Compile Include="Services\ExaminationcouncilStaffService.cs" />
     <Compile Include="Services\PartService.cs" />
     <Compile Include="Services\RoomDiagramService.cs" />
